@@ -1,0 +1,16 @@
+@media only screen and (max-width: 768px) {
+    #leftColumn{
+        height: 100vh;
+        width: 100vw;
+        font-size: small;
+    }
+    #rightColumn{
+        height: 100vh;
+        width: 100vw;
+        font-size: small;
+    }
+    #footer{
+        visibility: hidden;
+    }
+
+}

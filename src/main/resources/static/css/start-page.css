@@ -1,0 +1,100 @@
+html, body{
+    margin: 0;
+}
+
+#leftColumn{
+    background: #fd7e14;
+    color: white;
+    height: 95vh;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+#rightColumn {
+    background: white;
+    height: 95vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#rightColumn span{
+    font-size: 2em;
+}
+
+#slogansArea{
+    display: inline-block;
+    vertical-align: middle;
+    font-family: sans-serif;
+    font-weight: bold;
+    font-size: 2em;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.item1{
+    display: none;
+    padding-right: 15px;
+}
+.item2{
+    display: none;
+    padding-right: 15px;
+}
+.item3{
+    display: none;
+    padding-right: 15px;
+}
+
+#footer{
+    height: 5vh;
+    line-height: 5vh;
+    background: white;
+    font-family: sans-serif;
+    text-align: end;
+    font-weight: bold;
+}
+
+.overButtonSpeech {
+    font-weight: bold;
+    font-size:2em;
+    font-family: sans-serif;
+    padding: 0;
+    margin: 0;
+    line-height: 2em;
+}
+
+#buttonReg{
+    border-radius: 15px;
+    color: white;
+    width: 350px;
+    text-align: center;
+    font-family: sans-serif;
+    background: dodgerblue;
+    font-size: 0.7em;
+    padding: 10px 10px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+#buttonLog{
+    border-radius: 15px;
+    color: dodgerblue;
+    width: 350px;
+    text-align: center;
+    font-family: sans-serif;
+    background: white;
+    border: 3px solid dodgerblue;
+    font-size: 0.7em;
+    font-weight: bold;
+    padding: 10px 10px;
+    margin-bottom: 30px;
+}
+
+.content{
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-items: center;
+}
+
