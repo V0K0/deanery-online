@@ -1,5 +1,5 @@
 let regBtn  = $("#buttonReg");
-let logBtn = $("#buttonLog");
+let logBtn = $("#emptyBackgroundBtn");
 
 logBtn.hover(function() {
         $( this ).css("border", "3px solid #fd7e14");

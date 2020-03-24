@@ -1,0 +1,25 @@
+
+I
+src/main/webapp/index.jsp,8\e\8e6d3b70c9f5b02570779b0441540d45eceb0ded
+O
+src/main/webapp/WEB-INF/web.xml,2\e\2e22b6edd746fa3dc40ad7276c87c8d87d72a392
+y
+Isrc/main/java/com/vozniuk/springapplication/DeaneryOnlineApplication.java,f\c\fc4c4e94e08d29e0f9194aa38f5720af1cfc7ccc
+q
+Asrc/main/java/com/vozniuk/springapplication/config/MvcConfig.java,f\a\fa20500190216728f105ebb3422362a58f704d3e
+{
+Ksrc/main/java/com/vozniuk/springapplication/controllers/MainController.java,1\1\11236470a944f35dc9d86865c7bc87f2e7f3596e
+7
+pom.xml,4\4\442292b8a7efeabbe4cc176709b833b1792140ec
+l
+<src/main/java/com/vozniuk/springapplication/domain/Role.java,b\4\b49032e0a468fb34f9cbbe9a549c7050ea9fcc46
+l
+<src/main/java/com/vozniuk/springapplication/domain/User.java,1\7\171aa0e30d34e1390000dd95270fe1ff798e8a9a
+y
+Isrc/main/java/com/vozniuk/springapplication/config/WebSecurityConfig.java,b\e\be46718242b6e6493fabbe149cafdfc94badc714
+|
+Lsrc/main/java/com/vozniuk/springapplication/repositories/UserRepository.java,f\1\f1407f2e234a51ced1f419c3e4035bbfff1659a1
+t
+Dsrc/main/java/com/vozniuk/springapplication/service/UserService.java,2\1\211e99e864ac5ac008baf7e9ef4b4ea1ef8ed0e4
+ƒ
+Ssrc/main/java/com/vozniuk/springapplication/controllers/RegistrationController.java,9\1\910d495829f77e0058534fce1764d85c7db80378

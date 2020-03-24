@@ -1,44 +1,51 @@
-let  enterBtn = $("#buttonEnter");
-
-let login = $(".inputLogin");
+let enterBtn = $("#buttonEnter");
+let confirmPass = $(".inputConfirmPass");
 let pass = $(".inputPass");
 
-enterBtn.hover(function() {
-            $( this ).css("background", "#1A91DA")
-        }, function() {
-            $( this ).css("background", "dodgerblue")
-        });
-
-
-login.focus(function () {
-    $(".login").css("border-bottom", "2px solid dodgerblue");
-    $(".login span").css("color", "dodgerblue");
-}).blur(function () {
-    $(".login").css("border-bottom", "2px solid gray");
-    $(".login span").css("color", "gray");
+enterBtn.hover(function () {
+    $(this).removeClass("enabledBtn").addClass("hoverOnBtn");
+}, function () {
+    $(this).removeClass("hoverOnBtn").addClass("enabledBtn");
 });
 
-pass.focus(function () {
-    $(".password").css("border-bottom", "2px solid dodgerblue");
-    $(".password span").css("color", "dodgerblue");
-}).blur(function () {
-    $(".password").css("border-bottom", "2px solid gray");
-    $(".password span").css("color", "gray");
+$("#regForm").submit(function (event) {
+    let warn = $("#alert");
+    if (pass.val() === confirmPass.val()) {
+        $(warn).css("display", "none");
+        return;
+    }
+    $(warn).css("display", "inline-block").text("Паролі повинні збігатися!");
+    event.preventDefault();
+
+});
+
+
+$(".inputDiv").focusin(function() {
+    $(this).css("border-bottom", "2px solid dodgerblue");
+    $(this).find('span').css("color", "dodgerblue");
+}).focusout(function () {
+    $(this).css("border-bottom", "2px solid gray");
+    $(this).find('span').css("color", "gray");
+
 });
 
 $(".dataField").on('keyup', function () {
     let isEmpty = false;
 
-    $('.dataField').each(function() {
-       if (!$(this).val().trim().length){
-           isEmpty = true;
-       }
+    $('.dataField').each(function () {
+        if (!$(this).val().trim().length) {
+            isEmpty = true;
+        }
     });
 
-    if (isEmpty){
+    if (isEmpty) {
         $(enterBtn).attr("disabled", true);
-    } else{
+        $(enterBtn).removeClass("enabledBtn hoverOnBtn").addClass("disabledBtn");
+    } else {
         $(enterBtn).attr("disabled", false);
+        $(enterBtn).removeClass("disabledBtn").addClass("enabledBtn");
     }
 
 });
+
+
