@@ -1,0 +1,59 @@
+#buttonEnter {
+    border: none;
+    border-radius: 15px;
+    width: 100%;
+    margin: auto;
+    text-align: center;
+    padding: 10px 10px;
+    color: white;
+    font-size: 1em;
+    font-family: sans-serif;
+    font-weight: bold;
+}
+
+#buttonReg {
+    border-radius: 15px;
+    color: white;
+    width: 350px;
+    text-align: center;
+    font-family: sans-serif;
+    background: dodgerblue;
+    font-size: 0.7em;
+    padding: 10px 10px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+#emptyBackgroundBtn {
+    border-radius: 15px;
+    color: dodgerblue;
+    width: 350px;
+    text-align: center;
+    font-family: sans-serif;
+    background: transparent;
+    border: 3px solid dodgerblue;
+    font-size: 0.7em;
+    font-weight: bold;
+    padding: 10px 10px;
+    margin-bottom: 30px;
+}
+
+#signOutBtn {
+    background: transparent;
+    border: 0;
+    padding: 0;
+    margin: 0;
+}
+
+.enabledBtn {
+    background: dodgerblue;
+}
+
+.disabledBtn {
+    background: grey;
+}
+
+.hoverOnBtn {
+    background: #1A91DA
+}
+

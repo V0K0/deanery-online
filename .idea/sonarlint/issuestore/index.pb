@@ -1,6 +1,4 @@
 
-I
-src/main/webapp/index.jsp,8\e\8e6d3b70c9f5b02570779b0441540d45eceb0ded
 O
 src/main/webapp/WEB-INF/web.xml,2\e\2e22b6edd746fa3dc40ad7276c87c8d87d72a392
 y
@@ -23,3 +21,21 @@ t
 Dsrc/main/java/com/vozniuk/springapplication/service/UserService.java,2\1\211e99e864ac5ac008baf7e9ef4b4ea1ef8ed0e4
 ƒ
 Ssrc/main/java/com/vozniuk/springapplication/controllers/RegistrationController.java,9\1\910d495829f77e0058534fce1764d85c7db80378
+\
+,.idea/inspectionProfiles/Project_Default.xml,4\9\496a238a6afa168dbaf6efd37bb459331589579c
+V
+&src/main/resources/static/css/form.css,8\3\83393a974a227a866732b56ccfc024cd85da690c
+\
+,src/main/resources/static/css/form-media.css,b\2\b202b8698d4dc68af4d3546fb6e14e26cac1a735
+\
+,src/main/resources/static/css/start-page.css,0\e\0e4ab24462ca3440d5f6e39ee6828d7aaac29888
+Z
+*src/main/resources/static/js/login-form.js,9\4\94cf0ddc83c6da9202f92af1d531b952610195ee
+]
+-src/main/resources/static/js/mainStartPage.js,8\8\88a8a312519bcbe435a5cd3b7dcddc67ee5b1ba4
+W
+'src/main/resources/templates/login.html,6\4\64b48127ab06e5df4a6ed58b34ac3aba28784c99
+[
++src/main/resources/templates/startPage.html,e\6\e631f0d489b098b8abd80833a1b9eb0f96f21391
+Y
+)src/main/resources/application.properties,0\6\06f65155ec73600b9fc5c4dc2883d4bb84d8e284
