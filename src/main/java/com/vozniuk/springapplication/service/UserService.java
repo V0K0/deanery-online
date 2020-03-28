@@ -1,7 +1,10 @@
 package com.vozniuk.springapplication.service;
 
-import com.vozniuk.springapplication.domain.Role;
-import com.vozniuk.springapplication.domain.User;
+import com.vozniuk.springapplication.domain.data.university.Student;
+import com.vozniuk.springapplication.domain.data.user.Role;
+import com.vozniuk.springapplication.domain.data.user.User;
+import com.vozniuk.springapplication.repositories.GroupRepository;
+import com.vozniuk.springapplication.repositories.StudentRepository;
 import com.vozniuk.springapplication.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,7 +21,13 @@ public class UserService implements UserDetailsService {
     private UserRepository userRepository;
 
     @Autowired
+    private StudentRepository studentRepository;
+
+    @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private GroupRepository groupRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -34,7 +43,16 @@ public class UserService implements UserDetailsService {
         user.setRoles(Collections.singleton(Role.USER));
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
+        saveUserAsStudent(user);
 
         return true;
+    }
+
+
+    private void saveUserAsStudent(User user){
+        Student student = new Student();
+        student.setId(user.getId());
+        student.setGroup(groupRepository.getOne(1));
+        studentRepository.save(student);
     }
 }

@@ -1,6 +1,6 @@
 package com.vozniuk.springapplication.controllers;
 
-import com.vozniuk.springapplication.domain.User;
+import com.vozniuk.springapplication.domain.data.user.User;
 import com.vozniuk.springapplication.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class RegistrationController {
     @Autowired
     private UserService userService;
-
 
     @GetMapping("/registration")
     public String registration() {

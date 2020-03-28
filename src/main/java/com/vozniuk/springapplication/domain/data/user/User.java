@@ -1,4 +1,4 @@
-package com.vozniuk.springapplication.domain;
+package com.vozniuk.springapplication.domain.data.user;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -26,7 +26,6 @@ public class User implements UserDetails {
     @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
     @Enumerated(EnumType.STRING)
     private Set<Role> roles;
-
 
     public Integer getId() {
         return id;
@@ -92,4 +91,5 @@ public class User implements UserDetails {
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
+
 }

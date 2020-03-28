@@ -1,4 +1,4 @@
-package com.vozniuk.springapplication.domain;
+package com.vozniuk.springapplication.domain.data.user;
 
 import org.springframework.security.core.GrantedAuthority;
 

@@ -1,6 +1,6 @@
 package com.vozniuk.springapplication.controllers;
 
-import com.vozniuk.springapplication.domain.User;
+import com.vozniuk.springapplication.domain.data.user.User;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
