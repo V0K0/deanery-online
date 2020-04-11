@@ -2,6 +2,7 @@ package com.vozniuk.springapplication.domain.data.university;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.sql.Date;
 
 @Entity
 public class Subject {
@@ -34,6 +35,13 @@ public class Subject {
 
     @JoinColumn(name = "course_work")
     private boolean courseWork;
+
+    @JoinColumn(name = "defence_date")
+    private Date defenceDate;
+
+    @ManyToOne
+    @JoinColumn(name = "teacher_id")
+    private Teacher teacher;
 
     public Integer getSubjectId() {
         return subjectId;
@@ -89,5 +97,21 @@ public class Subject {
 
     public void setPlan(StudyingPlan plan) {
         this.plan = plan;
+    }
+
+    public Date getDefenceDate() {
+        return defenceDate;
+    }
+
+    public void setDefenceDate(Date defenceDate) {
+        this.defenceDate = defenceDate;
+    }
+
+    public Teacher getTeacher() {
+        return teacher;
+    }
+
+    public void setTeacher(Teacher teacher) {
+        this.teacher = teacher;
     }
 }

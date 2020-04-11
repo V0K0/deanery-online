@@ -27,6 +27,8 @@ public class Student {
     @JoinColumn(name = "group_id")
     private UniversityGroup group;
 
+    private String phone;
+
     public Integer getId() {
         return id;
     }
@@ -81,5 +83,13 @@ public class Student {
 
     public void setGroup(UniversityGroup group) {
         this.group = group;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 }

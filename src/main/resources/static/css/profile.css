@@ -1,0 +1,40 @@
+body{
+    background: #F7F7F7;
+}
+
+.content-header{
+    margin: 10px 0;
+    background: white;
+    padding: 30px;
+}
+
+.content-header p{
+    margin: 0;
+    font-family: sans-serif;
+}
+
+.detailCard{
+    background: white;
+    padding: 25px 30px;
+    margin-bottom: 10px;
+}
+
+.detailInfo{
+    margin-top: 5px;
+}
+
+.controls{
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+    color: white;
+}
+
+.accept{
+    margin-left: 5px;
+}
+
+.decline{
+    margin-right: 5px;
+}
+

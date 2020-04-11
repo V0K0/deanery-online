@@ -1,4 +1,8 @@
-.carousel img{
+body {
+    background: #F7F7F7;
+}
+
+.carousel img {
     height: 400px;
     width: 600px;
     margin: auto;
@@ -12,10 +16,15 @@
     background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23f00' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E");
 }
 
-#indicators{
+#indicators {
     margin-top: 15px;
 }
-.news-header{
+
+.news-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
     margin-top: 30px;
     width: 100%;
     background: dodgerblue;
@@ -25,12 +34,13 @@
     padding: 10px 0;
 }
 
-.news{
+.news {
+    background: white;
 
 }
 
 @media screen and (max-width: 768px) {
-    .navbar {
+    .header {
         position: relative !important;
     }
 }

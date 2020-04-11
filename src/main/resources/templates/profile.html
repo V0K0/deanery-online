@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Особистий кабінет</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <link rel="icon" href="images/icons8-dev-post-64.png" type="image/x-icon">
+    <link rel="stylesheet" href="css/applicationButtons.css">
+    <link rel="stylesheet" href="css/profile.css">
+    <meta name="viewport" content="width=device-width"/>
+</head>
+<body>
+<div class="header" th:insert="~{navbar :: nav}"></div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3"></div>
+
+        <div class="col-md">
+            <div class="shadow-sm rounded content-header">
+                <p class="h2">Інформаційна сторінка</p>
+            </div>
+            <div class="shadow-sm rounded detailCard">
+                <div>
+                    <p class="text-muted">Детально</p>
+                </div>
+                <div class="detailInfo">
+                    <p class="font-weight-bold">Прізвище та ім'я</p>
+                    <div>
+                        <p th:if="${student?.name != null and student?.lastname!= null}" th:text="${student.lastname + ' ' + student.name}"></p>
+                    </div>
+                    <hr>
+                    <p class="font-weight-bold">Дата народження</p>
+                    <div>
+                        <p th:if="${student.dateOfBirth}" th:text="${student.dateOfBirth}"></p>
+                    </div>
+                    <hr>
+                    <p class="font-weight-bold">Адреса</p>
+                    <div>
+                        <p th:if="${student.address}" th:text="${student.address}"></p>
+                    </div>
+                    <hr>
+                    <p class="font-weight-bold">Факультет</p>
+                    <div>
+                        <p th:text="${student?.group?.specialty?.department?.faculty?.facultyName}"></p>
+                    </div>
+                    <hr>
+                    <p class="font-weight-bold">Кафедра</p>
+                    <div>
+                        <p th:text="${student?.group?.specialty?.department?.departmentName}"></p>
+                    </div>
+                    <hr>
+                    <p class="font-weight-bold">Спеціальність</p>
+                    <div>
+                        <p th:if="${student?.group?.specialty ne null}" th:text="${student.group.specialty.specialtyCode + ' (' + student.group.specialty.specialtyName + ')'}"></p>
+                    </div>
+                    <hr>
+                    <p class="font-weight-bold">Група</p>
+                    <div>
+                        <p th:if="${student?.group?.groupCode ne null}" th:text="${student.group.groupCode}"></p>
+                    </div>
+                    <hr>
+                </div>
+                <div class="controls">
+                    <a class="btn btn-outline-primary" th:href="@{/profile/edit}">Редагувати</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3"></div>
+    </div>
+</div>
+</body>
+</html>

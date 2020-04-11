@@ -74,3 +74,9 @@ Osrc/main/java/com/vozniuk/springapplication/domain/data/university/Student.java
 Osrc/main/java/com/vozniuk/springapplication/repositories/StudentRepository.java,9\b\9ba95fd8bed2b7b60f81a538c9fee5cf3518ffc8
 }
 Msrc/main/java/com/vozniuk/springapplication/repositories/GroupRepository.java,4\1\41fd2cbedc3c05055f67cdcc84bc1ebcca321482
+
+Osrc/main/java/com/vozniuk/springapplication/domain/data/university/Teacher.java,a\b\ab6972904badecceffd3f85a6a4d58271115e0b5
+~
+Nsrc/main/java/com/vozniuk/springapplication/controllers/ProfileController.java,e\6\e6163d174df660cb19de6fc09048250afda5e0bd
+w
+Gsrc/main/java/com/vozniuk/springapplication/service/StudentService.java,5\4\5484563fb51ac3f3730212ca6af2e3fa60ca5f8f
