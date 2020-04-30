@@ -77,7 +77,6 @@ public class ProfileController {
         }
 
         student.setGroup(groupServiceImpl.getByGroupCode(params.get("group")));
-
         studentServiceImpl.editStudent(student);
     }
 

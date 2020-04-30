@@ -30,6 +30,9 @@ public class UniversityGroup {
     @OneToMany(mappedBy = "group", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Student> students;
 
+    @OneToMany(mappedBy = "group", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<Schedule> schedules;
+
     public Set<Student> getStudents() {
         return students;
     }
@@ -68,5 +71,13 @@ public class UniversityGroup {
 
     public void setPlan(StudyingPlan plan) {
         this.plan = plan;
+    }
+
+    public Set<Schedule> getSchedules() {
+        return schedules;
+    }
+
+    public void setSchedules(Set<Schedule> schedules) {
+        this.schedules = schedules;
     }
 }

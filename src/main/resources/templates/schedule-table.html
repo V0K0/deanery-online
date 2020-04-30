@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<!--suppress ALL -->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3" lang="ua">
+<body>
+
+<table class="table table-bordered table-responsive-sm"
+       th:fragment="table(day, scheduleNum, scheduleDenum ,scheduleUtils)">
+    <thead>
+    <tr>
+        <th scope="col" class="align-middle" colspan="10" th:text="${day}"></th>
+    </tr>
+    <tr>
+        <th scope="col" class="small-cell">Пара</th>
+        <th scope="col" class="big-cell">Предмет</th>
+        <th scope="col" class="small-cell">Місце</th>
+        <th scope="col" class="medium-cell">Викладач</th>
+    </tr>
+    </thead>
+    <!--/*@thymesVar id="scheduleUtils" type="com.vozniuk.springapplication.controllers.ScheduleController"*/-->
+    <tbody th:each="i, iter: ${#numbers.sequence(0, 4)}" th:with="index =${iter.index}">
+    <tr>
+        <td rowspan="2" class="align-middle" th:text="${index + 1}"></td>
+
+        <td class="align-middle"
+            th:each="sch : ${scheduleNum}"
+            th:if="${sch != null && scheduleUtils.findLessonIndexInSchedule(sch) == index}"
+            th:classappend="${#strings.equals(sch.weekType, 'Чисельник')} ? 'table-success' : 'table-light' ">
+            <span th:text="${sch.subject.subjectName}"></span>
+        </td>
+
+        <td class="align-middle"
+            th:each="sch : ${scheduleNum}"
+            th:if="${sch != null && scheduleUtils.findLessonIndexInSchedule(sch) == index}"
+            th:classappend="${#strings.equals(sch.weekType, 'Чисельник')} ? 'table-success' : 'table-light'">
+            <span th:text="${sch.lessonPlace}"></span>
+
+        </td>
+
+        <td class="align-middle"
+            th:each="sch : ${scheduleNum}"
+            th:if="${sch != null && scheduleUtils.findLessonIndexInSchedule(sch) == index}"
+            th:classappend="${#strings.equals(sch.weekType, 'Чисельник')} ? 'table-success' : 'table-light'">&nbsp;
+            <span>&nbsp;</span>
+        </td>
+
+
+    </tr>
+    <tr> <!--Знаминатель-->
+        <td class="align-middle table-primary"
+            th:each="sch1 : ${scheduleDenum}"
+            th:if="${sch1 != null && scheduleUtils.findLessonIndexInSchedule(sch1) == index}">
+            <span th:text="${sch1.subject.subjectName}"></span>
+        </td>
+
+        <td class="align-middle table-primary"
+            th:each="sch1 : ${scheduleDenum}"
+            th:if="${sch1 != null && scheduleUtils.findLessonIndexInSchedule(sch1) == index}">
+            <span th:text="${sch1.lessonPlace}"></span>
+        </td>
+
+        <td class="align-middle table-primary"
+            th:each="sch1 : ${scheduleDenum}"
+            th:if="${sch1 != null && scheduleUtils.findLessonIndexInSchedule(sch1) == index}">
+            <span>&nbsp;</span>
+        </td>
+
+    </tr>
+
+    </tbody>
+</table>
+</body>
+</html>

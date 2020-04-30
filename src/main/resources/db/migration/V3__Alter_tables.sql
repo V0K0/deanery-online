@@ -1,5 +1,5 @@
 create table teacher (
-teacher_id int not null,
+teacher_id int not null AUTO_INCREMENT,
 name varchar (255),
 lastname  varchar (255),
 patronymic  varchar (255),

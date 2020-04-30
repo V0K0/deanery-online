@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3" lang="ua">
+<head>
+    <meta charset="UTF-8">
+    <title>Розклад</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <link rel="icon" href="images/icons8-dev-post-64.png" type="image/x-icon">
+    <link rel="stylesheet" href="css/applicationButtons.css">
+    <link rel="stylesheet" href="css/schedule-page.css">
+    <meta name="viewport" content="width=device-width"/>
+</head>
+<body>
+<div class="header" th:insert="~{navbar :: nav}"></div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md timetables" style="background: white">
+            <div th:insert="~{schedule-table :: table(${MONDAY}, ${scheduleMondayNum}, ${scheduleMondayDenum} ,${scheduleUtils})}" ></div>
+            <div th:insert="~{schedule-table :: table(${TUESDAY}, ${scheduleTuesdayNum}, ${scheduleTuesdayDenum} ,${scheduleUtils})}" ></div>
+            <div th:insert="~{schedule-table :: table(${WEDNESDAY}, ${scheduleWednesdayNum}, ${scheduleWednesdayDenum} ,${scheduleUtils})}" ></div>
+            <div th:insert="~{schedule-table :: table(${THURSDAY}, ${scheduleThursdayNum}, ${scheduleThursdayDenum} ,${scheduleUtils})}" ></div>
+            <div th:insert="~{schedule-table :: table(${FRIDAY}, ${scheduleFridayNum}, ${scheduleFridayDenum} ,${scheduleUtils})}" ></div>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+
+</div>
+<script type="text/javascript" src="js/schedule-page.js"></script>
+</body>
+</html>

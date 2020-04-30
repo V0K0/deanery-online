@@ -26,7 +26,7 @@ public class Specialty {
 
     @NotNull
     @JoinColumn(name = "specialty_code")
-    private String specialtyCode;
+    private Integer specialtyCode;
 
     @OneToMany(mappedBy = "specialty", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<UniversityGroup> groups;
@@ -63,12 +63,11 @@ public class Specialty {
         this.specialtyName = specialtyName;
     }
 
-    public String getSpecialtyCode() {
+    public Integer getSpecialtyCode() {
         return specialtyCode;
     }
 
-    public void setSpecialtyCode(String specialtyCode) {
+    public void setSpecialtyCode(Integer specialtyCode) {
         this.specialtyCode = specialtyCode;
     }
-
 }
