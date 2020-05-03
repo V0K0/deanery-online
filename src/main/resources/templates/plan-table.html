@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<!--suppress ALL -->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3" lang="ua">
+<body>
+<table class="table table-bordered table-responsive-sm"
+       th:fragment="plan-table(plan)">
+    <thead>
+    <tr>
+        <th scope="col" class="big-cell align-middle table-success">Предмет</th>
+        <th scope="col" class="very-small-cell align-middle table-success">Лекційні заняття</th>
+        <th scope="col" class="very-small-cell align-middle table-success">Практичні заняття</th>
+        <th scope="col" class="medium-cell align-middle table-success">Викладач</th>
+        <th scope="col" class="medium-cell align-middle table-success">Захист</th>
+        <th scope="col" class="small-cell align-middle table-success">Дата захисту</th>
+    </tr>
+    </thead>
+    <tbody th:each="subject : ${plan}">
+        <td class="align-middle" th:text="${subject?.subjectName}"></td>
+        <td class="align-middle" th:text="${subject?.lectureHours}"></td>
+        <td class="align-middle" th:text="${subject?.practicalHours}"></td>
+        <td class="align-middle"
+            th:text="${subject?.teacher?.name + ' ' + subject?.teacher?.lastname }"></td>
+        <!--"*{teacher != null}? *{teacher.name + ' ' + teacher.lastname} : '—'"-->
+        <td class="align-middle" th:text="${subject?.defenceType}">-</td>
+        <td class="align-middle" th:text="${subject?.defenceDate}">-</td>
+    </tbody>
+</table>
+</body>
+</html>

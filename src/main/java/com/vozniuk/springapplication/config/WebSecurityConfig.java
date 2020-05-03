@@ -1,7 +1,7 @@
 package com.vozniuk.springapplication.config;
 
 
-import com.vozniuk.springapplication.service.UserService;
+import com.vozniuk.springapplication.service.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

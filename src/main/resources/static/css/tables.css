@@ -1,0 +1,29 @@
+.very-small-cell{
+    width: 5%;
+}
+
+.small-cell{
+    width: 10%;
+}
+
+.medium-cell{
+    width: 20%;
+}
+
+.big-cell{
+    width: 40%;
+}
+
+.table.table-responsive-sm {
+    border-collapse: collapse;
+    margin:30px 0;
+    width: 100%;
+}
+
+.table.table-bordered.table-responsive-sm td{
+    padding: 6px;
+}
+
+.table.table-bordered.table-responsive-sm th{
+    padding: 6px;
+}

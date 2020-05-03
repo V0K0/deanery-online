@@ -11,6 +11,7 @@
     <link rel="icon" href="images/icons8-dev-post-64.png" type="image/x-icon">
     <link rel="stylesheet" href="css/applicationButtons.css">
     <link rel="stylesheet" href="css/schedule-page.css">
+    <link rel="stylesheet" href="css/tables.css">
     <meta name="viewport" content="width=device-width"/>
 </head>
 <body>
@@ -19,11 +20,29 @@
     <div class="row">
         <div class="col-md-3"></div>
         <div class="col-md timetables" style="background: white">
-            <div th:insert="~{schedule-table :: table(${MONDAY}, ${scheduleMondayNum}, ${scheduleMondayDenum} ,${scheduleUtils})}" ></div>
-            <div th:insert="~{schedule-table :: table(${TUESDAY}, ${scheduleTuesdayNum}, ${scheduleTuesdayDenum} ,${scheduleUtils})}" ></div>
-            <div th:insert="~{schedule-table :: table(${WEDNESDAY}, ${scheduleWednesdayNum}, ${scheduleWednesdayDenum} ,${scheduleUtils})}" ></div>
-            <div th:insert="~{schedule-table :: table(${THURSDAY}, ${scheduleThursdayNum}, ${scheduleThursdayDenum} ,${scheduleUtils})}" ></div>
-            <div th:insert="~{schedule-table :: table(${FRIDAY}, ${scheduleFridayNum}, ${scheduleFridayDenum} ,${scheduleUtils})}" ></div>
+            <div class="week-types">
+
+                <div class="week-desc">
+                    <span class="circle table-success"></span>
+                    <span class="circle-label"> — Чисельник</span>
+                </div>
+
+                <div class="week-desc">
+                    <span class="circle table-primary"></span>
+                    <span class="circle-label"> — Знаменник</span>
+                </div>
+
+                <div class="week-desc">
+                    <span class="circle" style="border: 1px dimgray solid"></span>
+                    <span class="circle-label"> — Щотижня</span>
+                </div>
+
+            </div>
+            <div th:insert="~{schedule-table :: table(${MONDAY}, ${scheduleMondayNum}, ${scheduleMondayDenum} ,${scheduleUtils})}"></div>
+            <div th:insert="~{schedule-table :: table(${TUESDAY}, ${scheduleTuesdayNum}, ${scheduleTuesdayDenum} ,${scheduleUtils})}"></div>
+            <div th:insert="~{schedule-table :: table(${WEDNESDAY}, ${scheduleWednesdayNum}, ${scheduleWednesdayDenum} ,${scheduleUtils})}"></div>
+            <div th:insert="~{schedule-table :: table(${THURSDAY}, ${scheduleThursdayNum}, ${scheduleThursdayDenum} ,${scheduleUtils})}"></div>
+            <div th:insert="~{schedule-table :: table(${FRIDAY}, ${scheduleFridayNum}, ${scheduleFridayDenum} ,${scheduleUtils})}"></div>
         </div>
         <div class="col-md-3"></div>
     </div>

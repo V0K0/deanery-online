@@ -2,46 +2,31 @@ body{
     background: #F7F7F7;
 }
 
-.rotate {
-    text-align: center;
-    white-space: nowrap;
-    vertical-align: middle;
-    width: 1.5em;
-}
-.rotate div {
-    -moz-transform: rotate(-90.0deg);
-    -o-transform: rotate(-90.0deg);
-    -webkit-transform: rotate(-90.0deg);
-    filter:  progid:DXImageTransform.Microsoft.BasicImage(rotation=0.083);
-    -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=0.083)";
-    margin-left: -10em;
-    margin-right: -10em;
+
+.week-types{
+    margin-top: 10px;
+    background: white;
 }
 
-.small-cell{
-    width: 7.5%;
+.week-desc{
+    display: flex;
+    align-items: flex-start;
 }
 
-.medium-cell{
-    width: 35%;
+.circle{
+    height: 25px;
+    width: 25px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    border-radius: 50%;
+    display: inline;
 }
 
-.big-cell{
-    width: 50%;
+.circle-label{
+    display: inline;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-right: 10px;
 }
-
-.table.table-responsive-sm {
-    border-collapse: collapse;
-    margin:30px 0;
-    width: 100%;
-}
-
-.table.table-bordered.table-responsive-sm td{
-    padding: 6px;
-}
-
-.table.table-bordered.table-responsive-sm th{
-    padding: 6px;
-}
-
 

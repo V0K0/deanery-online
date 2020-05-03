@@ -3,7 +3,7 @@ package com.vozniuk.springapplication.service.impl;
 import com.vozniuk.springapplication.domain.data.university.Specialty;
 import com.vozniuk.springapplication.domain.data.university.UniversityGroup;
 import com.vozniuk.springapplication.repositories.GroupRepository;
-import com.vozniuk.springapplication.service.GroupService;
+import com.vozniuk.springapplication.service.services.GroupService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

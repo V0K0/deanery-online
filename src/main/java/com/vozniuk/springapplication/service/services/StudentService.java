@@ -1,4 +1,4 @@
-package com.vozniuk.springapplication.service;
+package com.vozniuk.springapplication.service.services;
 
 import com.vozniuk.springapplication.domain.data.university.Student;
 import com.vozniuk.springapplication.domain.data.university.UniversityGroup;

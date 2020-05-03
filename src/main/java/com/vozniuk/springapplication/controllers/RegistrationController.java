@@ -1,7 +1,7 @@
 package com.vozniuk.springapplication.controllers;
 
 import com.vozniuk.springapplication.domain.data.user.User;
-import com.vozniuk.springapplication.service.UserService;
+import com.vozniuk.springapplication.service.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

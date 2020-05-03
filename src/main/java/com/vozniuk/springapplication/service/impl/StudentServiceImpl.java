@@ -3,7 +3,7 @@ package com.vozniuk.springapplication.service.impl;
 import com.vozniuk.springapplication.domain.data.university.Student;
 import com.vozniuk.springapplication.domain.data.university.UniversityGroup;
 import com.vozniuk.springapplication.repositories.StudentRepository;
-import com.vozniuk.springapplication.service.StudentService;
+import com.vozniuk.springapplication.service.services.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +11,6 @@ import java.util.List;
 
 @Service
 public class StudentServiceImpl implements StudentService {
-
 
     @Autowired
     private StudentRepository studentRepository;

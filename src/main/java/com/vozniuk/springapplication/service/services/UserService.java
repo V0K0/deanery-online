@@ -1,4 +1,4 @@
-package com.vozniuk.springapplication.service;
+package com.vozniuk.springapplication.service.services;
 
 import com.vozniuk.springapplication.domain.data.university.Student;
 import com.vozniuk.springapplication.domain.data.user.Role;
@@ -31,22 +31,22 @@ public class UserService implements UserDetailsService {
         return userRepository.findByUsername(username);
     }
 
-    public boolean addUser(User user){
+    public boolean addUser(User user) {
         User userFromDB = userRepository.findByUsername(user.getUsername());
-        if (userFromDB!=null){
+        if (userFromDB != null) {
             return false;
         }
         user.setActive(true);
         user.setRoles(Collections.singleton(Role.USER));
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
-       saveUserAsStudent(user);
+        saveUserAsStudent(user);
 
         return true;
     }
 
 
-    private void saveUserAsStudent(User user){
+    private void saveUserAsStudent(User user) {
         Student student = new Student();
         student.setId(user.getId());
         studentServiceImpl.addStudent(student);
