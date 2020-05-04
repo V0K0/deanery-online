@@ -1,8 +1,8 @@
 <!--suppress ALL -->
 <html  xmlns:th="http://www.w3.org/1999/xhtml" lang="ua">
 <body>
-<nav class="navbar navbar-expand-md navbar-dark" style="background: #fd7e14" th:fragment="nav">
-    <a class="navbar-brand"  th:href="@{/home}" style="margin-right: 50px">Деканат-онлайн</a>
+<nav class="navbar  navbar-expand-md navbar-dark" th:fragment="nav">
+    <a class="navbar-brand"  th:href="@{/home}">Деканат-онлайн</a>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -19,6 +19,9 @@
             </li>
             <li class="nav-item plan">
                 <a class="nav-link" th:href="@{/plan}">Учбовий план</a>
+            </li>
+            <li class="nav-item grades">
+                <a class="nav-link" href="#">Мої оцінки</a>
             </li>
         </ul>
         <ul class="navbar-nav">
@@ -37,5 +40,7 @@
         </ul>
     </div>
 </nav>
+
+<script src="js/navbar-hoover-actions.js" type="text/javascript"></script>
 </body>
 </html>
