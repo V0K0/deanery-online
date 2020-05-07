@@ -1,9 +1,7 @@
 package com.vozniuk.springapplication.domain.data.university;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -21,8 +19,13 @@ public class Teacher {
 
     private String phone;
 
-    @OneToMany(mappedBy = "teacher")
-    private Set<Subject> teacherSubjects;
+    @ManyToMany(cascade = {CascadeType.ALL})
+    @JoinTable(
+            name = "subject_teacher_relation",
+            joinColumns = {@JoinColumn(name = "teacher_id")},
+            inverseJoinColumns = {@JoinColumn(name = "subject_id")}
+    )
+    private Set<Subject> subjects = new HashSet<>();
 
     public Integer getTeacherId() {
         return teacherId;
@@ -64,13 +67,11 @@ public class Teacher {
         this.phone = phone;
     }
 
-    public Set<Subject> getTeacherSubjects() {
-        return teacherSubjects;
+    public Set<Subject> getSubjects() {
+        return subjects;
     }
 
-    public void setTeacherSubjects(Set<Subject> teacherSubjects) {
-        this.teacherSubjects = teacherSubjects;
+    public void setSubjects(Set<Subject> subjects) {
+        this.subjects = subjects;
     }
-
-
 }

@@ -51,6 +51,7 @@ create table schedule (
 schedule_id int not null AUTO_INCREMENT,
 group_id int not null,
 subject_id int not null,
+term int(1) not null,
 day_of_week varchar (20),
 week_type varchar (20),
 lesson_time time,

@@ -39,13 +39,17 @@
 
         <td class="align-middle"
             th:each="sch : ${scheduleNum}"
-            th:if="${sch != null && scheduleUtils.findLessonIndexInSchedule(sch) == index}"
-            th:classappend="${#strings.equals(sch.weekType, 'Чисельник')} ? 'table-success' : 'table-light'">&nbsp;
-            <span>&nbsp;</span>
+            th:if="${sch != null
+            && scheduleUtils.findLessonIndexInSchedule(sch) == index
+            && sch.subject.teachers != null }"
+            th:classappend="${#strings.equals(sch.weekType, 'Чисельник')} ? 'table-success' : 'table-light'">
+            <span
+                    th:each="teacher, iter : ${sch.subject.teachers}"
+                    th:text="${iter.last} ? ${teacher.name} + ' ' + ${teacher.lastname} : ${teacher.name} + ' ' + ${teacher.lastname} + ', '">
+            </span>
         </td>
-
-
     </tr>
+
     <tr> <!--Знаминатель-->
         <td class="align-middle table-primary"
             th:each="sch1 : ${scheduleDenum}"
@@ -61,10 +65,14 @@
 
         <td class="align-middle table-primary"
             th:each="sch1 : ${scheduleDenum}"
-            th:if="${sch1 != null && scheduleUtils.findLessonIndexInSchedule(sch1) == index}">
-            <span>&nbsp;</span>
+            th:if="${sch1 != null
+             && scheduleUtils.findLessonIndexInSchedule(sch1) == index
+             && sch1.subject.teachers != null}">
+             <span
+                     th:each="teacher, iter : ${sch1.subject.teachers}"
+                     th:text="${iter.last} ? ${teacher.name} + ' ' + ${teacher.lastname} : ${teacher.name} + ' ' + ${teacher.lastname} + ', '">
+             </span>
         </td>
-
     </tr>
 
     </tbody>

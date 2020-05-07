@@ -3,6 +3,8 @@ package com.vozniuk.springapplication.domain.data.university;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.sql.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Subject {
@@ -39,9 +41,8 @@ public class Subject {
     @JoinColumn(name = "defence_date")
     private Date defenceDate;
 
-    @ManyToOne
-    @JoinColumn(name = "teacher_id")
-    private Teacher teacher;
+    @ManyToMany(mappedBy = "subjects")
+    private Set<Teacher> teachers = new HashSet<>();
 
     public Integer getSubjectId() {
         return subjectId;
@@ -107,11 +108,11 @@ public class Subject {
         this.defenceDate = defenceDate;
     }
 
-    public Teacher getTeacher() {
-        return teacher;
+    public Set<Teacher> getTeachers() {
+        return teachers;
     }
 
-    public void setTeacher(Teacher teacher) {
-        this.teacher = teacher;
+    public void setTeachers(Set<Teacher> teachers) {
+        this.teachers = teachers;
     }
 }

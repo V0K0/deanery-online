@@ -16,14 +16,16 @@
     </tr>
     </thead>
     <tbody th:each="subject : ${plan}">
-        <td class="align-middle" th:text="${subject?.subjectName}"></td>
-        <td class="align-middle" th:text="${subject?.lectureHours}"></td>
-        <td class="align-middle" th:text="${subject?.practicalHours}"></td>
-        <td class="align-middle"
-            th:text="${subject?.teacher?.name + ' ' + subject?.teacher?.lastname }"></td>
-        <!--"*{teacher != null}? *{teacher.name + ' ' + teacher.lastname} : '—'"-->
-        <td class="align-middle" th:text="${subject?.defenceType}">-</td>
-        <td class="align-middle" th:text="${subject?.defenceDate}">-</td>
+    <td class="align-middle"><span th:text="${subject?.subjectName}"> </span></td>
+    <td class="align-middle"><span th:text="${subject?.lectureHours}"></span></td>
+    <td class="align-middle"><span th:text="${subject?.practicalHours}"></span></td>
+    <td class="align-middle"
+        th:if="${subject.teachers ne null}"><span
+            th:each="teacher, iter : ${subject.teachers}"
+            th:text="${iter.last} ? ${teacher.name} + ' ' + ${teacher.lastname}
+             :  ${teacher.name} + ' ' + ${teacher.lastname} + ', '"></span></td>
+    <td class="align-middle"><span th:text="${subject?.defenceType}"></span></td>
+    <td class="align-middle"><span th:text="${subject?.defenceDate}"></span></td>
     </tbody>
 </table>
 </body>

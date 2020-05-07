@@ -7,7 +7,6 @@ import java.sql.Time;
 @Entity
 public class Schedule {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @JoinColumn(name = "schedule_id")
@@ -22,6 +21,8 @@ public class Schedule {
     @JoinColumn(name = "subject_id")
     @NotNull
     private Subject subject;
+
+    private Integer term;
 
     @JoinColumn(name = "day_of_week")
     private String dayOfWeek;
@@ -91,4 +92,11 @@ public class Schedule {
         this.weekType = weekType;
     }
 
+    public Integer getTerm() {
+        return term;
+    }
+
+    public void setTerm(Integer term) {
+        this.term = term;
+    }
 }
