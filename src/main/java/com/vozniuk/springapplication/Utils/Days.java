@@ -1,16 +1,37 @@
 package com.vozniuk.springapplication.Utils;
 
-public class Days {
+public enum Days {
 
-    private Days(){}
+    MONDAY("Понеділок", "scheduleMondayNum", "scheduleMondayDenum"),
+    TUESDAY("Вівторок", "scheduleTuesdayNum", "scheduleTuesdayDenum"),
+    WEDNESDAY ("Середа", "scheduleWednesdayNum", "scheduleWednesdayDenum"),
+    THURSDAY ("Четверг", "scheduleThursdayNum","scheduleThursdayDenum"),
+    FRIDAY ("П'ятниця", "scheduleFridayNum","scheduleFridayDenum"),
+    WEEK_NUMERATOR ("Чисельник", "",""),
+    WEEK_DENOMINATOR  ("Знаменник", "",""),
+    EVERY_WEEK  ("Щотижня", "","");
 
-    public static final String MONDAY = "Понеділок";
-    public static final String TUESDAY = "Вівторок";
-    public static final String WEDNESDAY = "Середа";
-    public static final String THURSDAY = "Четверг";
-    public static final String FRIDAY = "П'ятниця";
-    public static final String WEEK_NUMERATOR = "Чисельник";
-    public static final String WEEK_DENOMINATOR  = "Знаменник";
-    public static final String EVERY_WEEK  = "Щотижня";
+    private final String dayName;
 
+    private final String dayNum;
+
+    private final String dayDenum;
+
+    Days(String dayName, String dayNum, String dayDenum) {
+        this.dayName = dayName;
+        this.dayNum = dayNum;
+        this.dayDenum = dayDenum;
+    }
+
+    public String getDayName() {
+        return dayName;
+    }
+
+    public String getDayNum() {
+        return dayNum;
+    }
+
+    public String getDayDenum() {
+        return dayDenum;
+    }
 }

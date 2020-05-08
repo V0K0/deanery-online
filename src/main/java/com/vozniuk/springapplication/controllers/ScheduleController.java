@@ -30,60 +30,41 @@ public class ScheduleController {
     @GetMapping("/schedule")
     public String getSchedule(@AuthenticationPrincipal User user, Model model) {
         model.addAttribute("username", user.getUsername());
-        pushInModel(user, model);
+        pushUserInModel(user, model);
+        pushScheduleForStudent(model);
         return "schedule";
     }
 
-    private void pushInModel(User user, Model model) {
+    private void pushUserInModel(User user, Model model) {
         Student currentStudent = studentServiceImpl.getStudentById(user.getId());
         model.addAttribute("student", currentStudent);
-        pushScheduleForStudent(currentStudent, model);
     }
 
-    private void pushScheduleForStudent(Student student, Model model){
+    private void pushScheduleForStudent(Model model) {
+        Student current = (Student) model.getAttribute("student");
 
-        List<Schedule> schedulesMonday = scheduleServiceImpl.getAllForGroupOnDay(student.getGroup(), Days.MONDAY);
-        List<Schedule> schedulesTuesday = scheduleServiceImpl.getAllForGroupOnDay(student.getGroup(), Days.TUESDAY);
-        List<Schedule> schedulesWednesday = scheduleServiceImpl.getAllForGroupOnDay(student.getGroup(), Days.WEDNESDAY);
-        List<Schedule> schedulesThursday = scheduleServiceImpl.getAllForGroupOnDay(student.getGroup(), Days.THURSDAY);
-        List<Schedule> schedulesFriday = scheduleServiceImpl.getAllForGroupOnDay(student.getGroup(), Days.FRIDAY);
+        if (current != null) {
+            loadScheduleForDayInModel(current, model, Days.MONDAY);
+            loadScheduleForDayInModel(current, model, Days.TUESDAY);
+            loadScheduleForDayInModel(current, model, Days.WEDNESDAY);
+            loadScheduleForDayInModel(current, model, Days.THURSDAY);
+            loadScheduleForDayInModel(current, model, Days.FRIDAY);
+            model.addAttribute("scheduleUtils", new ScheduleUtils(new DefaultTimeTable()));
+        }
 
-        model.addAttribute("scheduleMondayNum", schedulesMonday.stream().filter(schedule ->
-                schedule.getWeekType().equals(Days.WEEK_NUMERATOR) || schedule.getWeekType().equals(Days.EVERY_WEEK))
-                .collect(Collectors.toList()));
-        model.addAttribute("scheduleMondayDenum", schedulesMonday.stream().filter(schedule -> schedule.getWeekType().equals(Days.WEEK_DENOMINATOR))
-                .collect(Collectors.toList()));
-        model.addAttribute("MONDAY", Days.MONDAY);
+    }
 
-        model.addAttribute("scheduleTuesdayNum", schedulesTuesday.stream().filter(schedule ->
-                schedule.getWeekType().equals(Days.WEEK_NUMERATOR) || schedule.getWeekType().equals(Days.EVERY_WEEK))
+    private void loadScheduleForDayInModel(Student student, Model model, Days days) {
+        List<Schedule> schedule = scheduleServiceImpl.getAllForGroupOnDay(student.getGroup(), days.getDayName());
+        model.addAttribute(days.getDayNum(), schedule.stream().filter(sch ->
+                sch.getWeekType().equals(Days.WEEK_NUMERATOR.getDayName()) || sch.getWeekType().equals(Days.EVERY_WEEK.getDayName()))
                 .collect(Collectors.toList()));
-        model.addAttribute("scheduleTuesdayDenum", schedulesTuesday.stream().filter(schedule -> schedule.getWeekType().equals(Days.WEEK_DENOMINATOR))
+        model.addAttribute(days.getDayDenum(), schedule.stream().filter(sch -> sch.getWeekType().equals(Days.WEEK_DENOMINATOR.getDayName()))
                 .collect(Collectors.toList()));
-        model.addAttribute("TUESDAY", Days.TUESDAY);
-
-        model.addAttribute("scheduleWednesdayNum", schedulesWednesday.stream().filter(schedule ->
-                schedule.getWeekType().equals(Days.WEEK_NUMERATOR) || schedule.getWeekType().equals(Days.EVERY_WEEK))
-                .collect(Collectors.toList()));
-        model.addAttribute("scheduleWednesdayDenum", schedulesWednesday.stream().filter(schedule -> schedule.getWeekType().equals(Days.WEEK_DENOMINATOR))
-                .collect(Collectors.toList()));
-        model.addAttribute("WEDNESDAY", Days.WEDNESDAY);
-
-        model.addAttribute("scheduleThursdayNum", schedulesThursday.stream().filter(schedule ->
-                schedule.getWeekType().equals(Days.WEEK_NUMERATOR) || schedule.getWeekType().equals(Days.EVERY_WEEK))
-                .collect(Collectors.toList()));
-        model.addAttribute("scheduleThursdayDenum", schedulesThursday.stream().filter(schedule -> schedule.getWeekType().equals(Days.WEEK_DENOMINATOR))
-                .collect(Collectors.toList()));
-        model.addAttribute("THURSDAY", Days.THURSDAY);
-
-        model.addAttribute("scheduleFridayNum", schedulesFriday.stream().filter(schedule ->
-                schedule.getWeekType().equals(Days.WEEK_NUMERATOR) || schedule.getWeekType().equals(Days.EVERY_WEEK))
-                .collect(Collectors.toList()));
-        model.addAttribute("scheduleFridayDenum", schedulesFriday.stream().filter(schedule -> schedule.getWeekType().equals(Days.WEEK_DENOMINATOR))
-                .collect(Collectors.toList()));
-        model.addAttribute("FRIDAY", Days.FRIDAY);
-
-        model.addAttribute("scheduleUtils", new ScheduleUtils(new DefaultTimeTable()));
+        model.addAttribute(days.name(), days.getDayName());
     }
 
 }
+
+
+
