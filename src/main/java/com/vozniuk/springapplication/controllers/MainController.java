@@ -3,6 +3,7 @@ package com.vozniuk.springapplication.controllers;
 import com.vozniuk.springapplication.domain.data.university.Student;
 import com.vozniuk.springapplication.domain.data.university.StudyingPlan;
 import com.vozniuk.springapplication.domain.data.university.Subject;
+import com.vozniuk.springapplication.domain.data.user.Role;
 import com.vozniuk.springapplication.domain.data.user.User;
 import com.vozniuk.springapplication.service.impl.StudentServiceImpl;
 import com.vozniuk.springapplication.service.impl.SubjectServiceImpl;
@@ -31,6 +32,9 @@ public class MainController {
 
     @GetMapping("/home")
     public String homePage(@AuthenticationPrincipal User user, Model model){
+        if (user.getAuthorities().contains(Role.ADMIN)){
+            return "forward:admin-page";
+        }
         loadStudentInModel(user, model);
         return "home";
     }
@@ -50,7 +54,7 @@ public class MainController {
 
     private void loadPlanInModel(Model model){
        Student currentStudent = (Student) model.getAttribute("student");
-       if (currentStudent.getGroup() != null){
+       if (currentStudent != null && currentStudent.getGroup() != null){
            StudyingPlan plan = currentStudent.getGroup().getPlan();
            List<Subject> subjects = subjectServiceImpl.getAllByPlan(plan);
            model.addAttribute("listOfSubjects", subjects);

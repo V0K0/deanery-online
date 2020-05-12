@@ -3,31 +3,32 @@
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3" lang="ua">
 <head>
     <meta charset="UTF-8">
-    <title>Учбовий план</title>
+    <title>Сторінка адміністратора</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <link rel="icon" href="images/icons8-dev-post-64.png" type="image/x-icon">
     <link rel="stylesheet" href="css/applicationButtons.css">
-    <link rel="stylesheet" href="css/tables.css">
     <link rel="stylesheet" href="css/authorized-pages.css">
+    <link rel="stylesheet" href="css/profile.css">
     <link rel="stylesheet" href="css/navbar.css">
     <meta name="viewport" content="width=device-width"/>
 </head>
 <body>
-<div class="header" th:insert="~{navbar :: nav}"></div>
+<div class="header sticky-top" th:insert="~{admin-navbar :: nav-admin}"></div>
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-3"></div>
-        <div class="col-md central-container">
-            <div th:insert="~{plan-table :: plan-table(${listOfSubjects})}" ></div>
+        <div class="col-md">
+            <div class="shadow-sm rounded content-header">
+                <p class="h2">Вітаємо! Ви увійшли, як адміністратор</p>
+            </div>
         </div>
         <div class="col-md-3"></div>
     </div>
-
 </div>
 
-<script id="marker" type="text/javascript" src="js/mark-active-page.js" data-page="plan" ></script>
+<script id="marker" type="text/javascript" src="js/mark-active-page.js" data-page="home"></script>
 </body>
 </html>

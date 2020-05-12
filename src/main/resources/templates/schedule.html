@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!--suppress ALL -->
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3" lang="ua">
 <head>
@@ -13,6 +14,7 @@
     <link rel="stylesheet" href="css/schedule-page.css">
     <link rel="stylesheet" href="css/tables.css">
     <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/authorized-pages.css">
     <meta name="viewport" content="width=device-width"/>
 </head>
 <body>
@@ -20,7 +22,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-3"></div>
-        <div class="col-md timetables" style="background: white">
+        <div class="col-md timetables central-container">
             <div class="week-types">
 
                 <div class="week-desc">
@@ -34,7 +36,7 @@
                 </div>
 
                 <div class="week-desc">
-                    <span class="circle" style="border: 1px dimgray solid"></span>
+                    <span class="circle circle-bordered"></span>
                     <span class="circle-label"> — Щотижня</span>
                 </div>
 
@@ -49,6 +51,6 @@
     </div>
 
 </div>
-<script type="text/javascript" src="js/schedule-page.js"></script>
+<script id="marker" type="text/javascript" src="js/mark-active-page.js" data-page="schedule"></script>
 </body>
 </html>
