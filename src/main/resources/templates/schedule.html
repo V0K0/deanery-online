@@ -4,7 +4,7 @@
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3" lang="ua">
 <head>
     <meta charset="UTF-8">
-    <title>Розклад</title>
+    <title th:text="#{schedule_page}"></title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -27,17 +27,17 @@
 
                 <div class="week-desc">
                     <span class="circle table-success"></span>
-                    <span class="circle-label"> — Чисельник</span>
+                    <span class="circle-label" th:text="#{numerator}"></span>
                 </div>
 
                 <div class="week-desc">
                     <span class="circle table-primary"></span>
-                    <span class="circle-label"> — Знаменник</span>
+                    <span class="circle-label" th:text="#{denominator}"></span>
                 </div>
 
                 <div class="week-desc">
                     <span class="circle circle-bordered"></span>
-                    <span class="circle-label"> — Щотижня</span>
+                    <span class="circle-label" th:text="#{each_week}"></span>
                 </div>
 
             </div>

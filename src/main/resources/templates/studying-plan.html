@@ -3,7 +3,7 @@
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3" lang="ua">
 <head>
     <meta charset="UTF-8">
-    <title>Учбовий план</title>
+    <title th:text="#{st_plan_page}"></title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -28,6 +28,6 @@
 
 </div>
 
-<script id="marker" type="text/javascript" src="js/mark-active-page.js" data-page="plan" ></script>
+<script id="marker" type="text/javascript" src="js/mark-active-page.js" data-page="plan"></script>
 </body>
 </html>

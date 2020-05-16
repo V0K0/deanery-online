@@ -3,7 +3,7 @@
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3" lang="ua">
 <head>
     <meta charset="UTF-8">
-    <title>Деканат-онлайн</title>
+    <title th:text="#{site-title}"></title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -21,15 +21,15 @@
 
             <div id="slogansArea">
                 <div class="item1">
-                    <img src="images/icons8-театральный-бинокль-35.png" alt="Бінокль"> <span>Слідкуй за своїм розкладом</span>
+                    <img src="images/icons8-театральный-бинокль-35.png" alt="Бінокль"> <span th:text="#{watchYourSchedule}"></span>
                 </div>
 
                 <div class="item2">
-                    <img src="images/icons8-календарь-35.png" alt="Календар"> <span>Дізнайся про свій учбовий план</span>
+                    <img src="images/icons8-календарь-35.png" alt="Календар"> <span th:text="#{findYourPlan}"></span>
                 </div>
 
                 <div class="item3">
-                    <img src="images/icons8-оценки-35.png" alt="Відмітки"> <span>Контролюй свою успішність</span>
+                    <img src="images/icons8-оценки-35.png" alt="Відмітки"> <span th:text="#{controlSuccess}"></span>
                 </div>
 
             </div>
@@ -39,17 +39,17 @@
         <div class="col-md-8" id="rightColumn">
             <div class="content">
                 <div class="overButtonSpeech">
-                    <p>Приєднуйся</p>
-                    <p>та будь у курсі подій</p>
-                    <p>просто зараз</p>
+                    <p th:text="#{join}"></p>
+                    <p th:text="#{andKeepInformed}"></p>
+                    <p th:text="#{rightNow}"></p>
                 </div>
 
                 <a th:href="@{/registration}" class="text-decoration-none" id="buttonReg">
-                    <span>Зареєструватися</span>
+                    <span th:text="#{registration}"></span>
                 </a>
 
                 <a th:href="@{/home}" class="text-decoration-none" id="emptyBackgroundBtn">
-                    <span>Увійти</span>
+                    <span th:text="#{log_in}">Увійти</span>
                 </a>
             </div>
 
@@ -59,7 +59,7 @@
 
     <div class="row">
         <div class="col" id="footer">
-            <span>2020 Vozniuk Kostiantyn</span>
+            <span th:text="#{author}"></span>
         </div>
     </div>
 </div>

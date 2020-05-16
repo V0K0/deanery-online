@@ -8,7 +8,7 @@ $(document).ready(function () {
         if (selectedId !== undefined && selectedId !== null) {
             specialty.html(options.filter('[id="' + selectedId + '"]'));
         } else {
-            specialty.html('<option  value="" selected>Спеціальність...</option>');
+            specialty.html('<option  value="" selected>...</option>');
         }
     }).trigger('change');
 

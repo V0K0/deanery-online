@@ -3,7 +3,7 @@
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3" lang="ua">
 <head>
     <meta charset="UTF-8">
-    <title>Редагування профілю</title>
+    <title th:text="#{prof_edit}"></title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -24,42 +24,42 @@
         <div class="col-md">
 
             <div class="shadow-sm rounded content-header">
-                <p class="h2">Редагування профілю</p>
+                <p class="h2" th:text="#{prof_edit}"></p>
             </div>
 
             <div class="shadow-sm rounded detailCard">
                 <div class="detailInfo">
                     <form id="formEdit" class="needs-validation" method="post" validate>
                         <div class="form-group row">
-                            <label for="name" class="col-sm-4 col-form-label">Ім'я</label>
+                            <label for="name" class="col-sm-4 col-form-label" th:text="#{st_name}"></label>
                             <div class="col-sm-8">
                                 <input type="text" class="form-control lettersOnly" id="name" name="name"
-                                       title="Тільки літери" th:value="${student?.name}"
+                                       th:title="#{lettersOnly}" th:value="${student?.name}"
                                        required>
-                                <div class="invalid-feedback">Введіть коректне ім'я. Поле не повинно бути пустим</div>
+                                <div class="invalid-feedback" th:text="#{inv_feedback_name}"></div>
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="lastname" class="col-sm-4 col-form-label">Прізвище</label>
+                            <label for="lastname" class="col-sm-4 col-form-label" th:text="#{st_lastname}"></label>
                             <div class="col-sm-8">
                                 <input type="text" class="form-control lettersOnly" id="lastname" name="lastname"
-                                       title="Тільки літери"
+                                       th:title="#{lettersOnly}"
                                        th:value="${student?.lastname}"
                                        required>
-                                <div class="invalid-feedback">Введіть коректне прізвище. Поле не повинно бути пустим</div>
+                                <div class="invalid-feedback" th:text="#{inv_feedback_lastname}"></div>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="patronymic" class="col-sm-4 col-form-label">По-батькові</label>
+                            <label for="patronymic" class="col-sm-4 col-form-label" th:text="#{st_patron}"></label>
                             <div class="col-sm-8">
                                 <input type="text" class="form-control lettersOnly" id="patronymic" name="patronymic"
                                        th:value="${student?.patronymic}"
-                                       title="Тільки літери">
+                                       th:title="#{lettersOnly}">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="birhday" class="col-sm-4 col-form-label">Дата народження</label>
+                            <label for="birhday" class="col-sm-4 col-form-label" th:text="#{st_birth}"> </label>
                             <div class="col-sm-8">
                                 <input type="date" class="form-control" id="birhday" name="dateOfBirth"
                                        th:value="${student?.dateOfBirth}"
@@ -67,80 +67,79 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="address" class="col-sm-4 col-form-label">Адреса</label>
+                            <label for="address" class="col-sm-4 col-form-label" th:text="#{st_address}"></label>
                             <div class="col-sm-8">
                                 <input type="text" class="form-control" id="address" name="address"
                                 th:value="${student?.address}">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="phone" class="col-sm-4 col-form-label">Телефон</label>
+                            <label for="phone" class="col-sm-4 col-form-label" th:text="#{st_phone}"></label>
                             <div class="col-sm-8">
                                 <input type="text" class="form-control phoneInput" id="phone" name="phone"
                                        pattern="0[0-9]{2}-[0-9]{3}-[0-9]{2}-[0-9]{2}"
                                        placeholder="0XX-XXX-XX-XX"
                                        title="0XX-XXX-XX-XX"
                                        minlength="13" maxlength="13">
-                                <div class="invalid-feedback">Невірний формат. Притримуйтесь формату 0XX-XXX-XX-XX</div>
+                                <div class="invalid-feedback" th:text="#{inv_feedback_phone}"></div>
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="faculty" class="col-sm-4 col-form-label">Факультет</label>
+                            <label for="faculty" class="col-sm-4 col-form-label" th:text="#{fac}"></label>
                             <div class="col-sm-8">
                                 <select id="faculty" name="faculty" class="custom-select" required>
-                                    <option value="" selected>Факультет...</option>
-                                    <option value="fit">Інформаційних технологій</option>
+                                    <option value="" selected th:text="#{fac_select}"></option>
+                                    <option value="fit" th:text="#{fit_fac}"></option>
                                 </select>
-                                <div class="invalid-feedback">Оберіть факультет</div>
+                                <div class="invalid-feedback" th:text="#{inv_choose_fac}"></div>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="department" class="col-sm-4 col-form-label">Кафедра</label>
+                            <label for="department" class="col-sm-4 col-form-label" th:text="#{dep}"></label>
                             <div class="col-sm-8">
                                 <select id="department" name="department" class="custom-select" required>
-                                    <option  value="" selected>Кафедра...</option>
-                                    <option value="ПЗКС" id="pzks">Програмного забезпечення комп'ютерних систем</option>
-                                    <option value="БІТ" id="bit">Безпеки і телекомунікацій</option>
-                                    <option value="САУ" id="say">Системного аналізу та управління</option>
-                                    <option value="ІСТТ" id="ictt">Інформаційних систем та технологій</option>
+                                    <option  value="" selected th:text="#{dep_select}"></option>
+                                    <option value="ПЗКС" id="pzks" th:text="#{dep_pzks}"></option>
+                                    <option value="БІТ" id="bit" th:text="#{dep_bit}"></option>
+                                    <option value="САУ" id="say" th:text="#{dep_say}"></option>
+                                    <option value="ІСТТ" id="ictt" th:text="#{dep_inf_tech}"></option>
                                 </select>
-                                <div class="invalid-feedback">Оберіть кафедру</div>
+                                <div class="invalid-feedback" th:text="#{inv_choose_dep}"></div>
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="specialty" class="col-sm-4 col-form-label">Спеціальність</label>
+                            <label for="specialty" class="col-sm-4 col-form-label" th:text="#{spec}"></label>
                             <div class="col-sm-8">
                                 <select id="specialty" name="specialty" class="custom-select" required>
-                                    <option  value="" selected>Спеціальність...</option>
-                                    <option value="Інженерія програмного забезпечення" id="pzks" class="s121">Інженерія програмного забезпечення (121)</option>
-                                    <option value="Комп'ютерні науки та інформаційні технології" id="pzks" class="s122">Комп'ютерні науки та інформаційні технології (122)</option>
-                                    <option value="Кібербезпека" id="bit" class="s125">Кібербезпека (125)</option>
-                                    <option value="Телекомунікації та радіотехніка" id="bit" class="s172">Телекомунікації та радіотехніка (172)</option>
-                                    <option value="Системний аналіз" id="say" class="s124">Системний аналіз (124)</option>
-                                    <option value="Комп'ютерна інженерія" id="ictt" class="s123">Комп'ютерна інженерія (123)</option>
-                                    <option value="Інформаційні системи та технології" id="ictt"  class="s126">Інформаційні системи та технології (126)</option>
+                                    <option value="Інженерія програмного забезпечення" id="pzks" class="s121" th:text="#{spec_121}"></option>
+                                    <option value="Комп'ютерні науки та інформаційні технології" id="pzks" class="s122" th:text="#{spec_122}"></option>
+                                    <option value="Кібербезпека" id="bit" class="s125" th:text="#{spec_125}"></option>
+                                    <option value="Телекомунікації та радіотехніка" id="bit" class="s172" th:text="#{spec_172}"></option>
+                                    <option value="Системний аналіз" id="say" class="s124" th:text="#{spec_124}"></option>
+                                    <option value="Комп'ютерна інженерія" id="ictt" class="s123" th:text="#{spec_123}"></option>
+                                    <option value="Інформаційні системи та технології" id="ictt" class="s126" th:text="#{spec_126}"></option>
                                 </select>
-                                <div class="invalid-feedback">Оберіть спеціальність</div>
+                                <div class="invalid-feedback" th:text="#{inv_choose_spec}"></div>
                             </div>
                         </div>
                          <div class="form-group row">
-                             <label for="group" class="col-sm-4 col-form-label">Група</label>
+                             <label for="group" class="col-sm-4 col-form-label" th:text="#{un_group}"></label>
                              <div class="col-sm-8">
                                  <input type="text" class="form-control phoneInput" id="group" name="group"
-                                        title="Тільки цифри"
+                                        th:title="#{lettersOnly}"
                                         pattern="[0-9]{3}-[0-9]{2}-[1-9]{1}"
                                         th:value="${student?.group?.groupCode}"
-                                        placeholder="спеціальность-рік-група"
+                                        th:placeholder="#{group_signature_placeholder}"
                                         required>
-                                 <div class="invalid-feedback" id="incorrectGroup">Введіть коректний код групи. Поле не повинно бути пустим</div>
+                                 <div class="invalid-feedback" id="incorrectGroup" th:text="#{inv_choose_group}"></div>
                              </div>
                          </div>
 
                         <div class="controls" style="margin-top: 30px">
-                            <a class="btn btn-secondary decline" th:href="@{/profile}">Скасувати</a>
-                            <input type="submit" class="btn btn-primary accept" value="Оновити профіль"></input>
+                            <a class="btn btn-secondary decline" th:href="@{/profile}" th:text="#{decline}"></a>
+                            <input type="submit" class="btn btn-primary accept" th:value="#{refresh_profile}"></input>
                         </div>
                     </form>
                 </div>

@@ -7,12 +7,12 @@
        th:fragment="plan-table(plan)">
     <thead>
     <tr>
-        <th scope="col" class="big-cell align-middle table-success">Предмет</th>
-        <th scope="col" class="very-small-cell align-middle table-success">Лекційні заняття</th>
-        <th scope="col" class="very-small-cell align-middle table-success">Практичні заняття</th>
-        <th scope="col" class="medium-cell align-middle table-success">Викладач</th>
-        <th scope="col" class="medium-cell align-middle table-success">Захист</th>
-        <th scope="col" class="small-cell align-middle table-success">Дата захисту</th>
+        <th scope="col" class="big-cell align-middle table-success" th:text="#{subj}"></th>
+        <th scope="col" class="very-small-cell align-middle table-success" th:text="#{lect_hours}"></th>
+        <th scope="col" class="very-small-cell align-middle table-success" th:text="#{pract_hours}"></th>
+        <th scope="col" class="medium-cell align-middle table-success" th:text="#{subject_teacher}"></th>
+        <th scope="col" class="medium-cell align-middle table-success" th:text="#{def_type}"></th>
+        <th scope="col" class="small-cell align-middle table-success" th:text="#{def_date}"></th>
     </tr>
     </thead>
     <tbody th:each="subject : ${plan}">

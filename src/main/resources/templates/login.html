@@ -3,7 +3,7 @@
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3" lang="ua">
 <head>
     <meta charset="UTF-8">
-    <title>Увійти в деканат-онлайн</title>
+    <title th:text="#{enterDeanery}"></title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/form.css">
     <link rel="stylesheet" href="css/form-media.css">
@@ -20,22 +20,22 @@
 
     <div id="welcomeText">
         <img src="images/icons8-dev-post-64.png" alt="Логотип">
-        <p>Увійти в деканат онлайн</p>
+        <p th:text="#{enterDeanery}"></p>
 
     </div>
     <div th:if="${param.error}">
-      <p class="text-danger">Невірний логін або пароль. Перевірте правельність введених данних</p>
+      <p class="text-danger" th:text="#{incorrectCredits}"></p>
     </div>
     <form method="post" th:action="@{/login}">
         <div class="inputDiv" tabindex="0">
-                <span>Ім'я користувача</span>
+                <span th:text="#{user_name}"></span>
             <input type="text" class="inputLogin dataField" name="username">
         </div>
         <div class="inputDiv" tabindex="0">
-                <span>Пароль</span>
+                <span th:text="#{pass_word}"></span>
             <input type="password"  class="inputPass dataField" name="password">
         </div>
-        <input type="submit" value="Увійти" id="buttonEnter" class="disabledBtn" disabled="disabled">
+        <input type="submit" th:value="#{log_in}" id="buttonEnter" class="disabledBtn" disabled="disabled">
     </form>
 
     <script src="js/login-form.js" type="text/javascript" ></script>

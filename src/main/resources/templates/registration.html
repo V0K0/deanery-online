@@ -3,7 +3,7 @@
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3" lang="ua">
 <head>
     <meta charset="UTF-8">
-    <title>Реєстрація аккаунту</title>
+    <title th:text="#{registration_acc}"></title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/form.css">
     <link rel="stylesheet" href="css/form-media.css">
@@ -20,28 +20,28 @@
 
     <div id="welcomeText">
         <img src="images/icons8-dev-post-64.png">
-        <p class="label">Реєстрація</p>
+        <p class="label" th:text="#{registration}"></p>
     </div>
-    <!--/*@thymesVar id="msg" type="com.vozniuk.springapplication.controllers.RegistrationController"*/-->
-    <div th:if="${msg}">
-        <p class="text-danger" th:text="${msg}"></p>
+    
+    <div th:if="${msgError}">
+        <p class="text-danger" th:text="${msgError}"></p>
     </div>
 
     <form id="regForm" method="post" th:action="@{/registration}">
         <div class="inputDiv inputArea">
-                <span>Логін</span>
+                <span th:text="#{log_in}"></span>
             <input type="text" class="inputLogin dataField" name="username">
         </div>
         <div class="inputDiv inputArea">
-                <span>Пароль</span>
+                <span th:text="#{pass_word}"></span>
             <input type="password" class="inputPass dataField" name="password" >
         </div>
         <div class="inputDiv inputArea">
-                <span>Підтвердження паролю</span>
+                <span th:text="#{pass_confirm}"></span>
             <input type="password" class="inputConfirmPass dataField" name="passwordConfirm" >
         </div>
 
-        <input type="submit" value="Створити аккаунт" id="buttonEnter" class="disabledBtn" disabled="disabled">
+        <input type="submit" th:value="#{create_acc}" id="buttonEnter" class="disabledBtn" disabled="disabled">
     </form>
 
     <script src="js/login-form.js" type="text/javascript" ></script>

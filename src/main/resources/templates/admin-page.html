@@ -3,7 +3,7 @@
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3" lang="ua">
 <head>
     <meta charset="UTF-8">
-    <title>Сторінка адміністратора</title>
+    <title th:text="#{admin_page}"></title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -22,7 +22,7 @@
         <div class="col-md-3"></div>
         <div class="col-md">
             <div class="shadow-sm rounded content-header">
-                <p class="h2">Вітаємо! Ви увійшли, як адміністратор</p>
+                <p class="h2" th:text="#{admin_hello}"></p>
             </div>
         </div>
         <div class="col-md-3"></div>

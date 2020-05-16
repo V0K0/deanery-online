@@ -11,13 +11,12 @@
         <th scope="col" class="align-middle" colspan="10" th:text="${day}"></th>
     </tr>
     <tr>
-        <th scope="col" class="very-small-cell">Пара</th>
-        <th scope="col" class="big-cell">Предмет</th>
-        <th scope="col" class="very-small-cell">Місце</th>
-        <th scope="col" class="medium-cell">Викладач</th>
+        <th scope="col" class="very-small-cell" th:text="#{lecture}"></th>
+        <th scope="col" class="big-cell" th:text="#{subj}"></th>
+        <th scope="col" class="very-small-cell" th:text="#{place}"></th>
+        <th scope="col" class="medium-cell" th:text="#{subject_teacher}"></th>
     </tr>
     </thead>
-    <!--/*@thymesVar id="scheduleUtils" type="com.vozniuk.springapplication.controllers.ScheduleController"*/-->
     <tbody th:each="i, iter: ${#numbers.sequence(0, 4)}" th:with="index =${iter.index}">
     <tr>
         <td rowspan="2" class="align-middle" th:text="${index + 1}"></td>
@@ -50,7 +49,7 @@
         </td>
     </tr>
 
-    <tr> <!--Знаминатель-->
+    <tr>
         <td class="align-middle table-primary"
             th:each="sch1 : ${scheduleDenum}"
             th:if="${sch1 != null && scheduleUtils.findLessonIndexInSchedule(sch1) == index}">

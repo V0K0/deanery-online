@@ -1,5 +1,6 @@
 package com.vozniuk.springapplication.controllers;
 
+import com.vozniuk.springapplication.config.WebConfig;
 import com.vozniuk.springapplication.domain.data.user.User;
 import com.vozniuk.springapplication.service.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,10 +9,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.ResourceBundle;
+
 @Controller
 public class RegistrationController {
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private WebConfig webConfig;
 
     @GetMapping("/registration")
     public String registration() {
@@ -22,7 +28,8 @@ public class RegistrationController {
     public String signUpUser(User user, Model model) {
 
         if (!userService.addUser(user)) {
-            model.addAttribute("msg", "Користувач з таким ім'ям вже існує!");
+            final ResourceBundle messages = ResourceBundle.getBundle("messages", webConfig.locale());
+            model.addAttribute("msgError", messages.getString("msgErrorAlreadyExists"));
             return "registration";
         }
 
