@@ -12,15 +12,11 @@ subject_id int not null,
 PRIMARY KEY (teacher_id, subject_id),
 KEY subject_id (subject_id),
 CONSTRAINT teacher_subject_ibfk_1
-FOREIGN KEY (teacher_id) REFERENCES teacher (teacher_id),
+FOREIGN KEY (teacher_id) REFERENCES teacher (teacher_id) ON DELETE CASCADE,
 CONSTRAINT teacher_subject_ibfk_2
-FOREIGN KEY (subject_id) REFERENCES subject (subject_id)
+FOREIGN KEY (subject_id) REFERENCES subject (subject_id) ON DELETE CASCADE
 );
-
-alter table university_group add constraint group_spec_fk foreign key (specialty_id) references specialty (specialty_id);
 
 alter table student add phone varchar (12) after group_id;
 
 alter table subject add defence_date date after course_work;
-
-alter table student modify group_id int null;

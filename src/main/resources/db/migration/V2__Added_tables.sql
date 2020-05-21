@@ -5,7 +5,7 @@ lastname varchar (255),
 patronymic  varchar (255),
 date_of_birth date,
 address varchar (255),
-group_id int not null,
+group_id int null,
 primary key (id));
 
 create table faculty (
@@ -58,16 +58,18 @@ lesson_time time,
 lesson_place varchar (255),
 primary key (schedule_id));
 
-alter table department add constraint dep_fac_fk foreign key (faculty_id) references faculty (faculty_id);
+alter table department add constraint dep_fac_fk foreign key (faculty_id) references faculty (faculty_id) ON DELETE CASCADE;
 
-alter table specialty add constraint spec_dep_fk foreign key (department_id) references department (department_id);
+alter table specialty add constraint spec_dep_fk foreign key (department_id) references department (department_id) ON DELETE CASCADE;
 
-alter table student add constraint st_gr_fk foreign key (group_id) references university_group (group_id);
+alter table student add constraint st_gr_fk foreign key (group_id) references university_group (group_id) ON DELETE SET NULL;
 
-alter table university_group add constraint group_pl_fk foreign key (plan_id) references studying_plan (plan_id);
+alter table university_group add constraint group_pl_fk foreign key (plan_id) references studying_plan (plan_id)  ON DELETE SET NULL;
 
-alter table subject add constraint subj_plan_fk foreign key (plan_id) references studying_plan (plan_id);
+alter table university_group add constraint group_spec_fk foreign key (specialty_id) references specialty (specialty_id) ON DELETE CASCADE;
 
-alter table schedule add constraint sch_gr_fk foreign key (group_id) references university_group (group_id);
+alter table subject add constraint subj_plan_fk foreign key (plan_id) references studying_plan (plan_id) ON DELETE CASCADE;
 
-alter table schedule add constraint sch_subj_fk foreign key (subject_id) references subject (subject_id);
+alter table schedule add constraint sch_gr_fk foreign key (group_id) references university_group (group_id) ON DELETE CASCADE;
+
+alter table schedule add constraint sch_subj_fk foreign key (subject_id) references subject (subject_id) ON DELETE CASCADE;
