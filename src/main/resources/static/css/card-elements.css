@@ -15,22 +15,11 @@
     margin-bottom: 10px;
 }
 
-.detailInfo{
-    margin-top: 5px;
-}
-
-.controls{
+.end-display-mg30{
     display: flex;
     justify-content: flex-end;
-    margin-top: 20px;
-    color: white;
+    margin-top: 30px;
 }
 
-.accept{
-    margin-left: 5px;
-}
 
-.decline{
-    margin-right: 5px;
-}
 

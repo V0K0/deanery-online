@@ -1,0 +1,8 @@
+#createSubjectDiv, #updateSubjectDiv, #deleteSubjectDiv{
+    display: none;
+}
+
+#formEdit{
+    margin-top: 30px;
+    margin-bottom: 30px;
+}

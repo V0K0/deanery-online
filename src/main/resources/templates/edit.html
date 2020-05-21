@@ -10,7 +10,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <link rel="icon" href="../images/icons8-dev-post-64.png" type="image/x-icon">
     <link rel="stylesheet" href="../css/applicationButtons.css">
-    <link rel="stylesheet" href="../css/profile.css">
+    <link rel="stylesheet" href="../css/card-elements.css">
     <link rel="stylesheet" href="../css/authorized-pages.css">
     <link rel="stylesheet" href="../css/navbar.css">
     <meta name="viewport" content="width=device-width"/>
@@ -28,7 +28,7 @@
             </div>
 
             <div class="shadow-sm rounded detailCard">
-                <div class="detailInfo">
+                <div style=" margin-top: 5px">
                     <form id="formEdit" class="needs-validation" method="post" validate>
                         <div class="form-group row">
                             <label for="name" class="col-sm-4 col-form-label" th:text="#{st_name}"></label>
@@ -137,9 +137,14 @@
                              </div>
                          </div>
 
-                        <div class="controls" style="margin-top: 30px">
-                            <a class="btn btn-secondary decline" th:href="@{/profile}" th:text="#{decline}"></a>
-                            <input type="submit" class="btn btn-primary accept" th:value="#{refresh_profile}"></input>
+                        <div class="end-display-mg30">
+                            <a id="decline" class="btn btn-secondary" style="margin-right: 5px"
+                               th:href="@{/profile}"
+                               th:text="#{decline}">
+                            </a>
+                            <input type="submit" id="refresh" class="btn btn-primary" style="margin-left: 5px"
+                                   th:value="#{refresh}">
+                            </input>
                         </div>
                     </form>
                 </div>
@@ -151,6 +156,6 @@
 </div>
 <script type="text/javascript" src="../js/edit-page.js"></script>
 <script type="text/javascript" src="../js/filter.js"></script>
-<script type="text/javascript" src="../js/form-validation.js"></script>
+<script type="text/javascript" src="../js/submitForm-validation.js"></script>
 </body>
 </html>

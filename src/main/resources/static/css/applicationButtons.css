@@ -66,3 +66,14 @@
     background: #1A91DA
 }
 
+.updateBtn{
+    margin-right: 5px;
+    width: 120px;
+}
+
+.deleteBtn{
+    margin-left: 5px;
+    width: 120px;
+}
+
+

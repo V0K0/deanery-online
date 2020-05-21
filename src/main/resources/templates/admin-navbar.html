@@ -1,5 +1,6 @@
 <!--suppress ALL -->
-<html xmlns:th="http://www.w3.org/1999/xhtml" lang="ua">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <body>
 <nav class="navbar  navbar-expand-md navbar-dark" th:fragment="nav-admin">
     <a class="navbar-brand" th:href="@{/home}" th:text="#{site-title}"></a>
@@ -18,13 +19,13 @@
                 <a class="nav-link" href="#" th:text="#{news_block}"> </a>
             </li>
             <li class="nav-item study">
-                <a class="nav-link" href="#" th:text="#{study}"></a>
+                <a class="nav-link" th:href="@{/admin-page/study}" th:text="#{study}"></a>
             </li>
             <li class="nav-item students">
                 <a class="nav-link" href="#" th:text="#{students}"></a>
             </li>
             <li class="nav-item teachers">
-                <a class="nav-link" thref="#" th:text="#{teachers}"></a>
+                <a class="nav-link" href="#" th:text="#{teachers}"></a>
             </li>
 
         </ul>
@@ -33,7 +34,6 @@
                 <form class= "text-ligt" th:action="@{/logout}" method="post">
                     <input id="logout" type="submit" th:value="#{log_out}"/>
                 </form>
-
             </li>
         </ul>
     </div>

@@ -10,7 +10,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <link rel="icon" href="images/icons8-dev-post-64.png" type="image/x-icon">
     <link rel="stylesheet" href="css/applicationButtons.css">
-    <link rel="stylesheet" href="css/profile.css">
+    <link rel="stylesheet" href="css/card-elements.css">
     <link rel="stylesheet" href="css/authorized-pages.css">
     <link rel="stylesheet" href="css/navbar.css">
     <meta name="viewport" content="width=device-width"/>
@@ -29,13 +29,14 @@
                 <div>
                     <p class="text-muted" th:text="#{details}"></p>
                 </div>
-                <div class="detailInfo">
+                <div style="margin-top: 5px">
                     <p class="font-weight-bold" th:text="#{lastnameAndName}"></p>
                     <div>
-                        <p th:if="${student?.name != null and student?.lastname!= null}" th:text="${student.lastname + ' ' + student.name}"></p>
+                        <p th:if="${student?.name != null and student?.lastname!= null}"
+                           th:text="${student.lastname + ' ' + student.name}"></p>
                     </div>
                     <hr>
-                    <p class="font-weight-bold" th:text="#{birthday}"> </p>
+                    <p class="font-weight-bold" th:text="#{birthday}"></p>
                     <div>
                         <p th:if="${student.dateOfBirth}" th:text="${student.dateOfBirth}"></p>
                     </div>
@@ -57,7 +58,8 @@
                     <hr>
                     <p class="font-weight-bold" th:text="#{spec}"></p>
                     <div>
-                        <p th:if="${student?.group?.specialty ne null}" th:text="${student.group.specialty.specialtyCode + ' (' + student.group.specialty.specialtyName + ')'}"></p>
+                        <p th:if="${student?.group?.specialty ne null}"
+                           th:text="${student.group.specialty.specialtyCode + ' (' + student.group.specialty.specialtyName + ')'}"></p>
                     </div>
                     <hr>
                     <p class="font-weight-bold" th:text="#{un_group}"></p>
@@ -66,7 +68,7 @@
                     </div>
                     <hr>
                 </div>
-                <div class="controls">
+                <div class="end-display-mg30">
                     <a class="btn btn-outline-primary" th:href="@{/profile/edit}" th:text="#{edit}"></a>
                 </div>
             </div>

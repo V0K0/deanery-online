@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<!--suppress ALL -->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3" lang="ua">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="#{study}"></title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <link rel="icon" href="../images/icons8-dev-post-64.png" type="image/x-icon">
+    <link rel="stylesheet" href="../css/applicationButtons.css">
+    <link rel="stylesheet" href="../css/authorized-pages.css">
+    <link rel="stylesheet" href="../css/card-elements.css">
+    <link rel="stylesheet" href="../css/navbar.css">
+    <link rel="stylesheet" href="../css/tables.css">
+    <link rel="stylesheet" href="../css/admin-forms.css">
+    <meta name="viewport" content="width=device-width"/>
+</head>
+<body>
+<div class="header sticky-top" th:insert="~{admin-navbar :: nav-admin}"></div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md">
+            <div class="shadow-sm rounded content-header">
+                <p class="h2" th:text="#{study}"></p>
+            </div>
+            <div class="shadow-sm rounded detailCard">
+                <div class="response">
+                    <table class="table table-bordered table-responsive-sm">
+                        <thead>
+                        <tr>
+                            <th scope="col" class="small-cell align-middle table-success">ID</th>
+                            <th scope="col" class="big-cell align-middle table-success" th:text="#{subj}"></th>
+                            <th scope="col" class="small-cell align-middle table-success"
+                                th:text="#{st_plan_page}"></th>
+                            <th scope="col" class="big-cell align-middle table-success" th:text="#{def_type}"></th>
+                        </tr>
+                        </thead>
+                        <tbody id="subjectsTableBody">
+
+                        </tbody>
+                    </table>
+                </div>
+
+                <div style="display: flex">
+                    <div style="flex: 1">
+                        <button id="createSubject" class="btn btn-outline-success" th:text="#{create}"></button>
+                        <button id="updateSub" class="btn btn-outline-primary" th:text="#{update}"></button>
+                        <button id="deleteSubject" class="btn btn-outline-danger" th:text="#{delete}"></button>
+                    </div>
+                    <div>
+                        <button id="back" class="btn btn-outline-dark prevSubjectsPage" th:text="#{back}"></button>
+                        <button id="next" class="btn btn-outline-dark nextSubjectsPage" th:text="#{next}"></button>
+                    </div>
+                </div>
+
+                <div id="deleteSubjectDiv" th:insert="~{delete-subject-form :: delete-subject}"></div>
+                <div id="createSubjectDiv" th:insert="~{create-subject-form :: create-subject}"></div>
+                <div id="updateSubjectDiv" th:insert="~{update-subject-form :: update-subject}"></div>
+
+            </div>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+
+</div>
+
+<input id="countSubjects" th:value="${countSubjects}" type="hidden" readonly>
+<script id="marker" type="text/javascript" src="../js/mark-active-page.js"></script>
+<script type="text/javascript" src="../js/ajaxSubjectCalls.js"></script>
+<script type="text/javascript" src="../js/admin-editor.js"></script>
+</body>
+</html>

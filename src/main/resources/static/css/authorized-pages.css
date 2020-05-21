@@ -5,3 +5,9 @@ body{
 .central-container{
     background: white;
 }
+
+.centerElementsDiv{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

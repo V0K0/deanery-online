@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<!--suppress ALL -->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3" lang="ua">
+<body>
+<form id="formEdit" class="needs-validation updateForm"  validate th:fragment="update-subject">
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="oldSubjectId">Id</label>
+            <input type="text" class="form-control lettersOnly" id="oldSubjectId" name="oldSubjectId"
+                   th:title="#{lettersOnly}" required>
+            <div class="invalid-feedback" th:text="#{inv_feedback_lastname}"></div>
+        </div>
+
+        <div class="form-group col-md-6">
+            <label for="newSubjectName" th:text="#{new_name}"></label>
+            <input type="text" class="form-control lettersOnly" id="newSubjectName" name="newSubjectName"
+                   th:title="#{lettersOnly}" required>
+            <div class="invalid-feedback" th:text="#{inv_feedback_lastname}"></div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="newLectureHours" th:text="#{new_l_hours}"></label>
+            <input type="number" class="form-control" id="newLectureHours" name="newLectureHours" required min="0" max="240">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="newPracticalHours" th:text="#{new_p_hours}"></label>
+            <input type="number" class="form-control" id="newPracticalHours" name="newPracticalHours" required min="0" max="240">
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            <label for="newCourseWork" th:text="#{course_work}"></label>
+            <select id="newCourseWork" name="newCourseWork" class="form custom-select" required>
+                <option value="false" selected th:text="#{no}"></option>
+                <option value="true" th:text="#{yes}"></option>
+            </select>
+        </div>
+        <div class="form-group col-md-4">
+            <label for="newDefenceType" th:text="#{new_def_type}"></label>
+            <select id="newDefenceType" name="newDefenceType" class="custom-select" required>
+                <option value="Екзамен" selected th:text="#{exam}"></option>
+                <option value="Залік" th:text="#{test}"></option>
+            </select>
+        </div>
+        <div class="form-group col-md-4">
+            <label for="newDefenceDate" th:text="#{new_def_date}"></label>
+            <input type="date" class="form-control" id="newDefenceDate" name="newDefenceDate" min='2020-01-01'>
+        </div>
+    </div>
+
+
+    <div class="end-display">
+        <div id="declineUpdate" class="btn btn-secondary" style="margin-right: 5px"
+             th:text="#{decline}">
+        </div>
+        <input id="updateSubject" type="submit" class="btn btn-primary" style="margin-left: 5px"
+               th:value="#{refresh}">
+        </input>
+    </div>
+</form>
+</body>
+</html>
