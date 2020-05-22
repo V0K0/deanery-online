@@ -19,12 +19,24 @@ public class Teacher {
 
     private String phone;
 
-    @ManyToMany(cascade = {CascadeType.ALL})
-    @JoinTable(
-            name = "subject_teacher_relation",
-            joinColumns = {@JoinColumn(name = "teacher_id")},
-            inverseJoinColumns = {@JoinColumn(name = "subject_id")}
-    )
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade =
+                    {
+                            CascadeType.DETACH,
+                            CascadeType.MERGE,
+                            CascadeType.REFRESH,
+                            CascadeType.PERSIST
+                    },
+            targetEntity = Subject.class)
+    @JoinTable(name = "subject_teacher_relation",
+            inverseJoinColumns = @JoinColumn(name = "teacher_id",
+                    nullable = false,
+                    updatable = false),
+            joinColumns = @JoinColumn(name = "subject_id",
+                    nullable = false,
+                    updatable = false),
+            foreignKey = @ForeignKey(ConstraintMode.CONSTRAINT),
+            inverseForeignKey = @ForeignKey(ConstraintMode.CONSTRAINT))
     private Set<Subject> subjects = new HashSet<>();
 
     public Integer getTeacherId() {

@@ -7,13 +7,11 @@ import java.util.List;
 
 public interface ScheduleService {
 
-    Schedule addSchedule(Schedule schedule);
+    Schedule addOrUpdateSchedule(Schedule schedule);
 
     void deleteSchedule(Schedule schedule);
 
     Schedule getScheduleById(Integer id);
-
-    Schedule editSchedule(Schedule schedule);
 
     List<Schedule> getAllForGroupOnDay(UniversityGroup group, String day);
 

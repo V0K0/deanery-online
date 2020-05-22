@@ -1,8 +1,8 @@
 package com.vozniuk.springapplication.controllers;
 
 
-import com.vozniuk.springapplication.Utils.Days;
-import com.vozniuk.springapplication.Utils.ScheduleUtils;
+import com.vozniuk.springapplication.utils.Days;
+import com.vozniuk.springapplication.utils.ScheduleUtils;
 import com.vozniuk.springapplication.domain.data.university.DefaultTimeTable;
 import com.vozniuk.springapplication.domain.data.university.Schedule;
 import com.vozniuk.springapplication.domain.data.university.Student;

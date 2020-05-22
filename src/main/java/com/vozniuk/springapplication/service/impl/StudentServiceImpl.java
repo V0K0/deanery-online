@@ -16,8 +16,8 @@ public class StudentServiceImpl implements StudentService {
     private StudentRepository studentRepository;
 
     @Override
-    public Student addStudent(Student student) {
-        studentRepository.save(student);
+    public Student addOrUpdateStudent(Student student) {
+        studentRepository.saveAndFlush(student);
         return student;
     }
 
@@ -29,11 +29,6 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public Student getStudentById(Integer id) {
             return studentRepository.findById(id).isPresent() ?  studentRepository.findById(id).get() : null;
-    }
-
-    @Override
-    public Student editStudent(Student student) {
-        return studentRepository.saveAndFlush(student);
     }
 
     @Override

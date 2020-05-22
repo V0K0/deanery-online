@@ -17,7 +17,13 @@ public class Schedule {
     @NotNull
     private UniversityGroup group;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY,   cascade =
+            {
+                    CascadeType.DETACH,
+                    CascadeType.MERGE,
+                    CascadeType.REFRESH,
+                    CascadeType.PERSIST
+            })
     @JoinColumn(name = "subject_id")
     @NotNull
     private Subject subject;

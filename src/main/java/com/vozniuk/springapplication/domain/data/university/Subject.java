@@ -10,13 +10,13 @@ import java.util.Set;
 public class Subject {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JoinColumn(name = "subject_id")
     private Integer subjectId;
 
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "plan_id")
-    @NotNull
     private StudyingPlan plan;
 
     @NotNull
@@ -41,7 +41,24 @@ public class Subject {
     @JoinColumn(name = "defence_date")
     private Date defenceDate;
 
-    @ManyToMany(mappedBy = "subjects")
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade =
+                    {
+                            CascadeType.DETACH,
+                            CascadeType.MERGE,
+                            CascadeType.REFRESH,
+                            CascadeType.PERSIST
+                    },
+            targetEntity = Teacher.class)
+    @JoinTable(name = "subject_teacher_relation",
+            joinColumns = @JoinColumn(name = "teacher_id",
+                    nullable = false,
+                    updatable = false),
+            inverseJoinColumns = @JoinColumn(name = "subject_id",
+                    nullable = false,
+                    updatable = false),
+            foreignKey = @ForeignKey(ConstraintMode.CONSTRAINT),
+            inverseForeignKey = @ForeignKey(ConstraintMode.CONSTRAINT))
     private Set<Teacher> teachers = new HashSet<>();
 
     public Integer getSubjectId() {
@@ -84,7 +101,7 @@ public class Subject {
         this.defenceType = defenceType;
     }
 
-    public boolean isCourseWork() {
+    public boolean hasCourseWork() {
         return courseWork;
     }
 

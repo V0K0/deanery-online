@@ -63,8 +63,7 @@ public class ProfileController {
 
         if (!params.get("dateOfBirth").isEmpty()) {
             Date date = Date.valueOf(params.get("dateOfBirth"));
-            Date now = Date.valueOf(LocalDate.now());
-            if (date.compareTo(now) <= 0){
+            if (date.compareTo(Date.valueOf(LocalDate.now())) <= 0){
                 student.setDateOfBirth(date);
             }
         }
@@ -77,7 +76,7 @@ public class ProfileController {
         }
 
         student.setGroup(groupServiceImpl.getByGroupCode(params.get("group")));
-        studentServiceImpl.editStudent(student);
+        studentServiceImpl.addOrUpdateStudent(student);
     }
 
 }

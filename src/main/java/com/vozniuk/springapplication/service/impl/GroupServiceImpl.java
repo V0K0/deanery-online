@@ -16,8 +16,8 @@ public class GroupServiceImpl implements GroupService {
     private GroupRepository groupRepository;
 
     @Override
-    public UniversityGroup addGroup(UniversityGroup group) {
-        groupRepository.save(group);
+    public UniversityGroup addOrUpdateGroup(UniversityGroup group) {
+        groupRepository.saveAndFlush(group);
         return group;
     }
 
@@ -29,12 +29,6 @@ public class GroupServiceImpl implements GroupService {
     @Override
     public UniversityGroup getGroupById(Integer id) {
         return groupRepository.findById(id).isPresent() ?  groupRepository.findById(id).get() : null;
-    }
-
-    @Override
-    public UniversityGroup editGroup(UniversityGroup group) {
-       groupRepository.saveAndFlush(group);
-       return group;
     }
 
     @Override

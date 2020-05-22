@@ -49,6 +49,6 @@ public class UserService implements UserDetailsService {
     private void saveUserAsStudent(User user) {
         Student student = new Student();
         student.setId(user.getId());
-        studentServiceImpl.addStudent(student);
+        studentServiceImpl.addOrUpdateStudent(student);
     }
 }

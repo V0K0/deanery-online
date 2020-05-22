@@ -1,4 +1,4 @@
-package com.vozniuk.springapplication.Utils;
+package com.vozniuk.springapplication.utils;
 
 public enum Days {
 

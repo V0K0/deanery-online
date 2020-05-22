@@ -20,8 +20,8 @@ public class ScheduleServiceImpl implements ScheduleService {
     }
 
     @Override
-    public Schedule addSchedule(Schedule schedule) {
-        scheduleRepository.save(schedule);
+    public Schedule addOrUpdateSchedule(Schedule schedule) {
+        scheduleRepository.saveAndFlush(schedule);
         return schedule;
     }
 
@@ -35,10 +35,5 @@ public class ScheduleServiceImpl implements ScheduleService {
         return scheduleRepository.findById(id).isPresent() ? scheduleRepository.findById(id).get() : null;
     }
 
-    @Override
-    public Schedule editSchedule(Schedule schedule) {
-        scheduleRepository.saveAndFlush(schedule);
-        return schedule;
-    }
 
 }

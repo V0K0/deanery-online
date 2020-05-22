@@ -7,13 +7,11 @@ import java.util.List;
 
 public interface GroupService {
 
-    UniversityGroup addGroup(UniversityGroup group);
+    UniversityGroup addOrUpdateGroup(UniversityGroup group);
 
     void deleteGroup(UniversityGroup group);
 
     UniversityGroup getGroupById(Integer id);
-
-    UniversityGroup editGroup(UniversityGroup group);
 
     List<UniversityGroup> getGroupsBySpecialty(Specialty specialty);
 

@@ -13,7 +13,7 @@ public class Department {
     @JoinColumn(name = "department_id")
     private Integer departmentId;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "faculty_id")
     @NotNull
     private Faculty faculty;

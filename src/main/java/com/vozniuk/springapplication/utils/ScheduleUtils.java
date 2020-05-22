@@ -1,4 +1,4 @@
-package com.vozniuk.springapplication.Utils;
+package com.vozniuk.springapplication.utils;
 
 import com.vozniuk.springapplication.domain.data.university.Schedule;
 import com.vozniuk.springapplication.domain.data.university.TimeTable;
