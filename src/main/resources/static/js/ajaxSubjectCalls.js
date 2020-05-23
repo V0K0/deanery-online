@@ -5,13 +5,13 @@ $(function () {
     let countOfNotes = $("#countSubjects").val();
     console.log(countOfNotes);
 
-    $('.deleteForm').on('submit', function (event) {
+    $('.deleteSubjectForm').on('submit', function (event) {
         event.preventDefault();
         let deleteId = $('#deletingId').val();
         deleteSubject(deleteId);
     });
 
-    $('.updateForm').on('submit', function (event) {
+    $('.updateSubjectForm').on('submit', function (event) {
         event.preventDefault();
         let updatingId = $('#oldSubjectId').val();
         let updatingName = $('#newSubjectName').val();

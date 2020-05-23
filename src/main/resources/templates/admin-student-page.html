@@ -25,31 +25,29 @@
         <div class="col-md-3"></div>
         <div class="col-md">
             <div class="shadow-sm rounded content-header">
-                <p class="h2" th:text="#{study}"></p>
+                <p class="h2" th:text="#{students}"></p>
             </div>
             <div class="shadow-sm rounded detailCard">
                 <div class="response">
-                    <table class="table table-bordered table-responsive-sm">
+                    <table id="allStudentsTable" class="table table-bordered table-responsive-sm">
                         <thead>
                         <tr>
                             <th scope="col" class="small-cell align-middle table-success" th:text="#{id}"></th>
-                            <th scope="col" class="big-cell align-middle table-success" th:text="#{subj}"></th>
-                            <th scope="col" class="small-cell align-middle table-success"
-                                th:text="#{st_plan_page}"></th>
-                            <th scope="col" class="big-cell align-middle table-success" th:text="#{def_type}"></th>
+                            <th scope="col" class="big-cell align-middle table-success" th:text="#{st_lastname}"></th>
+                            <th scope="col" class="big-cell align-middle table-success" th:text="#{st_name}"></th>
+                            <th scope="col" class="small-cell align-middle table-success" th:text="#{un_group}"></th>
                         </tr>
                         </thead>
-                        <tbody id="subjectsTableBody">
+                        <tbody id="studentTableBody">
 
                         </tbody>
                     </table>
                 </div>
 
-                <div style="display: flex">
+                <div class="cotrol-btns" style="display: flex">
                     <div style="flex: 1">
-                        <button id="createSubject" class="btn btn-outline-success" th:text="#{create}"></button>
-                        <button id="updateSub" class="btn btn-outline-primary" th:text="#{update}"></button>
-                        <button id="deleteSubject" class="btn btn-outline-danger" th:text="#{delete}"></button>
+                        <button id="searchStudentBtn" class="btn btn-outline-success" th:text="#{search}"></button>
+                        <button id="updateStudentBtn" class="btn btn-outline-primary" th:text="#{update}"></button>
                     </div>
                     <div>
                         <button id="back" class="btn btn-outline-dark prevSubjectsPage" th:text="#{back}"></button>
@@ -57,9 +55,24 @@
                     </div>
                 </div>
 
-                <div id="deleteDiv" th:insert="~{delete-subject-form :: delete-subject}"></div>
-                <div id="createDiv" th:insert="~{create-subject-form :: create-subject}"></div>
-                <div id="updateDiv" th:insert="~{update-subject-form :: update-subject}"></div>
+                <div id="searchDiv" th:insert="~{search-students-form :: search-student}"></div>
+
+                <div class="get-by-group-response">
+                    <table id="searchedStudentsTable" class="table table-bordered table-responsive-sm">
+                        <thead>
+                        <tr>
+                            <th scope="col" class="small-cell align-middle table-success" th:text="#{id}"></th>
+                            <th scope="col" class="big-cell align-middle table-success" th:text="#{st_lastname}"></th>
+                            <th scope="col" class="big-cell align-middle table-success" th:text="#{st_name}"></th>
+                            <th scope="col" class="small-cell align-middle table-success" th:text="#{un_group}"></th>
+                        </tr>
+                        </thead>
+                        <tbody id="searchedStudentTableBody">
+
+                        </tbody>
+                    </table>
+                </div>
+                <div id="updateDiv" th:insert="~{update-student-form :: update-student}"></div>
 
             </div>
         </div>
@@ -68,10 +81,11 @@
 
 </div>
 
-<input id="countSubjects" th:value="${countSubjects}" type="hidden" readonly>
-<script id="marker" type="text/javascript" src="../js/markActivePage.js" data-page="study"></script>
+<input id="countOfStudents" th:value="${countOfStudents}" type="hidden" readonly>
+<script id="marker" type="text/javascript" src="../js/markActivePage.js" data-page="students"></script>
+<script type="text/javascript" src="../js/ajaxStudentCalls.js"></script>
+<script type="text/javascript" src="../js/adminStudentEditor.js"></script>
+<script type="text/javascript" src="../js/matchDepartmentSpecialty.js"></script>
 <script type="text/javascript" src="../js/filter.js"></script>
-<script type="text/javascript" src="../js/ajaxSubjectCalls.js"></script>
-<script type="text/javascript" src="../js/adminSubjectEditor.js"></script>
 </body>
 </html>

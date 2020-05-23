@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<!--suppress ALL -->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3" lang="ua">
+<body>
+<form id="formEdit" class="needs-validation updateStudentForm" validate th:fragment="update-student">
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            <label for="oldStudentId" th:text="#{id}"></label>
+            <input type="number" class="form-control" id="oldStudentId" min="1" max="999999" name="oldStudentId" required>
+        </div>
+        <div class="form-group col-md-4">
+            <label for="newStudentName" th:text="#{new_name}"></label>
+            <input type="text" class="form-control lettersOnly" id="newStudentName" name="newStudentName"
+                   th:title="#{lettersOnly}" required>
+        </div>
+        <div class="form-group col-md-4">
+            <label for="newStudentName" th:text="#{new_st_lastname}"></label>
+            <input type="text" class="form-control lettersOnly" id="newStudentLastname" name="newStudentLastname"
+                   th:title="#{lettersOnly}" required>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="department" th:text="#{new_st_department}"></label>
+            <select id="department" name="department" class="custom-select" required>
+                <option value="" selected th:text="#{dep_select}"></option>
+                <option value="ПЗКС" id="pzks" th:text="#{dep_pzks}"></option>
+                <option value="БІТ" id="bit" th:text="#{dep_bit}"></option>
+                <option value="САУ" id="say" th:text="#{dep_say}"></option>
+                <option value="ІСТТ" id="ictt" th:text="#{dep_inf_tech}"></option>
+            </select>
+            <div class="invalid-feedback" th:text="#{inv_choose_dep}"></div>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="specialty" th:text="#{new_st_specialty}"></label>
+            <select id="specialty" name="specialty" class="custom-select" required>
+                <option value="Інженерія програмного забезпечення" id="pzks" class="s121"
+                        th:text="#{spec_121}"></option>
+                <option value="Комп'ютерні науки та інформаційні технології" id="pzks" class="s122"
+                        th:text="#{spec_122}"></option>
+                <option value="Кібербезпека" id="bit" class="s125" th:text="#{spec_125}"></option>
+                <option value="Телекомунікації та радіотехніка" id="bit" class="s172" th:text="#{spec_172}"></option>
+                <option value="Системний аналіз" id="say" class="s124" th:text="#{spec_124}"></option>
+                <option value="Комп'ютерна інженерія" id="ictt" class="s123" th:text="#{spec_123}"></option>
+                <option value="Інформаційні системи та технології" id="ictt" class="s126"
+                        th:text="#{spec_126}"></option>
+            </select>
+            <div class="invalid-feedback" th:text="#{inv_choose_spec}"></div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="newStudentName" th:text="#{new_name}"></label>
+            <input type="text" id="group" class="form-control phoneInput" name="group"
+                   pattern="[0-9]{3}-[0-9]{2}-[1-9]{1}"
+                   th:placeholder="#{group_signature_placeholder}"
+                   required>
+        </div>
+        <div class="form-group col-md-6"></div>
+    </div>
+
+    <div class="end-display">
+        <div id="declineUpdateStudent" class="btn btn-secondary" style="margin-right: 5px"
+             th:text="#{decline}">
+        </div>
+        <input id="submitUpdateStudent" type="submit" class="btn btn-primary" style="margin-left: 5px"
+               th:value="#{refresh}">
+        </input>
+    </div>
+
+</form>
+</body>
+</html>

@@ -3,20 +3,17 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3" lang="ua">
 <body>
-<form id="formEdit" class="needs-validation updateForm"  validate th:fragment="update-subject">
+<form id="formEdit" class="needs-validation updateSubjectForm"  validate th:fragment="update-subject">
     <div class="form-row">
         <div class="form-group col-md-6">
-            <label for="oldSubjectId">Id</label>
-            <input type="text" class="form-control lettersOnly" id="oldSubjectId" name="oldSubjectId"
-                   th:title="#{lettersOnly}" required>
-            <div class="invalid-feedback" th:text="#{inv_feedback_lastname}"></div>
+            <label for="oldSubjectId" th:text="#{id}"></label>
+            <input type="number" class="form-control" id="oldSubjectId" name="oldSubjectId" required>
         </div>
 
         <div class="form-group col-md-6">
             <label for="newSubjectName" th:text="#{new_name}"></label>
             <input type="text" class="form-control lettersOnly" id="newSubjectName" name="newSubjectName"
                    th:title="#{lettersOnly}" required>
-            <div class="invalid-feedback" th:text="#{inv_feedback_lastname}"></div>
         </div>
     </div>
     <div class="form-row">

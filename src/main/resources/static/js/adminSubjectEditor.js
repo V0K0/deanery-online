@@ -1,8 +1,10 @@
 $(document).ready(function () {
 
-    let formCreateSubject = $('#createSubjectDiv');
-    let formUpdateSubject = $('#updateSubjectDiv');
-    let formDeleteSubject = $('#deleteSubjectDiv');
+    let formCreateSubject = $('#createDiv');
+    let formUpdateSubject = $('#updateDiv');
+    let formDeleteSubject = $('#deleteDiv');
+    let searchResultTable = $('#searchedStudentsTable');
+
 
     $("#createSubject").on('click', function () {
         if ($(formCreateSubject).css('display') !== 'block'){
@@ -37,6 +39,8 @@ $(document).ready(function () {
                obj.value = "";
            });
            $(formUpdateSubject).css('display', 'none');
+           $(searchResultTable).css('display', 'none');
+
        });
     });
 
