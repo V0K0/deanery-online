@@ -1,4 +1,4 @@
-package com.vozniuk.springapplication.controllers;
+package com.vozniuk.springapplication.controllers.admin;
 
 import com.vozniuk.springapplication.domain.data.university.StudyingPlan;
 import com.vozniuk.springapplication.domain.data.university.Subject;
