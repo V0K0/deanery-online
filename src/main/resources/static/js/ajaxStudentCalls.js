@@ -1,26 +1,37 @@
 $(function () {
 
     let currentPageIndex = 1;
-
     let limitPages = 10;
-    let countOfNotes = $("#countOfStudents").val();
-    console.log(countOfNotes);
-
-    let searchResult = $('.get-by-group-response');
+    let countOfStudents = $("#countOfStudents").val();
+    let badSearchFeedBack400 = $('.invalid-feedback-400');
+    let searchResult = $('.search-response');
 
     $('.updateStudentForm').on('submit', function (event) {
         event.preventDefault();
-        let updatingId = $('#oldStudentId').val();
-        let updatingName = $('#newStudentName').val();
-        let updatingLastname = $('#newStudentLastname').val();
         let updatingGroup = $('#group').val();
-        let student = {
-            id: updatingId,
-            name: updatingName,
-            lastname: updatingLastname,
-            stGroup: updatingGroup,
-        };
-        updateStudent(student);
+        let code = updatingGroup.substring(0, 3);
+        let selectedSpecialty = $('select[name="specialty"] :selected').attr('class').substring(1, 4);
+
+        if (code === selectedSpecialty) {
+            $(updatingGroup).removeClass('is-invalid');
+            $(".invalid-feedback-match").css('display', 'none');
+            let updatingId = $('#oldStudentId').val();
+            let updatingName = $('#newStudentName').val();
+            let updatingLastname = $('#newStudentLastname').val();
+
+            let student = {
+                id: updatingId,
+                name: updatingName,
+                lastname: updatingLastname,
+                stGroup: updatingGroup,
+            };
+            updateStudent(student);
+        }
+        else {
+            $(updatingGroup).addClass('is-invalid');
+            $(".invalid-feedback-match").css('display', 'block');
+        }
+
     });
 
     $('.searchStudentForm').on('submit', function (event) {
@@ -38,7 +49,7 @@ $(function () {
     });
 
     $(".nextSubjectsPage").on("click", function () {
-        if (currentPageIndex * limitPages < countOfNotes) {
+        if (currentPageIndex * limitPages < countOfStudents) {
             currentPageIndex++;
             fetchAllStudentsFromController();
         }
@@ -55,7 +66,6 @@ $(function () {
             },
             success: function (data) {
                 if (data.length > 0) {
-                    console.log(data);
                     fillTable($("#studentTableBody"), data);
                 }
             },
@@ -69,26 +79,26 @@ $(function () {
 
     function fetchStudentsFromControllerByGroup(groupCode) {
         $.ajax({
-            url: "/api/students/byGroup",
+            url: "/api/students/search",
             type: "GET",
             data: {
                 group: groupCode
             },
             success: function (data) {
                 if (data.length > 0) {
-                    console.log(data);
+                    if ($(badSearchFeedBack400).css('display') === 'block') {
+                        $(badSearchFeedBack400).css('display', 'none')
+                    }
                     fillTable($("#searchedStudentTableBody"), data);
-                    if ($(searchResult).css('display') !== 'block'){
+                    if ($(searchResult).css('display') !== 'block') {
                         $(searchResult).slideDown(400, function () {
                             $(searchResult).css('display', 'block');
                         });
                     }
                 }
             },
-            error: function (jqXHR, textStatus, errorThrown) {
-                console.log(jqXHR);
-                console.log(textStatus);
-                console.log(errorThrown);
+            error: function () {
+                $(badSearchFeedBack400).css('display', 'block');
             }
         });
     }
@@ -112,7 +122,7 @@ $(function () {
         if (checkProperties(student)) {
 
             $.ajax({
-                url: "/admin-page/study/student/update",
+                url: "/admin-page/students/update",
                 type: "PUT",
                 data: {
                     id: student.id,
@@ -121,7 +131,6 @@ $(function () {
                     stGroup: student.stGroup,
                 },
                 success: function () {
-                    console.log("successfully updated");
                     fetchAllStudentsFromController();
                 },
                 error: function (jqXHR, textStatus, errorThrown) {

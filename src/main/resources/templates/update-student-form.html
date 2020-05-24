@@ -10,7 +10,7 @@
             <input type="number" class="form-control" id="oldStudentId" min="1" max="999999" name="oldStudentId" required>
         </div>
         <div class="form-group col-md-4">
-            <label for="newStudentName" th:text="#{new_name}"></label>
+            <label for="newStudentName" th:text="#{new_st_name}"></label>
             <input type="text" class="form-control lettersOnly" id="newStudentName" name="newStudentName"
                    th:title="#{lettersOnly}" required>
         </div>
@@ -51,7 +51,7 @@
     </div>
     <div class="form-row">
         <div class="form-group col-md-6">
-            <label for="newStudentName" th:text="#{new_name}"></label>
+            <label for="newStudentName" th:text="#{new_st_group}"></label>
             <input type="text" id="group" class="form-control phoneInput" name="group"
                    pattern="[0-9]{3}-[0-9]{2}-[1-9]{1}"
                    th:placeholder="#{group_signature_placeholder}"
@@ -60,15 +60,16 @@
         <div class="form-group col-md-6"></div>
     </div>
 
+    <div class="invalid-feedback-match mrg-br-5" style="display: none"><span class="text-danger" th:text="#{inv_feedback_match}"></span></div>
+
     <div class="end-display">
-        <div id="declineUpdateStudent" class="btn btn-secondary" style="margin-right: 5px"
+        <div id="declineUpdateStudent" class="declineUpdate btn btn-secondary mrg-br-5"
              th:text="#{decline}">
         </div>
-        <input id="submitUpdateStudent" type="submit" class="btn btn-primary" style="margin-left: 5px"
+        <input id="submitUpdateStudent" type="submit" class="btn btn-primary mrg-br-5"
                th:value="#{refresh}">
         </input>
     </div>
-
 </form>
 </body>
 </html>

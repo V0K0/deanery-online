@@ -18,7 +18,7 @@ $(document).ready(function () {
     }(jQuery));
 
     $(".lettersOnly").inputFilter(function (value) {
-        return /^[а-яєії]*$/i.test(value);
+        return /^[а-яєії`'/-]*$/i.test(value);
     });
 
     $(".phoneInput").inputFilter(function (value) {

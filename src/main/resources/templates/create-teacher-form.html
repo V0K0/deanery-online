@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<!--suppress ALL -->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3" lang="ua">
+<body>
+<form id="formEdit" class="needs-validation createTeacherForm" method="post" validate th:fragment="create-teacher" th:action="@{/admin-page/teachers/create}">
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="teacherName" th:text="#{st_name}"></label>
+            <input type="text" class="form-control lettersOnly" id="teacherName" name="name"
+                   th:title="#{lettersOnly}"
+                   required>
+        </div>
+        <div class="form-group col-md-6"></div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="teacherLastname" th:text="#{st_lastname}"></label>
+            <input type="text" class="form-control lettersOnly" id="teacherLastname" name="lastname"
+                   th:title="#{lettersOnly}"
+                   required>
+        </div>
+        <div class="form-group col-md-6"></div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="teacherPatron" th:text="#{st_patron}"></label>
+            <input type="text" class="form-control lettersOnly" id="teacherPatron" name="patron" th:title="#{lettersOnly}">
+        </div>
+        <div class="form-group col-md-6"></div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="teacherPhone" th:text="#{st_phone}"></label>
+            <input type="text" class="form-control phoneInput" id="teacherPhone" name="phone"
+                   pattern="0[0-9]{2}-[0-9]{3}-[0-9]{2}-[0-9]{2}"
+                   placeholder="0XX-XXX-XX-XX"
+                   title="0XX-XXX-XX-XX"
+                   minlength="13" maxlength="13">
+        </div>
+        <div class="form-group col-md-6"></div>
+    </div>
+
+    <div class="end-display">
+        <div id="declineCreateTeacher" class="declineCreate btn btn-secondary mrg-br-5"
+             th:text="#{decline}">
+        </div>
+        <input id="createTeacher" type="submit" class="btn btn-primary mrg-br-5"
+               th:value="#{create}">
+        </input>
+    </div>
+</form>
+</body>
+</html>

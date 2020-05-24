@@ -47,13 +47,13 @@
 
                 <div style="display: flex">
                     <div style="flex: 1">
-                        <button id="createSubject" class="btn btn-outline-success" th:text="#{create}"></button>
-                        <button id="updateSub" class="btn btn-outline-primary" th:text="#{update}"></button>
-                        <button id="deleteSubject" class="btn btn-outline-danger" th:text="#{delete}"></button>
+                        <button id="createSubject" class="create btn btn-outline-success mrg-br-5" th:text="#{create}"></button>
+                        <button id="updateSubject" class="update btn btn-outline-primary mrg-br-5" th:text="#{update}"></button>
+                        <button id="deleteSubject" class="delete btn btn-outline-danger mrg-br-5" th:text="#{delete}"></button>
                     </div>
                     <div>
-                        <button id="back" class="btn btn-outline-dark prevSubjectsPage" th:text="#{back}"></button>
-                        <button id="next" class="btn btn-outline-dark nextSubjectsPage" th:text="#{next}"></button>
+                        <button id="back" class="btn btn-outline-dark prevSubjectsPage mrg-br-5" th:text="#{back}"></button>
+                        <button id="next" class="btn btn-outline-dark nextSubjectsPage mrg-br-5" th:text="#{next}"></button>
                     </div>
                 </div>
 
@@ -68,10 +68,10 @@
 
 </div>
 
-<input id="countSubjects" th:value="${countSubjects}" type="hidden" readonly>
+<input id="countOfSubjects" th:value="${countOfSubjects}" type="hidden" readonly>
 <script id="marker" type="text/javascript" src="../js/markActivePage.js" data-page="study"></script>
 <script type="text/javascript" src="../js/filter.js"></script>
 <script type="text/javascript" src="../js/ajaxSubjectCalls.js"></script>
-<script type="text/javascript" src="../js/adminSubjectEditor.js"></script>
+<script type="text/javascript" src="../js/adminEditor.js"></script>
 </body>
 </html>

@@ -2,8 +2,7 @@ $(function () {
 
     let currentPageIndex = 1;
     let limitPages = 10;
-    let countOfNotes = $("#countSubjects").val();
-    console.log(countOfNotes);
+    let countOfNotes = $("#countOfSubjects").val();
 
     $('.deleteSubjectForm').on('submit', function (event) {
         event.preventDefault();
@@ -35,7 +34,6 @@ $(function () {
 
     });
 
-
     $(".prevSubjectsPage").on("click", function () {
         if (currentPageIndex > 1) {
             currentPageIndex--;
@@ -54,14 +52,13 @@ $(function () {
 
     function fetchDataFromController() {
         $.ajax({
-            url: "/api/subject",
+            url: "/api/subjects",
             type: "GET",
             data: {
                 page: currentPageIndex
             },
             success: function (data) {
                 if (data.length > 0) {
-                    console.log(data);
                     let html = "";
                     for (let i = 0; i < data.length; i++) {
                         html +=
@@ -83,14 +80,12 @@ $(function () {
         });
     }
 
-
     function deleteSubject(id) {
         if (id != null || id !== undefined) {
             $.ajax({
                 url: "/admin-page/study/subject/delete/" + id,
                 type: "DELETE",
                 success: function () {
-                    console.log("success");
                     fetchDataFromController();
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
@@ -103,8 +98,7 @@ $(function () {
     }
 
     function updateSubject(subject) {
-        if (checkProperties(subject)) {
-
+        if (subject != null) {
             $.ajax({
                 url: "/admin-page/study/subject/update",
                 type: "PUT",
@@ -118,7 +112,6 @@ $(function () {
                     cw: subject.courseWork,
                 },
                 success: function () {
-                    console.log("successfully updated");
                     fetchDataFromController();
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
@@ -128,16 +121,6 @@ $(function () {
                 }
             });
         }
-
-    }
-
-    function checkProperties(obj) {
-        for (let key in obj) {
-            // noinspection JSUnfilteredForInLoop
-            if (obj[key] !== null && obj[key] !== "")
-                return true;
-        }
-        return false;
     }
 
 });

@@ -12,7 +12,7 @@
 
         <div class="form-group col-md-6">
             <label for="newSubjectName" th:text="#{new_name}"></label>
-            <input type="text" class="form-control lettersOnly" id="newSubjectName" name="newSubjectName"
+            <input type="text" class="form-control" id="newSubjectName" name="newSubjectName"
                    th:title="#{lettersOnly}" required>
         </div>
     </div>
@@ -49,10 +49,10 @@
 
 
     <div class="end-display">
-        <div id="declineUpdate" class="btn btn-secondary" style="margin-right: 5px"
+        <div id="declineUpdateSubject" class="declineUpdate btn btn-secondary mrg-br-5"
              th:text="#{decline}">
         </div>
-        <input id="updateSubject" type="submit" class="btn btn-primary" style="margin-left: 5px"
+        <input id="updateSubject" type="submit" class="btn btn-primary mrg-br-5"
                th:value="#{refresh}">
         </input>
     </div>

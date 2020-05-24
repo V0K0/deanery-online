@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<!--suppress ALL -->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3" lang="ua">
+<body>
+<form id="formEdit" class="needs-validation updateTeachersForm" validate th:fragment="update-teacher">
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            <label for="oldTeacherId" th:text="#{id}"></label>
+            <input type="number" class="form-control" id="oldTeacherId" min="1" max="999999" name="oldTeacherId" required>
+        </div>
+        <div class="form-group col-md-4">
+            <label for="newTeacherName" th:text="#{new_st_name}"></label>
+            <input type="text" class="form-control lettersOnly" id="newTeacherName" name="name"
+                   th:title="#{lettersOnly}" required>
+        </div>
+        <div class="form-group col-md-4">
+            <label for="newTeacherLastname" th:text="#{new_st_lastname}"></label>
+            <input type="text" class="form-control lettersOnly" id="newTeacherLastname" name="lastname"
+                   th:title="#{lettersOnly}" required>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            <label for="newTeacherPatron" th:text="#{st_patron}"></label>
+            <input type="text" class="form-control lettersOnly" id="newTeacherPatron" name="patron" th:title="#{lettersOnly}">
+        </div>
+        <div class="form-group col-md-4">
+            <label for="newTeacherPhone" th:text="#{st_phone}"></label>
+            <input type="text" class="form-control phoneInput" id="newTeacherPhone" name="phone"
+                   pattern="0[0-9]{2}-[0-9]{3}-[0-9]{2}-[0-9]{2}"
+                   placeholder="0XX-XXX-XX-XX"
+                   title="0XX-XXX-XX-XX"
+                   minlength="13" maxlength="13">
+        </div>
+        <div class="form-group col-md-4"></div>
+    </div>
+
+    <div class="end-display">
+        <div id="declineUpdateTeacher" class="declineUpdate btn btn-secondary mrg-br-5"
+             th:text="#{decline}">
+        </div>
+        <input id="submitUpdateTeacher" type="submit" class="btn btn-primary mrg-br-5"
+               th:value="#{refresh}">
+        </input>
+    </div>
+
+</form>
+</body>
+</html>

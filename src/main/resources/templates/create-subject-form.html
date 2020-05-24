@@ -3,10 +3,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3" lang="ua">
 <body>
-<form id="formEdit" class="needs-validation createForm" method="post" validate th:fragment="create-subject" th:action="@{/admin-page/study/subject/create}">
+<form id="formEdit" class="needs-validation createSubjectForm" method="post" validate th:fragment="create-subject" th:action="@{/admin-page/study/subject/create}">
     <div class="form-group">
         <label for="subjectName" th:text="#{subj}"></label>
-        <input type="text" class="form-control lettersOnly" id="subjectName" name="subjectName"
+        <input type="text" class="form-control" id="subjectName" name="subjectName"
                th:title="#{lettersOnly}" required>
     </div>
     <div class="form-row">
@@ -46,10 +46,10 @@
 
 
     <div class="end-display">
-        <div id="declineCreate" class="btn btn-secondary mg-all-5-except-right"
+        <div id="declineCreateSubject" class="declineCreate btn btn-secondary mrg-br-5"
              th:text="#{decline}">
         </div>
-        <input id="createSubject" type="submit" class="btn btn-primary" style="margin-left: 5px"
+        <input id="createSubject" type="submit" class="btn btn-primary mrg-br-5"
                th:value="#{create}">
         </input>
     </div>

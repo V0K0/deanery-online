@@ -4,7 +4,7 @@
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3" lang="ua">
 <head>
     <meta charset="UTF-8">
-    <title th:text="#{students}"></title>
+    <title th:text="#{teachers}"></title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -25,20 +25,21 @@
         <div class="col-md-3"></div>
         <div class="col-md">
             <div class="shadow-sm rounded content-header">
-                <p class="h2" th:text="#{students}"></p>
+                <p class="h2" th:text="#{teachers}"></p>
             </div>
             <div class="shadow-sm rounded detailCard">
                 <div class="response">
-                    <table id="allStudentsTable" class="table table-bordered table-responsive-sm">
+                    <table id="allTeacherTable" class="table table-bordered table-responsive-sm">
                         <thead>
                         <tr>
                             <th scope="col" class="small-cell align-middle table-success" th:text="#{id}"></th>
-                            <th scope="col" class="big-cell align-middle table-success" th:text="#{st_lastname}"></th>
-                            <th scope="col" class="big-cell align-middle table-success" th:text="#{st_name}"></th>
-                            <th scope="col" class="small-cell align-middle table-success" th:text="#{un_group}"></th>
+                            <th scope="col" class="medium-cell align-middle table-success" th:text="#{st_lastname}"></th>
+                            <th scope="col" class="medium-cell align-middle table-success" th:text="#{st_name}"></th>
+                            <th scope="col" class="medium-cell align-middle table-success" th:text="#{st_phone}"></th>
+                            <th scope="col" class="thirty-per-cell align-middle table-success" th:text="#{teacher_subjects}"></th>
                         </tr>
                         </thead>
-                        <tbody id="studentTableBody">
+                        <tbody id="teacherTableBody">
 
                         </tbody>
                     </table>
@@ -46,33 +47,35 @@
 
                 <div class="cotrol-btns" style="display: flex">
                     <div style="flex: 1">
-                        <button id="searchStudentBtn" class="searchBtn btn btn-outline-success mrg-br-5" th:text="#{search}"></button>
-                        <button id="updateStudentBtn" class="update btn btn-outline-primary mrg-br-5" th:text="#{update}"></button>
+                        <button id="createTeacherBtn" class="create btn btn-outline-success mrg-br-5" th:text="#{create}"></button>
+                        <button id="updateTeacherBtn" class="update btn btn-outline-primary mrg-br-5" th:text="#{update}"></button>
+                        <button id="searchTeacher" class="searchBtn btn btn-outline-warning mrg-br-5" th:text="#{search}"></button>
                     </div>
                     <div>
                         <button id="back" class="btn btn-outline-dark prevSubjectsPage mrg-br-5" th:text="#{back}"></button>
                         <button id="next" class="btn btn-outline-dark nextSubjectsPage mrg-br-5" th:text="#{next}"></button>
                     </div>
                 </div>
-
-                <div id="searchDiv" th:insert="~{search-students-form :: search-student}"></div>
-
                 <div class="search-response">
-                    <table id="searchedStudentsTable" class="searchedTable table table-bordered table-responsive-sm">
+                    <table id="searchedTeachersTable" class="searchedTable table table-bordered table-responsive-sm">
                         <thead>
                         <tr>
                             <th scope="col" class="small-cell align-middle table-success" th:text="#{id}"></th>
-                            <th scope="col" class="big-cell align-middle table-success" th:text="#{st_lastname}"></th>
-                            <th scope="col" class="big-cell align-middle table-success" th:text="#{st_name}"></th>
-                            <th scope="col" class="small-cell align-middle table-success" th:text="#{un_group}"></th>
+                            <th scope="col" class="medium-cell align-middle table-success" th:text="#{st_lastname}"></th>
+                            <th scope="col" class="medium-cell align-middle table-success" th:text="#{st_name}"></th>
+                            <th scope="col" class="medium-cell align-middle table-success" th:text="#{st_phone}"></th>
+                            <th scope="col" class="thirty-per-cell align-middle table-success" th:text="#{teacher_subjects}"></th>
                         </tr>
                         </thead>
-                        <tbody id="searchedStudentTableBody">
+                        <tbody id="searchedTeacherTableBody">
 
                         </tbody>
                     </table>
                 </div>
-                <div id="updateDiv" th:insert="~{update-student-form :: update-student}"></div>
+
+                <div id="searchDiv" th:insert="~{search-teachers-form :: search-teachers}"></div>
+                <div id="createDiv" th:insert="~{create-teacher-form :: create-teacher}"></div>
+                <div id="updateDiv" th:insert="~{update-teacher-form :: update-teacher}"></div>
 
             </div>
         </div>
@@ -81,11 +84,10 @@
 
 </div>
 
-<input id="countOfStudents" th:value="${countOfStudents}" type="hidden" readonly>
-<script id="marker" type="text/javascript" src="../js/markActivePage.js" data-page="students"></script>
-<script type="text/javascript" src="../js/ajaxStudentCalls.js"></script>
+<input id="countOfTeachers" th:value="${countOfTeachers}" type="hidden" readonly>
+<script id="marker" type="text/javascript" src="../js/markActivePage.js" data-page="teachers"></script>
+<script type="text/javascript" src="../js/ajaxTeacherCalls.js"></script>
 <script type="text/javascript" src="../js/adminEditor.js"></script>
-<script type="text/javascript" src="../js/matchDepartmentSpecialty.js"></script>
 <script type="text/javascript" src="../js/filter.js"></script>
 </body>
 </html>
