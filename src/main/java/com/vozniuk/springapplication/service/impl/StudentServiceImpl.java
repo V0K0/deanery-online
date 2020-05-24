@@ -40,12 +40,13 @@ public class StudentServiceImpl implements StudentService {
        return studentRepository.findAllByGroup(group);
     }
 
+    @Override
     public Page<Student> findAllLimit(Pageable pageable) {
         return studentRepository.findAll(pageable);
     }
 
-
-    public long getStudentsCount(){
+    @Override
+    public Long getStudentsCount(){
         return studentRepository.count();
     }
 

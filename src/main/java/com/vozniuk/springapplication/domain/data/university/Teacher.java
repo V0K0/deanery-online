@@ -8,6 +8,7 @@ import java.util.Set;
 public class Teacher {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JoinColumn(name = "teacher_id")
     private Integer teacherId;
 
@@ -29,10 +30,10 @@ public class Teacher {
                     },
             targetEntity = Subject.class)
     @JoinTable(name = "subject_teacher_relation",
-            inverseJoinColumns = @JoinColumn(name = "teacher_id",
+            inverseJoinColumns = @JoinColumn(name = "subject_id",
                     nullable = false,
                     updatable = false),
-            joinColumns = @JoinColumn(name = "subject_id",
+            joinColumns = @JoinColumn(name = "teacher_id",
                     nullable = false,
                     updatable = false),
             foreignKey = @ForeignKey(ConstraintMode.CONSTRAINT),
@@ -86,4 +87,6 @@ public class Teacher {
     public void setSubjects(Set<Subject> subjects) {
         this.subjects = subjects;
     }
+
+
 }

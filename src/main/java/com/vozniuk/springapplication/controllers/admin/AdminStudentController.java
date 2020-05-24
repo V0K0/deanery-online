@@ -25,9 +25,9 @@ public class AdminStudentController {
     @Autowired
     private GroupServiceImpl groupServiceImpl;
 
-    @PutMapping("/admin-page/study/student/update")
+    @PutMapping("/admin-page/students/update")
     @ResponseBody
-    public String updateSubject(@RequestParam Map<String, String> allParams) {
+    public String updateStudent(@RequestParam Map<String, String> allParams) {
         int id = Integer.parseInt(allParams.get("id"));
         Student oldStudent = studentServiceImpl.getStudentById(id);
         if (oldStudent != null) {
@@ -46,10 +46,10 @@ public class AdminStudentController {
     }
 
     private void setAttributes(String newStudentName, String newStudentLastname, UniversityGroup newGroup, Student student) {
-        if (!newStudentName.isBlank()) {
+        if (newStudentName != null && !newStudentName.isBlank()) {
             student.setName(newStudentName);
         }
-        if (!newStudentLastname.isBlank()) {
+        if (newStudentLastname != null && !newStudentLastname.isBlank()) {
             student.setLastname(newStudentLastname);
         }
         if (newGroup != null) {

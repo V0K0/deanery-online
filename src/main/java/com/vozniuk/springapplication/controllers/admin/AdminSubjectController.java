@@ -57,7 +57,7 @@ public class AdminSubjectController {
             return "success";
         }
 
-       return "error";
+        return "error";
     }
 
     private void fetchAndSetSubjectCreateAttributes(Subject subject, Map<String, String> attributes) {
@@ -94,7 +94,7 @@ public class AdminSubjectController {
 
     private void setAttributes(String subjectName, int practicalHours, int lectureHours, String defenceType, boolean courseWork, Date defenceDate,
                                StudyingPlan studyingPlan, Subject subject) {
-        if (!subjectName.isBlank()) {
+        if (subjectName != null && !subjectName.isBlank()) {
             subject.setSubjectName(subjectName);
         }
         if (practicalHours > 0) {
@@ -103,7 +103,7 @@ public class AdminSubjectController {
         if (lectureHours > 0) {
             subject.setLectureHours(lectureHours);
         }
-        if (!defenceType.isBlank()) {
+        if (defenceType != null && !defenceType.isBlank()) {
             subject.setDefenceType(defenceType);
         }
 

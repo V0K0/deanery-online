@@ -19,4 +19,6 @@ public interface SubjectService {
 
     Page<Subject> findAllLimit(Pageable pageable);
 
+    Long getSubjectsCount();
+
 }

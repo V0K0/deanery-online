@@ -39,10 +39,12 @@ public class SubjectServiceImpl implements SubjectService {
         return subjectRepository.findByPlanOrderBySubjectName(plan);
     }
 
+    @Override
     public Page<Subject> findAllLimit(Pageable pageable) {
         return subjectRepository.findAll(pageable);
     }
 
+    @Override
     public Long getSubjectsCount() {
         return subjectRepository.count();
     }

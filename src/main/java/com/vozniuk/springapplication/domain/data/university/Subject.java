@@ -51,10 +51,10 @@ public class Subject {
                     },
             targetEntity = Teacher.class)
     @JoinTable(name = "subject_teacher_relation",
-            joinColumns = @JoinColumn(name = "teacher_id",
+            inverseJoinColumns = @JoinColumn(name = "teacher_id",
                     nullable = false,
                     updatable = false),
-            inverseJoinColumns = @JoinColumn(name = "subject_id",
+            joinColumns = @JoinColumn(name = "subject_id",
                     nullable = false,
                     updatable = false),
             foreignKey = @ForeignKey(ConstraintMode.CONSTRAINT),
