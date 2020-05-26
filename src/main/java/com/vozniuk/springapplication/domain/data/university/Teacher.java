@@ -1,7 +1,9 @@
 package com.vozniuk.springapplication.domain.data.university;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -30,14 +32,8 @@ public class Teacher {
                     },
             targetEntity = Subject.class)
     @JoinTable(name = "subject_teacher_relation",
-            inverseJoinColumns = @JoinColumn(name = "subject_id",
-                    nullable = false,
-                    updatable = false),
-            joinColumns = @JoinColumn(name = "teacher_id",
-                    nullable = false,
-                    updatable = false),
-            foreignKey = @ForeignKey(ConstraintMode.CONSTRAINT),
-            inverseForeignKey = @ForeignKey(ConstraintMode.CONSTRAINT))
+            joinColumns = @JoinColumn(name = "teacher_id"),
+            inverseJoinColumns = @JoinColumn(name = "subject_id"))
     private Set<Subject> subjects = new HashSet<>();
 
     public Integer getTeacherId() {

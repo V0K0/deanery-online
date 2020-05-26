@@ -10,6 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class SubjectServiceImpl implements SubjectService {
@@ -40,12 +41,17 @@ public class SubjectServiceImpl implements SubjectService {
     }
 
     @Override
+    public Subject getByNameAndPlan(String name, StudyingPlan plan) {
+        return subjectRepository.findBySubjectNameAndPlan(name, plan).isPresent() ? subjectRepository.findBySubjectNameAndPlan(name, plan).get() : null;
+    }
+
+    @Override
     public Page<Subject> findAllLimit(Pageable pageable) {
         return subjectRepository.findAll(pageable);
     }
 
     @Override
     public Long getSubjectsCount() {
-        return subjectRepository.count();
+        return subjectRepository.getSubjectsCount();
     }
 }

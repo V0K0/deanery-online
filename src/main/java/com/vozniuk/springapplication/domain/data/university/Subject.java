@@ -3,7 +3,9 @@ package com.vozniuk.springapplication.domain.data.university;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -49,16 +51,7 @@ public class Subject {
                             CascadeType.REFRESH,
                             CascadeType.PERSIST
                     },
-            targetEntity = Teacher.class)
-    @JoinTable(name = "subject_teacher_relation",
-            inverseJoinColumns = @JoinColumn(name = "teacher_id",
-                    nullable = false,
-                    updatable = false),
-            joinColumns = @JoinColumn(name = "subject_id",
-                    nullable = false,
-                    updatable = false),
-            foreignKey = @ForeignKey(ConstraintMode.CONSTRAINT),
-            inverseForeignKey = @ForeignKey(ConstraintMode.CONSTRAINT))
+            mappedBy = "subjects")
     private Set<Teacher> teachers = new HashSet<>();
 
     public Integer getSubjectId() {

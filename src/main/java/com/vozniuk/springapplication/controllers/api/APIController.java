@@ -4,17 +4,11 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
-import com.vozniuk.springapplication.domain.data.university.Student;
-import com.vozniuk.springapplication.domain.data.university.Teacher;
-import com.vozniuk.springapplication.domain.data.university.UniversityGroup;
+import com.vozniuk.springapplication.domain.data.university.*;
 import com.vozniuk.springapplication.json.StudentSerializer;
 import com.vozniuk.springapplication.json.SubjectSerializer;
-import com.vozniuk.springapplication.domain.data.university.Subject;
 import com.vozniuk.springapplication.json.TeacherSerializer;
-import com.vozniuk.springapplication.service.impl.GroupServiceImpl;
-import com.vozniuk.springapplication.service.impl.StudentServiceImpl;
-import com.vozniuk.springapplication.service.impl.SubjectServiceImpl;
-import com.vozniuk.springapplication.service.impl.TeacherServiceImpl;
+import com.vozniuk.springapplication.service.impl.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -45,6 +39,9 @@ public class APIController {
 
     @Autowired
     private TeacherServiceImpl teacherServiceImpl;
+
+    @Autowired
+    private PlanServiceImpl planServiceImpl;
 
     @ResponseBody
     @GetMapping(value = "api/subjects", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -123,6 +120,21 @@ public class APIController {
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
     }
+
+    @ResponseBody
+    @GetMapping(value = "api/subjects/search", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Object getSubjectsByPlan(@RequestParam(name = "plan") String plan, Model model) {
+        StudyingPlan studyingPlan = planServiceImpl.getPlanById(Integer.parseInt(plan));
+        if (studyingPlan != null) {
+            List<Subject> subjectList = subjectServiceImpl.getAllByPlan(studyingPlan);
+            String json = convertSubjectsListToJSON(subjectList);
+            if (json != null) {
+                return ResponseEntity.ok(json);
+            }
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+    }
+
 
     private String convertSubjectsListToJSON(List<Subject> subjectList) {
         return mapperWriteList(Subject.class, new SubjectSerializer(), subjectList);

@@ -17,6 +17,8 @@ public interface SubjectService {
 
     List<Subject> getAllByPlan(StudyingPlan plan);
 
+    Subject getByNameAndPlan(String name, StudyingPlan plan);
+
     Page<Subject> findAllLimit(Pageable pageable);
 
     Long getSubjectsCount();

@@ -39,7 +39,7 @@ public class TeacherServiceImpl  implements TeacherService{
 
     @Override
     public Long getTeachersCount() {
-        return teacherRepository.count();
+        return teacherRepository.getTeachersCount();
     }
 
     @Override

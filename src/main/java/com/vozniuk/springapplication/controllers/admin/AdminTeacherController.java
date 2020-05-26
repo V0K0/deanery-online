@@ -1,16 +1,22 @@
 package com.vozniuk.springapplication.controllers.admin;
 
+import com.vozniuk.springapplication.domain.data.university.StudyingPlan;
+import com.vozniuk.springapplication.domain.data.university.Subject;
 import com.vozniuk.springapplication.domain.data.university.Teacher;
+import com.vozniuk.springapplication.service.impl.PlanServiceImpl;
+import com.vozniuk.springapplication.service.impl.SubjectServiceImpl;
 import com.vozniuk.springapplication.service.impl.TeacherServiceImpl;
+import com.vozniuk.springapplication.service.services.SubjectService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 @Controller
 @PreAuthorize("hasAuthority('ADMIN')")
@@ -19,19 +25,24 @@ public class AdminTeacherController {
     @Autowired
     private TeacherServiceImpl teacherServiceImpl;
 
+    @Autowired
+    private SubjectServiceImpl subjectServiceImpl;
+
+    @Autowired
+    private PlanServiceImpl planServiceImpl;
+
     @PutMapping("/admin-page/teachers/update")
     @ResponseBody
-    public String updateTeacher(@RequestParam Map<String, String> allParams) {
+    public Object updateTeacher(@RequestParam Map<String, String> allParams) {
         Teacher teacher = teacherServiceImpl.getTeacherById(Integer.parseInt(allParams.get("id")));
         if (teacher != null) {
             fetchAndSetTeacherAttributes(teacher, allParams);
             if (!teacher.getName().isBlank() && !teacher.getLastname().isBlank()) {
                 teacherServiceImpl.addOrUpdateTeacher(teacher);
-                return "Success";
+                return ResponseEntity.ok("Updated");
             }
-            return "Denied! Tried to push nulls.";
         }
-        return "Failed";
+        return ResponseEntity.status(HttpStatus.NOT_MODIFIED).body("Denied");
     }
 
     @PostMapping("/admin-page/teachers/create")
@@ -68,6 +79,46 @@ public class AdminTeacherController {
         if (phone != null && !phone.isBlank()) {
             teacher.setPhone(phone);
         }
+    }
+
+    @PostMapping("/admin-page/teachers/add-relation")
+    @ResponseBody
+    public Object createRelation(@RequestParam(name = "id") String id, @RequestParam(name = "name") String name, @RequestParam(name = "plan") String plan) {
+        Teacher teacher = teacherServiceImpl.getTeacherById(Integer.parseInt(id));
+        StudyingPlan studyingPlan = planServiceImpl.getPlanById(Integer.parseInt(plan));
+        Subject subject = subjectServiceImpl.getByNameAndPlan(name, studyingPlan);
+        if (studyingPlan != null && teacher != null && subject != null) {
+            Set<Subject> teacherSubjects = teacher.getSubjects();
+            teacherSubjects.add(subject);
+            Set<Teacher> teachers = subject.getTeachers();
+            teachers.add(teacher);
+            teacherServiceImpl.addOrUpdateTeacher(teacher);
+            subjectServiceImpl.addOrUpdateSubject(subject);
+            return ResponseEntity.ok("Added");
+        }
+
+        return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body("Denied");
+    }
+
+    @DeleteMapping("/admin-page/teachers/delete-relation")
+    @ResponseBody
+    public Object deleteRelation(@RequestParam(name = "id") String id, @RequestParam(name = "name") String name, @RequestParam(name = "plan") String plan) {
+        Teacher teacher = teacherServiceImpl.getTeacherById(Integer.parseInt(id));
+        StudyingPlan studyingPlan = planServiceImpl.getPlanById(Integer.parseInt(plan));
+        Subject subject = subjectServiceImpl.getByNameAndPlan(name, studyingPlan);
+        if (studyingPlan != null && teacher != null && subject != null) {
+            Set<Subject> teacherSubjects = teacher.getSubjects();
+            Set<Teacher> teachers = subject.getTeachers();
+            boolean removeSubject = teacherSubjects.remove(subject);
+            boolean removeTeacher = teachers.remove(teacher);
+            if (removeSubject && removeTeacher){
+                teacherServiceImpl.addOrUpdateTeacher(teacher);
+                subjectServiceImpl.addOrUpdateSubject(subject);
+                return ResponseEntity.ok("Deleted");
+            }
+        }
+
+        return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body("Denied");
     }
 
 }
