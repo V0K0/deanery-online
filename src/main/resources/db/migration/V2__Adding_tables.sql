@@ -6,6 +6,7 @@ patronymic  varchar (255),
 date_of_birth date,
 address varchar (255),
 group_id int null,
+phone varchar (12),
 primary key (id));
 
 create table faculty (
@@ -45,6 +46,7 @@ practical_hours int not null,
 lecture_hours int not null,
 defence_type varchar (20) not null,
 course_work bit,
+defence_date date,
 primary key (subject_id));
 
 create table schedule (
@@ -57,6 +59,26 @@ week_type varchar (20),
 lesson_time time,
 lesson_place varchar (255),
 primary key (schedule_id));
+
+create table teacher (
+teacher_id int not null AUTO_INCREMENT,
+name varchar (255),
+lastname  varchar (255),
+patronymic  varchar (255),
+phone varchar(12),
+primary key (teacher_id));
+
+create table subject_teacher_relation (
+teacher_id int not null,
+subject_id int not null,
+PRIMARY KEY (teacher_id, subject_id),
+KEY subject_id (subject_id),
+CONSTRAINT teacher_subject_ibfk_1
+FOREIGN KEY (teacher_id) REFERENCES teacher (teacher_id) ON DELETE CASCADE,
+CONSTRAINT teacher_subject_ibfk_2
+FOREIGN KEY (subject_id) REFERENCES subject (subject_id) ON DELETE CASCADE
+);
+
 
 alter table department add constraint dep_fac_fk foreign key (faculty_id) references faculty (faculty_id) ON DELETE CASCADE;
 
