@@ -3,6 +3,8 @@ $(function () {
     let currentPageIndex = 1;
     let limitPages = 10;
     let countOfNotes = $("#countOfSubjects").val();
+    let searchResult = $('.search-response');
+    let badSearch = $('.invalid-feedback-400');
 
     $('.deleteSubjectForm').on('submit', function (event) {
         event.preventDefault();
@@ -34,6 +36,12 @@ $(function () {
 
     });
 
+    $('.searchSubjectForm').on('submit', function (event) {
+        event.preventDefault();
+        let planId = $('#findSubject').val();
+        findByPlanSubjects(planId);
+    });
+
     $(".prevSubjectsPage").on("click", function () {
         if (currentPageIndex > 1) {
             currentPageIndex--;
@@ -59,17 +67,9 @@ $(function () {
             },
             success: function (data) {
                 if (data.length > 0) {
-                    let html = "";
-                    for (let i = 0; i < data.length; i++) {
-                        html +=
-                            "<tr>" +
-                            "<td class='align-middle'><span>" + data[i].id + "</span></td>" +
-                            "<td class='align-middle'><span>" + data[i].subjectName + "</span></td>" +
-                            "<td class='align-middle'><span>" + data[i].plan + "</span></td>" +
-                            "<td class='align-middle'><span>" + data[i].defenceType + "</span></td>" +
-                            "</tr>"
+                    if (data.length > 0) {
+                        fillTable($("#subjectsTableBody"), data);
                     }
-                    $("#subjectsTableBody").html(html);
                 }
             },
             error: function (jqXHR, textStatus, errorThrown) {
@@ -78,6 +78,34 @@ $(function () {
                 console.log(errorThrown);
             }
         });
+    }
+
+    function findByPlanSubjects(plan) {
+        if (plan != null) {
+            $.ajax({
+                url: "/api/subjects/search",
+                type: "GET",
+                data: {
+                    plan: plan
+                },
+                success: function (data) {
+                    if (data.length > 0) {
+                        if ($(badSearch).css('display') === 'block') {
+                            $(badSearch).css('display', 'none');
+                        }
+                        fillTable($("#searchedSubjectTableBody"), data);
+                        if ($(searchResult).css('display') !== 'block') {
+                            $(searchResult).slideDown(400, function () {
+                                $(searchResult).css('display', 'block');
+                            });
+                        }
+                    }
+                },
+                error: function () {
+                    $(badSearch).css("display", "block");
+                }
+            });
+        }
     }
 
     function deleteSubject(id) {
@@ -122,6 +150,24 @@ $(function () {
             });
         }
     }
+
+
+    function fillTable(table, data) {
+        let html = "";
+        for (let i = 0; i < data.length; i++) {
+            html +=
+                "<tr>" +
+                "<tr>" +
+                "<td class='align-middle'><span>" + data[i].id + "</span></td>" +
+                "<td class='align-middle'><span>" + data[i].subjectName + "</span></td>" +
+                "<td class='align-middle'><span>" + data[i].plan + "</span></td>" +
+                "<td class='align-middle'><span>" + data[i].defenceType + "</span></td>" +
+                "</tr>"
+
+        }
+        $(table).html(html);
+    }
+
 
 });
 

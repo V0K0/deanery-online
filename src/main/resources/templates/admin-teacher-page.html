@@ -33,10 +33,12 @@
                         <thead>
                         <tr>
                             <th scope="col" class="small-cell align-middle table-success" th:text="#{id}"></th>
-                            <th scope="col" class="medium-cell align-middle table-success" th:text="#{st_lastname}"></th>
+                            <th scope="col" class="medium-cell align-middle table-success"
+                                th:text="#{st_lastname}"></th>
                             <th scope="col" class="medium-cell align-middle table-success" th:text="#{st_name}"></th>
                             <th scope="col" class="medium-cell align-middle table-success" th:text="#{st_phone}"></th>
-                            <th scope="col" class="thirty-per-cell align-middle table-success" th:text="#{teacher_subjects}"></th>
+                            <th scope="col" class="thirty-per-cell align-middle table-success"
+                                th:text="#{teacher_subjects}"></th>
                         </tr>
                         </thead>
                         <tbody id="teacherTableBody">
@@ -47,13 +49,18 @@
 
                 <div class="cotrol-btns" style="display: flex">
                     <div style="flex: 1">
-                        <button id="createTeacherBtn" class="create btn btn-outline-success mrg-br-5" th:text="#{create}"></button>
-                        <button id="updateTeacherBtn" class="update btn btn-outline-primary mrg-br-5" th:text="#{update}"></button>
-                        <button id="searchTeacher" class="searchBtn btn btn-outline-warning mrg-br-5" th:text="#{search}"></button>
+                        <button id="createTeacherBtn" class="create btn btn-outline-success mrg-br-5"
+                                th:text="#{create}"></button>
+                        <button id="updateTeacherBtn" class="update btn btn-outline-primary mrg-br-5"
+                                th:text="#{update}"></button>
+                        <button id="searchTeacher" class="searchBtn btn btn-outline-warning mrg-br-5"
+                                th:text="#{search}"></button>
                     </div>
                     <div>
-                        <button id="back" class="btn btn-outline-dark prevSubjectsPage mrg-br-5" th:text="#{back}"></button>
-                        <button id="next" class="btn btn-outline-dark nextSubjectsPage mrg-br-5" th:text="#{next}"></button>
+                        <button id="back" class="btn btn-outline-dark prevTeachersPage mrg-br-5"
+                                th:text="#{back}"></button>
+                        <button id="next" class="btn btn-outline-dark nextTeachersPage mrg-br-5"
+                                th:text="#{next}"></button>
                     </div>
                 </div>
                 <div class="search-response">
@@ -61,10 +68,12 @@
                         <thead>
                         <tr>
                             <th scope="col" class="small-cell align-middle table-success" th:text="#{id}"></th>
-                            <th scope="col" class="medium-cell align-middle table-success" th:text="#{st_lastname}"></th>
+                            <th scope="col" class="medium-cell align-middle table-success"
+                                th:text="#{st_lastname}"></th>
                             <th scope="col" class="medium-cell align-middle table-success" th:text="#{st_name}"></th>
                             <th scope="col" class="medium-cell align-middle table-success" th:text="#{st_phone}"></th>
-                            <th scope="col" class="thirty-per-cell align-middle table-success" th:text="#{teacher_subjects}"></th>
+                            <th scope="col" class="thirty-per-cell align-middle table-success"
+                                th:text="#{teacher_subjects}"></th>
                         </tr>
                         </thead>
                         <tbody id="searchedTeacherTableBody">
@@ -78,6 +87,14 @@
                 <div id="updateDiv" th:insert="~{update-teacher-form :: update-teacher}"></div>
 
             </div>
+
+            <div class="shadow-sm rounded detailCard">
+
+                <div><p class="h2" th:text="#{set_teacher_relations}"></p></div>
+                <div id="setRelationDiv" th:insert="~{set-relation-form :: bound-teachers}"></div>
+
+            </div>
+
         </div>
         <div class="col-md-3"></div>
     </div>

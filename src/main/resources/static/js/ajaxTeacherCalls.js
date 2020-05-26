@@ -5,8 +5,17 @@ $(function () {
     let countOfTeachers = $("#countOfTeachers").val();
     let searchResult = $('.search-response');
     let badSearchFeedBack400 = $('.invalid-feedback-400');
+    let deniedModification304 = $('.invalid-feedback-304');
 
-    fetchAllTeachersFromController();
+    let relationForm = $('.setRelationForm');
+    let submitButtons = $(relationForm).find('input[type=submit]');
+
+    $(relationForm).keydown(function (e) {
+        if (e.keyCode === 13) {
+            e.preventDefault();
+            return false;
+        }
+    });
 
     $('.updateTeachersForm').on('submit', function (event) {
         event.preventDefault();
@@ -18,67 +27,60 @@ $(function () {
 
         let teacher = {
             id: id,
-            name : name,
-            lastname : lastname,
+            name: name,
+            lastname: lastname,
             patron: patron,
-            phone : phone
+            phone: phone
         };
-
         updateTeacher(teacher);
     });
 
+    $(relationForm).on('submit', function (e) {
+        e.preventDefault();
+        if (submitButtons != null) {
+            let clicked = submitButtons.name;
+            let id = $('#teacherIdInRelation').val();
+            let name = $('#subjectNameInRelation').val();
+            let plan = $('#subjectPlanInRelation').val();
+            let relation = {
+                id: id,
+                name: name,
+                plan: plan
+            }
+            if (clicked === 'submitDeleteBound') {
+                deleteRelation(relation);
+            } else {
+                addRelation(relation)
+            }
+        }
+    });
+
+    $(submitButtons).click(function (event) {
+        submitButtons = this;
+    });
 
     $('.searchTeachersForm').on('submit', function (event) {
         event.preventDefault();
         let name = $('#findName').val();
         let lastname = $('#findLastname').val();
-        fetchTeachersByNameFromController(name, lastname);
+        findTeacherByName(name, lastname);
     });
 
-
-    $(".prevSubjectsPage").on("click", function () {
+    $(".prevTeachersPage").on("click", function () {
         if (currentPageIndex > 1) {
             currentPageIndex--;
             fetchAllTeachersFromController();
         }
     });
 
-    $(".nextSubjectsPage").on("click", function () {
+    $(".nextTeachersPage").on("click", function () {
         if (currentPageIndex * limitPages < countOfTeachers) {
             currentPageIndex++;
             fetchAllTeachersFromController();
         }
     });
 
-    function fetchTeachersByNameFromController(name, lastname) {
-        if (name != null && lastname != null){
-            $.ajax({
-                url: "/api/teachers/search",
-                type: "GET",
-                data: {
-                    name: name,
-                    lastname: lastname
-                },
-                success: function (data) {
-                    if (data.length !== null) {
-                        if ($(badSearchFeedBack400).css('display') === 'block') {
-                            $('.invalid-feedback-400').css('display', 'none');
-                        }
-                        fillTable($('#searchedTeacherTableBody'), $(data).toArray());
-                        if ($(searchResult).css('display') !== 'block') {
-                            $(searchResult).slideDown(400, function () {
-                                $(searchResult).css('display', 'block');
-                            });
-                        }
-                    }
-                },
-                error: function () {
-                    $(badSearchFeedBack400).css('display', 'block');
-                }
-            });
-        }
-
-    }
+    fetchAllTeachersFromController();
 
     function fetchAllTeachersFromController() {
         $.ajax({
@@ -100,8 +102,37 @@ $(function () {
         });
     }
 
+    function findTeacherByName(name, lastname) {
+        if (name != null && lastname != null) {
+            $.ajax({
+                url: "/api/teachers/search",
+                type: "GET",
+                data: {
+                    name: name,
+                    lastname: lastname
+                },
+                success: function (data) {
+                    if (data.length !== null) {
+                        if ($(badSearchFeedBack400).css('display') === 'block') {
+                            $(badSearchFeedBack400).css('display', 'none');
+                        }
+                        fillTable($('#searchedTeacherTableBody'), $(data).toArray());
+                        if ($(searchResult).css('display') !== 'block') {
+                            $(searchResult).slideDown(400, function () {
+                                $(searchResult).css('display', 'block');
+                            });
+                        }
+                    }
+                },
+                error: function () {
+                    $(badSearchFeedBack400).css('display', 'block');
+                }
+            });
+        }
+    }
+
     function updateTeacher(teacher) {
-        if (teacher != null){
+        if (teacher != null) {
             $.ajax({
                 url: "/admin-page/teachers/update",
                 type: "PUT",
@@ -122,7 +153,52 @@ $(function () {
                 }
             });
         }
+    }
 
+    function deleteRelation(relation) {
+        if (relation != null) {
+            $.ajax({
+                url: "/admin-page/teachers/delete-relation",
+                type: "DELETE",
+                data: {
+                    id: relation.id,
+                    name: relation.name,
+                    plan: relation.plan
+                },
+                success: function () {
+                    if ($(deniedModification304).css("display") !== "none"){
+                        $(deniedModification304).css("display", "none");
+                    }
+                    fetchAllTeachersFromController();
+                },
+                error: function () {
+                    $(deniedModification304).css("display", "block");
+                }
+            });
+        }
+    }
+
+    function addRelation(relation) {
+        if (relation != null) {
+            $.ajax({
+                url: "/admin-page/teachers/add-relation",
+                type: "POST",
+                data: {
+                    id: relation.id,
+                    name: relation.name,
+                    plan: relation.plan
+                },
+                success: function () {
+                    if ($(deniedModification304).css("display") !== "none"){
+                        $(deniedModification304).css("display", "none");
+                    }
+                    fetchAllTeachersFromController();
+                },
+                error: function () {
+                    $(deniedModification304).css("display", "block");
+                }
+            });
+        }
     }
 
 

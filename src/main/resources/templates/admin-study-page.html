@@ -50,6 +50,7 @@
                         <button id="createSubject" class="create btn btn-outline-success mrg-br-5" th:text="#{create}"></button>
                         <button id="updateSubject" class="update btn btn-outline-primary mrg-br-5" th:text="#{update}"></button>
                         <button id="deleteSubject" class="delete btn btn-outline-danger mrg-br-5" th:text="#{delete}"></button>
+                        <button id="searchSubject" class="searchBtn btn btn-outline-warning mrg-br-5" th:text="#{search}"></button>
                     </div>
                     <div>
                         <button id="back" class="btn btn-outline-dark prevSubjectsPage mrg-br-5" th:text="#{back}"></button>
@@ -57,9 +58,27 @@
                     </div>
                 </div>
 
+                <div id="searchDiv" th:insert="~{search-subject-form :: search-subject}"></div>
                 <div id="deleteDiv" th:insert="~{delete-subject-form :: delete-subject}"></div>
                 <div id="createDiv" th:insert="~{create-subject-form :: create-subject}"></div>
                 <div id="updateDiv" th:insert="~{update-subject-form :: update-subject}"></div>
+
+                <div class="search-response">
+                    <table class="table table-bordered table-responsive-sm">
+                        <thead>
+                        <tr>
+                            <th scope="col" class="small-cell align-middle table-success" th:text="#{id}"></th>
+                            <th scope="col" class="big-cell align-middle table-success" th:text="#{subj}"></th>
+                            <th scope="col" class="small-cell align-middle table-success"
+                                th:text="#{st_plan_page}"></th>
+                            <th scope="col" class="big-cell align-middle table-success" th:text="#{def_type}"></th>
+                        </tr>
+                        </thead>
+                        <tbody id="searchedSubjectTableBody">
+
+                        </tbody>
+                    </table>
+                </div>
 
             </div>
         </div>

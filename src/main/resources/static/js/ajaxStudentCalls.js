@@ -37,7 +37,7 @@ $(function () {
     $('.searchStudentForm').on('submit', function (event) {
         event.preventDefault();
         let group = $('#findGroup').val();
-        fetchStudentsFromControllerByGroup(group);
+        findStudentsByGroup(group);
     });
 
 
@@ -77,7 +77,7 @@ $(function () {
         });
     }
 
-    function fetchStudentsFromControllerByGroup(groupCode) {
+    function findStudentsByGroup(groupCode) {
         $.ajax({
             url: "/api/students/search",
             type: "GET",
@@ -120,7 +120,6 @@ $(function () {
 
     function updateStudent(student) {
         if (checkProperties(student)) {
-
             $.ajax({
                 url: "/admin-page/students/update",
                 type: "PUT",
@@ -140,7 +139,6 @@ $(function () {
                 }
             });
         }
-
     }
 
     function checkProperties(obj) {

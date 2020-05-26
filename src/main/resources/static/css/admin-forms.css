@@ -1,4 +1,4 @@
-#createDiv, #updateDiv, #deleteDiv, #searchDiv, .search-response{
+#createDiv, #updateDiv, #deleteDiv, #searchDiv, .search-response, #createRelationDiv, #deleteRelationDiv{
     display: none;
 }
 

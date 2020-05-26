@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<!--suppress ALL -->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3" lang="ua">
+<body>
+<form id="formEdit" validate class="needs-validation setRelationForm" th:fragment="bound-teachers">
+    <div class="form-row">
+        <div class="form-group col-md-44">
+            <label for="teacherIdInRelation" th:text="#{teacher_id}"></label>
+            <input type="number" id="teacherIdInRelation" class="form-control" name="teacherId"
+                   required>
+        </div>
+        <div class="form-group col-md-4">
+            <label for="subjectNameInRelation" th:text="#{subj}"></label>
+            <input type="text" id="subjectNameInRelation" class="form-control" name="subjectName"
+                   required>
+        </div>
+        <div class="form-group col-md-4">
+            <label for="subjectPlan" th:text="#{st_plan_page}"></label>
+            <input type="number" id="subjectPlanInRelation" class="form-control" name="plan"
+                   required>
+        </div>
+    </div>
+
+    <div class="invalid-feedback-304 mrg-br-5" style="display: none"><span class="text-danger" th:text="#{invalid-feedback-304}"></span></div>
+
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <input type="submit" id="createRelation" class="btn btn-outline-success mrg-br-5"
+                    th:value="#{add_relation}" name="submitAddBound"></input>
+            <input type="submit" id="deleteRelation" class="btn btn-outline-danger mrg-br-5"
+                   th:value="#{delete_relation}" name="submitDeleteBound"></input>
+        </div>
+        <div class="form-group col-md-6"></div>
+    </div>
+</form>
+</body>
+</html>
