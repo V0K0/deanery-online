@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="css/tables.css">
     <link rel="stylesheet" href="css/authorized-pages.css">
     <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/card-elements.css">
     <meta name="viewport" content="width=device-width"/>
 </head>
 <body>
@@ -20,8 +21,20 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-3"></div>
-        <div class="col-md central-container">
-            <div th:insert="~{plan-table :: plan-table(${listOfSubjects})}" ></div>
+        <div class="col-md">
+            <div class="shadow-sm rounded content-header">
+                <p class="h2" th:text="#{your_st_plan}"></p>
+            </div>
+            <div class="shadow-sm rounded detailCard">
+                <div th:insert="~{plan-table :: plan-table(${listOfSubjects})}"></div>
+            </div>
+            <div class="shadow-sm rounded detailCard">
+                <p class="h2" style="margin-bottom: 30px" th:text="#{course_work}"></p>
+                <ul>
+                    <li class="courseWorkSubject" th:each="subject : ${courseWorkSubjects}"
+                        th:text="${subject.subjectName}"></li>
+                </ul>
+            </div>
         </div>
         <div class="col-md-3"></div>
     </div>

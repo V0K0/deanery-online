@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="css/tables.css">
     <link rel="stylesheet" href="css/navbar.css">
     <link rel="stylesheet" href="css/authorized-pages.css">
+    <link rel="stylesheet" href="css/card-elements.css">
     <meta name="viewport" content="width=device-width"/>
 </head>
 <body>
@@ -22,30 +23,33 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-3"></div>
-        <div class="col-md timetables central-container">
-            <div class="week-types">
+        <div class="col-md timetables">
+            <div class="shadow-sm rounded content-header">
+                <div class="week-types">
+                    <div class="week-desc">
+                        <span class="circle table-success"></span>
+                        <span class="circle-label" th:text="#{numerator}"></span>
+                    </div>
 
-                <div class="week-desc">
-                    <span class="circle table-success"></span>
-                    <span class="circle-label" th:text="#{numerator}"></span>
+                    <div class="week-desc">
+                        <span class="circle table-primary"></span>
+                        <span class="circle-label" th:text="#{denominator}"></span>
+                    </div>
+
+                    <div class="week-desc">
+                        <span class="circle circle-bordered"></span>
+                        <span class="circle-label" th:text="#{each_week}"></span>
+                    </div>
                 </div>
-
-                <div class="week-desc">
-                    <span class="circle table-primary"></span>
-                    <span class="circle-label" th:text="#{denominator}"></span>
-                </div>
-
-                <div class="week-desc">
-                    <span class="circle circle-bordered"></span>
-                    <span class="circle-label" th:text="#{each_week}"></span>
-                </div>
-
             </div>
-            <div th:insert="~{schedule-table :: table(${MONDAY}, ${scheduleMondayNum}, ${scheduleMondayDenum} ,${scheduleUtils})}"></div>
-            <div th:insert="~{schedule-table :: table(${TUESDAY}, ${scheduleTuesdayNum}, ${scheduleTuesdayDenum} ,${scheduleUtils})}"></div>
-            <div th:insert="~{schedule-table :: table(${WEDNESDAY}, ${scheduleWednesdayNum}, ${scheduleWednesdayDenum} ,${scheduleUtils})}"></div>
-            <div th:insert="~{schedule-table :: table(${THURSDAY}, ${scheduleThursdayNum}, ${scheduleThursdayDenum} ,${scheduleUtils})}"></div>
-            <div th:insert="~{schedule-table :: table(${FRIDAY}, ${scheduleFridayNum}, ${scheduleFridayDenum} ,${scheduleUtils})}"></div>
+
+            <div class="shadow-sm rounded detailCard">
+                <div th:insert="~{schedule-table :: table(${MONDAY}, ${scheduleMondayNum}, ${scheduleMondayDenum} ,${scheduleUtils})}"></div>
+                <div th:insert="~{schedule-table :: table(${TUESDAY}, ${scheduleTuesdayNum}, ${scheduleTuesdayDenum} ,${scheduleUtils})}"></div>
+                <div th:insert="~{schedule-table :: table(${WEDNESDAY}, ${scheduleWednesdayNum}, ${scheduleWednesdayDenum} ,${scheduleUtils})}"></div>
+                <div th:insert="~{schedule-table :: table(${THURSDAY}, ${scheduleThursdayNum}, ${scheduleThursdayDenum} ,${scheduleUtils})}"></div>
+                <div th:insert="~{schedule-table :: table(${FRIDAY}, ${scheduleFridayNum}, ${scheduleFridayDenum} ,${scheduleUtils})}"></div>
+            </div>
         </div>
         <div class="col-md-3"></div>
     </div>

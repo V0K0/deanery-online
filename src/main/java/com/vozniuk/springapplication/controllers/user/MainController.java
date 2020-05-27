@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class MainController {
@@ -57,7 +58,9 @@ public class MainController {
        if (currentStudent != null && currentStudent.getGroup() != null){
            StudyingPlan plan = currentStudent.getGroup().getPlan();
            List<Subject> subjects = subjectServiceImpl.getAllByPlan(plan);
+           List<Subject>  courseWorkSubjects = subjects.stream().filter(Subject::hasCourseWork).collect(Collectors.toList());
            model.addAttribute("listOfSubjects", subjects);
+           model.addAttribute("courseWorkSubjects", courseWorkSubjects);
        } else {
            model.addAttribute("listOfSubjects", new ArrayList<Subject>());
        }

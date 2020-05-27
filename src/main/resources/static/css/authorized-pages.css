@@ -11,3 +11,16 @@ body{
     align-items: center;
     justify-content: center;
 }
+
+#footer{
+    height: 5vh;
+    line-height: 5vh;
+    background: #F7F7F7;
+    font-family: sans-serif;
+    text-align: end;
+    font-weight: bold;
+}
+
+.courseWorkSubject{
+    font-size: 1.25em;
+}
