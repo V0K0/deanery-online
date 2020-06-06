@@ -16,14 +16,26 @@ import org.springframework.web.bind.annotation.GetMapping;
 @PreAuthorize("hasAuthority('ADMIN')")
 public class AdminController {
 
-    @Autowired
     private SubjectServiceImpl subjectServiceImpl;
 
-    @Autowired
     private StudentServiceImpl studentServiceImpl;
 
-    @Autowired
     private TeacherServiceImpl teacherServiceImpl;
+
+    @Autowired
+    public void setSubjectServiceImpl(SubjectServiceImpl subjectServiceImpl) {
+        this.subjectServiceImpl = subjectServiceImpl;
+    }
+
+    @Autowired
+    public void setStudentServiceImpl(StudentServiceImpl studentServiceImpl) {
+        this.studentServiceImpl = studentServiceImpl;
+    }
+
+    @Autowired
+    public void setTeacherServiceImpl(TeacherServiceImpl teacherServiceImpl) {
+        this.teacherServiceImpl = teacherServiceImpl;
+    }
 
     @GetMapping("/admin-page")
     public String admin() {

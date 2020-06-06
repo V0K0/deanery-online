@@ -12,8 +12,12 @@ import java.util.List;
 @Service
 public class GroupServiceImpl implements GroupService {
 
-    @Autowired
     private GroupRepository groupRepository;
+
+    @Autowired
+    public void setGroupRepository(GroupRepository groupRepository) {
+        this.groupRepository = groupRepository;
+    }
 
     @Override
     public UniversityGroup addOrUpdateGroup(UniversityGroup group) {
@@ -28,7 +32,7 @@ public class GroupServiceImpl implements GroupService {
 
     @Override
     public UniversityGroup getGroupById(Integer id) {
-        return groupRepository.findById(id).isPresent() ?  groupRepository.findById(id).get() : null;
+        return groupRepository.findById(id).isPresent() ? groupRepository.findById(id).get() : null;
     }
 
     @Override
@@ -40,4 +44,5 @@ public class GroupServiceImpl implements GroupService {
     public UniversityGroup getByGroupCode(String groupCode) {
         return groupRepository.findByGroupCode(groupCode);
     }
+
 }

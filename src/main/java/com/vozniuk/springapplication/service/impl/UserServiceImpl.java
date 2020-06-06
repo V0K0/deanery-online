@@ -1,4 +1,4 @@
-package com.vozniuk.springapplication.service.services;
+package com.vozniuk.springapplication.service.impl;
 
 import com.vozniuk.springapplication.domain.data.university.Student;
 import com.vozniuk.springapplication.domain.data.user.Role;
@@ -15,16 +15,28 @@ import org.springframework.stereotype.Service;
 import java.util.Collections;
 
 @Service
-public class UserService implements UserDetailsService {
-    @Autowired
+public class UserServiceImpl implements UserDetailsService {
+
     private UserRepository userRepository;
 
-    @Autowired
     private StudentServiceImpl studentServiceImpl;
 
-    @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
+    public void setUserRepository(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
+    @Autowired
+    public void setStudentServiceImpl(StudentServiceImpl studentServiceImpl) {
+        this.studentServiceImpl = studentServiceImpl;
+    }
+
+    @Autowired
+    public void setPasswordEncoder(PasswordEncoder passwordEncoder) {
+        this.passwordEncoder = passwordEncoder;
+    }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -51,4 +63,5 @@ public class UserService implements UserDetailsService {
         student.setId(user.getId());
         studentServiceImpl.addOrUpdateStudent(student);
     }
+
 }

@@ -1,8 +1,13 @@
 package com.vozniuk.springapplication.domain.data.university;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.util.Set;
 
+@Getter
+@Setter
 @Entity(name = "studying_plan")
 public class StudyingPlan {
 
@@ -16,30 +21,5 @@ public class StudyingPlan {
 
     @OneToMany(mappedBy = "plan", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Subject> subjects;
-
-    public Integer getPlanId() {
-        return planId;
-    }
-
-    public void setPlanId(Integer planId) {
-        this.planId = planId;
-    }
-
-    public Set<UniversityGroup> getUniversityGroup() {
-        return universityGroup;
-    }
-
-    public void setUniversityGroup(Set<UniversityGroup> universityGroup) {
-        this.universityGroup = universityGroup;
-    }
-
-    public Set<Subject> getSubjects() {
-        return subjects;
-    }
-
-    public void setSubjects(Set<Subject> subjects) {
-        this.subjects = subjects;
-    }
-
 
 }

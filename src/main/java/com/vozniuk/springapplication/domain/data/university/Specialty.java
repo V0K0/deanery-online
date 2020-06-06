@@ -1,12 +1,14 @@
 package com.vozniuk.springapplication.domain.data.university;
 
-import com.vozniuk.springapplication.domain.data.university.Department;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Set;
 
-
+@Getter
+@Setter
 @Entity
 public class Specialty {
 
@@ -31,43 +33,4 @@ public class Specialty {
     @OneToMany(mappedBy = "specialty", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<UniversityGroup> groups;
 
-    public Integer getSpecialtyId() {
-        return specialtyId;
-    }
-
-    public void setSpecialtyId(Integer specialtyId) {
-        this.specialtyId = specialtyId;
-    }
-
-    public Department getDepartment() {
-        return department;
-    }
-
-    public void setDepartment(Department department) {
-        this.department = department;
-    }
-
-    public Set<UniversityGroup> getGroups() {
-        return groups;
-    }
-
-    public void setGroups(Set<UniversityGroup> groups) {
-        this.groups = groups;
-    }
-
-    public String getSpecialtyName() {
-        return specialtyName;
-    }
-
-    public void setSpecialtyName(String specialtyName) {
-        this.specialtyName = specialtyName;
-    }
-
-    public Integer getSpecialtyCode() {
-        return specialtyCode;
-    }
-
-    public void setSpecialtyCode(Integer specialtyCode) {
-        this.specialtyCode = specialtyCode;
-    }
 }

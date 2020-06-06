@@ -4,7 +4,10 @@ import com.vozniuk.springapplication.domain.data.university.StudyingPlan;
 import com.vozniuk.springapplication.domain.data.university.Subject;
 import com.vozniuk.springapplication.service.impl.PlanServiceImpl;
 import com.vozniuk.springapplication.service.impl.SubjectServiceImpl;
+import org.apache.hc.core5.http.message.HttpResponseWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -17,21 +20,29 @@ import java.util.Map;
 @PreAuthorize("hasAuthority('ADMIN')")
 public class AdminSubjectController {
 
-    @Autowired
     private SubjectServiceImpl subjectServiceImpl;
 
-    @Autowired
     private PlanServiceImpl planServiceImpl;
+
+    @Autowired
+    public void setSubjectServiceImpl(SubjectServiceImpl subjectServiceImpl) {
+        this.subjectServiceImpl = subjectServiceImpl;
+    }
+
+    @Autowired
+    public void setPlanServiceImpl(PlanServiceImpl planServiceImpl) {
+        this.planServiceImpl = planServiceImpl;
+    }
 
     @DeleteMapping("/admin-page/study/subject/delete/{id}")
     @ResponseBody
-    public String deleteSubject(@PathVariable("id") String id) {
+    public Object deleteSubject(@PathVariable("id") String id) {
         Subject subject = subjectServiceImpl.getSubjectById(Integer.parseInt(id));
         if (subject != null) {
             subjectServiceImpl.deleteSubject(subject);
-            return "deleted";
+            return ResponseEntity.status(HttpStatus.OK).body("Deleted");
         }
-        return "failed";
+        return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body("Denied");
     }
 
     @PostMapping("/admin-page/study/subject/create")
@@ -48,16 +59,16 @@ public class AdminSubjectController {
 
     @PutMapping("/admin-page/study/subject/update")
     @ResponseBody
-    public String updateSubject(@RequestParam Map<String, String> allParams) {
+    public Object updateSubject(@RequestParam Map<String, String> allParams) {
         int id = Integer.parseInt(allParams.get("id"));
         Subject oldOneSubject = subjectServiceImpl.getSubjectById(id);
         if (oldOneSubject != null) {
             fetchAndSetSubjectUpdateAttributes(oldOneSubject, allParams);
             subjectServiceImpl.addOrUpdateSubject(oldOneSubject);
-            return "success";
+            return ResponseEntity.status(HttpStatus.OK).body("Updated");
         }
 
-        return "error";
+        return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body("Denied");
     }
 
     private void fetchAndSetSubjectCreateAttributes(Subject subject, Map<String, String> attributes) {

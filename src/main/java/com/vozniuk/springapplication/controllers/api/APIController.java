@@ -28,20 +28,40 @@ import java.util.List;
 @Controller
 public class APIController {
 
-    @Autowired
     private SubjectServiceImpl subjectServiceImpl;
 
-    @Autowired
     private StudentServiceImpl studentServiceImpl;
 
-    @Autowired
     private GroupServiceImpl groupServiceImpl;
 
-    @Autowired
     private TeacherServiceImpl teacherServiceImpl;
 
-    @Autowired
     private PlanServiceImpl planServiceImpl;
+
+    @Autowired
+    public void setSubjectServiceImpl(SubjectServiceImpl subjectServiceImpl) {
+        this.subjectServiceImpl = subjectServiceImpl;
+    }
+
+    @Autowired
+    public void setStudentServiceImpl(StudentServiceImpl studentServiceImpl) {
+        this.studentServiceImpl = studentServiceImpl;
+    }
+
+    @Autowired
+    public void setGroupServiceImpl(GroupServiceImpl groupServiceImpl) {
+        this.groupServiceImpl = groupServiceImpl;
+    }
+
+    @Autowired
+    public void setTeacherServiceImpl(TeacherServiceImpl teacherServiceImpl) {
+        this.teacherServiceImpl = teacherServiceImpl;
+    }
+
+    @Autowired
+    public void setPlanServiceImpl(PlanServiceImpl planServiceImpl) {
+        this.planServiceImpl = planServiceImpl;
+    }
 
     @ResponseBody
     @GetMapping(value = "api/subjects", produces = MediaType.APPLICATION_JSON_VALUE)

@@ -6,6 +6,8 @@ import com.vozniuk.springapplication.domain.data.university.UniversityGroup;
 import com.vozniuk.springapplication.service.impl.GroupServiceImpl;
 import com.vozniuk.springapplication.service.impl.StudentServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -19,23 +21,31 @@ import java.util.Map;
 @PreAuthorize("hasAuthority('ADMIN')")
 public class AdminStudentController {
 
-    @Autowired
     private StudentServiceImpl studentServiceImpl;
 
-    @Autowired
     private GroupServiceImpl groupServiceImpl;
+
+    @Autowired
+    public void setStudentServiceImpl(StudentServiceImpl studentServiceImpl) {
+        this.studentServiceImpl = studentServiceImpl;
+    }
+
+    @Autowired
+    public void setGroupServiceImpl(GroupServiceImpl groupServiceImpl) {
+        this.groupServiceImpl = groupServiceImpl;
+    }
 
     @PutMapping("/admin-page/students/update")
     @ResponseBody
-    public String updateStudent(@RequestParam Map<String, String> allParams) {
+    public Object updateStudent(@RequestParam Map<String, String> allParams) {
         int id = Integer.parseInt(allParams.get("id"));
         Student oldStudent = studentServiceImpl.getStudentById(id);
         if (oldStudent != null) {
             fetchAndSetStudentUpdateAttributes(oldStudent, allParams);
             studentServiceImpl.addOrUpdateStudent(oldStudent);
-            return "success";
+            return ResponseEntity.status(HttpStatus.OK).body("Updated");
         }
-        return "error";
+        return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body("Denied");
     }
 
     private void fetchAndSetStudentUpdateAttributes(Student student, Map<String, String> attributes) {

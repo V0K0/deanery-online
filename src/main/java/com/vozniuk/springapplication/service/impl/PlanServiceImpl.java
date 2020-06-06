@@ -1,6 +1,5 @@
 package com.vozniuk.springapplication.service.impl;
 
-import com.vozniuk.springapplication.domain.data.university.Schedule;
 import com.vozniuk.springapplication.domain.data.university.StudyingPlan;
 import com.vozniuk.springapplication.repositories.PlanRepository;
 import com.vozniuk.springapplication.service.services.PlanService;
@@ -10,8 +9,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class PlanServiceImpl implements PlanService {
 
-    @Autowired
     private PlanRepository planRepository;
+
+    @Autowired
+    public void setPlanRepository(PlanRepository planRepository) {
+        this.planRepository = planRepository;
+    }
 
     @Override
     public StudyingPlan addOrUpdatePlan(StudyingPlan plan) {

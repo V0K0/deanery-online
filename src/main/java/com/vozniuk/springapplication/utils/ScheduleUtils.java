@@ -11,7 +11,6 @@ public class ScheduleUtils {
     private HashMap<String, Integer> lessonsTimeMap;
     private Schedule schedule;
 
-
     public ScheduleUtils(TimeTable timeTable) {
         this.timeTable = timeTable;
         lessonsTimeMap = timeTable.getTimeMap();
@@ -39,7 +38,4 @@ public class ScheduleUtils {
         this.schedule = schedule;
     }
 
-    public int getDummy(){
-        return 1;
-    }
 }

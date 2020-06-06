@@ -1,5 +1,8 @@
 package com.vozniuk.springapplication.domain.data.university;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.sql.Date;
@@ -8,6 +11,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+@Getter
+@Setter
 @Entity
 public class Subject {
 
@@ -54,75 +59,4 @@ public class Subject {
             mappedBy = "subjects")
     private Set<Teacher> teachers = new HashSet<>();
 
-    public Integer getSubjectId() {
-        return subjectId;
-    }
-
-    public void setSubjectId(Integer subjectId) {
-        this.subjectId = subjectId;
-    }
-
-    public String getSubjectName() {
-        return subjectName;
-    }
-
-    public void setSubjectName(String subjectName) {
-        this.subjectName = subjectName;
-    }
-
-    public Integer getPracticalHours() {
-        return practicalHours;
-    }
-
-    public void setPracticalHours(Integer practicalHours) {
-        this.practicalHours = practicalHours;
-    }
-
-    public Integer getLectureHours() {
-        return lectureHours;
-    }
-
-    public void setLectureHours(Integer lectureHours) {
-        this.lectureHours = lectureHours;
-    }
-
-    public String getDefenceType() {
-        return defenceType;
-    }
-
-    public void setDefenceType(String defenceType) {
-        this.defenceType = defenceType;
-    }
-
-    public boolean hasCourseWork() {
-        return courseWork;
-    }
-
-    public void setCourseWork(boolean courseWork) {
-        this.courseWork = courseWork;
-    }
-
-    public StudyingPlan getPlan() {
-        return plan;
-    }
-
-    public void setPlan(StudyingPlan plan) {
-        this.plan = plan;
-    }
-
-    public Date getDefenceDate() {
-        return defenceDate;
-    }
-
-    public void setDefenceDate(Date defenceDate) {
-        this.defenceDate = defenceDate;
-    }
-
-    public Set<Teacher> getTeachers() {
-        return teachers;
-    }
-
-    public void setTeachers(Set<Teacher> teachers) {
-        this.teachers = teachers;
-    }
 }

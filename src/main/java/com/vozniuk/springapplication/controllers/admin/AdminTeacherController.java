@@ -22,14 +22,26 @@ import java.util.Set;
 @PreAuthorize("hasAuthority('ADMIN')")
 public class AdminTeacherController {
 
-    @Autowired
     private TeacherServiceImpl teacherServiceImpl;
 
-    @Autowired
     private SubjectServiceImpl subjectServiceImpl;
 
-    @Autowired
     private PlanServiceImpl planServiceImpl;
+
+    @Autowired
+    public void setTeacherServiceImpl(TeacherServiceImpl teacherServiceImpl) {
+        this.teacherServiceImpl = teacherServiceImpl;
+    }
+
+    @Autowired
+    public void setSubjectServiceImpl(SubjectServiceImpl subjectServiceImpl) {
+        this.subjectServiceImpl = subjectServiceImpl;
+    }
+
+    @Autowired
+    public void setPlanServiceImpl(PlanServiceImpl planServiceImpl) {
+        this.planServiceImpl = planServiceImpl;
+    }
 
     @PutMapping("/admin-page/teachers/update")
     @ResponseBody

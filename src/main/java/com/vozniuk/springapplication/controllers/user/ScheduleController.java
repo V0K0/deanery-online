@@ -21,11 +21,19 @@ import java.util.stream.Collectors;
 @Controller
 public class ScheduleController {
 
-    @Autowired
     private StudentServiceImpl studentServiceImpl;
 
-    @Autowired
     private ScheduleServiceImpl scheduleServiceImpl;
+
+    @Autowired
+    public void setStudentServiceImpl(StudentServiceImpl studentServiceImpl) {
+        this.studentServiceImpl = studentServiceImpl;
+    }
+
+    @Autowired
+    public void setScheduleServiceImpl(ScheduleServiceImpl scheduleServiceImpl) {
+        this.scheduleServiceImpl = scheduleServiceImpl;
+    }
 
     @GetMapping("/schedule")
     public String getSchedule(@AuthenticationPrincipal User user, Model model) {

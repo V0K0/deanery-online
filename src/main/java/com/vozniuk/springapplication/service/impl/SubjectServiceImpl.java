@@ -10,14 +10,16 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class SubjectServiceImpl implements SubjectService {
 
-    @Autowired
     private SubjectRepository subjectRepository;
 
+    @Autowired
+    public void setSubjectRepository(SubjectRepository subjectRepository) {
+        this.subjectRepository = subjectRepository;
+    }
 
     @Override
     public Subject addOrUpdateSubject(Subject subject) {
@@ -54,4 +56,5 @@ public class SubjectServiceImpl implements SubjectService {
     public Long getSubjectsCount() {
         return subjectRepository.getSubjectsCount();
     }
+
 }

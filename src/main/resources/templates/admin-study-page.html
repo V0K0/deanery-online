@@ -59,10 +59,6 @@
                 </div>
 
                 <div id="searchDiv" th:insert="~{search-subject-form :: search-subject}"></div>
-                <div id="deleteDiv" th:insert="~{delete-subject-form :: delete-subject}"></div>
-                <div id="createDiv" th:insert="~{create-subject-form :: create-subject}"></div>
-                <div id="updateDiv" th:insert="~{update-subject-form :: update-subject}"></div>
-
                 <div class="search-response">
                     <table class="table table-bordered table-responsive-sm">
                         <thead>
@@ -79,7 +75,9 @@
                         </tbody>
                     </table>
                 </div>
-
+                <div id="deleteDiv" th:insert="~{delete-subject-form :: delete-subject}"></div>
+                <div id="createDiv" th:insert="~{create-subject-form :: create-subject}"></div>
+                <div id="updateDiv" th:insert="~{update-subject-form :: update-subject}"></div>
             </div>
         </div>
         <div class="col-md-3"></div>

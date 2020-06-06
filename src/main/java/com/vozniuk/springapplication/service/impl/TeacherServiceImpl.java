@@ -8,13 +8,15 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
 public class TeacherServiceImpl  implements TeacherService{
 
-    @Autowired
     private TeacherRepository teacherRepository;
+
+    @Autowired
+    public void setTeacherRepository(TeacherRepository teacherRepository) {
+        this.teacherRepository = teacherRepository;
+    }
 
     @Override
     public Teacher addOrUpdateTeacher(Teacher teacher) {

@@ -1,5 +1,6 @@
 package com.vozniuk.springapplication.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
@@ -10,6 +11,9 @@ import java.util.Locale;
 
 @Configuration
 public class WebConfig {
+
+    @Value("${languageTag}")
+    private String tag;
 
     @Bean
     public LocaleResolver localeResolver() {
@@ -29,7 +33,7 @@ public class WebConfig {
 
     @Bean
     public Locale locale() {
-        return new Locale("uk", "UA");
+        return Locale.forLanguageTag(tag);
     }
 
 }

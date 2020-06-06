@@ -19,11 +19,18 @@ import java.util.Map;
 @Controller
 public class ProfileController {
 
-    @Autowired
     private StudentServiceImpl studentServiceImpl;
 
-    @Autowired
     private GroupServiceImpl groupServiceImpl;
+
+    @Autowired
+    public void setStudentServiceImpl(StudentServiceImpl studentServiceImpl) {
+        this.studentServiceImpl = studentServiceImpl;
+    }
+    @Autowired
+    public void setGroupServiceImpl(GroupServiceImpl groupServiceImpl) {
+        this.groupServiceImpl = groupServiceImpl;
+    }
 
     @GetMapping("/profile")
     public String profileInfo(@AuthenticationPrincipal User user, Model model) {

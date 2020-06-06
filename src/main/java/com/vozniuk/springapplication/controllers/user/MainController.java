@@ -20,11 +20,18 @@ import java.util.stream.Collectors;
 @Controller
 public class MainController {
 
-    @Autowired
     private SubjectServiceImpl subjectServiceImpl;
 
-    @Autowired
     private StudentServiceImpl studentServiceImpl;
+
+    @Autowired
+    public void setSubjectServiceImpl(SubjectServiceImpl subjectServiceImpl) {
+        this.subjectServiceImpl = subjectServiceImpl;
+    }
+    @Autowired
+    public void setStudentServiceImpl(StudentServiceImpl studentServiceImpl) {
+        this.studentServiceImpl = studentServiceImpl;
+    }
 
     @GetMapping("/")
     public String startPage(){
@@ -58,7 +65,7 @@ public class MainController {
        if (currentStudent != null && currentStudent.getGroup() != null){
            StudyingPlan plan = currentStudent.getGroup().getPlan();
            List<Subject> subjects = subjectServiceImpl.getAllByPlan(plan);
-           List<Subject>  courseWorkSubjects = subjects.stream().filter(Subject::hasCourseWork).collect(Collectors.toList());
+           List<Subject>  courseWorkSubjects = subjects.stream().filter(Subject::isCourseWork).collect(Collectors.toList());
            model.addAttribute("listOfSubjects", subjects);
            model.addAttribute("courseWorkSubjects", courseWorkSubjects);
        } else {

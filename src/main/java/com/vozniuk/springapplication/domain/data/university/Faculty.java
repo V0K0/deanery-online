@@ -1,9 +1,14 @@
 package com.vozniuk.springapplication.domain.data.university;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Set;
 
+@Getter
+@Setter
 @Entity
 public class Faculty {
 
@@ -18,30 +23,5 @@ public class Faculty {
 
     @OneToMany(mappedBy = "faculty", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Department> departments;
-
-    public Integer getFacultyId() {
-        return facultyId;
-    }
-
-    public void setFacultyId(Integer facultyId) {
-        this.facultyId = facultyId;
-    }
-
-    public String getFacultyName() {
-        return facultyName;
-    }
-
-    public void setFacultyName(String facultyName) {
-        this.facultyName = facultyName;
-    }
-
-    public Set<Department> getDepartments() {
-        return departments;
-    }
-
-    public void setDepartments(Set<Department> departments) {
-        this.departments = departments;
-    }
-
 
 }

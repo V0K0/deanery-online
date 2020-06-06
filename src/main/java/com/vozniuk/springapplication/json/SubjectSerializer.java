@@ -25,7 +25,7 @@ public class SubjectSerializer extends StdSerializer<Subject>{
         jsonGenerator.writeNumberField("practicalHours", subject.getPracticalHours());
         jsonGenerator.writeNumberField("lectureHours", subject.getLectureHours());
         jsonGenerator.writeStringField("defenceType", subject.getDefenceType());
-        jsonGenerator.writeBooleanField("courseWork", subject.hasCourseWork());
+        jsonGenerator.writeBooleanField("courseWork", subject.isCourseWork());
         if (subject.getDefenceDate() != null){
             jsonGenerator.writeStringField("defenceDate", subject.getDefenceDate().toString());
         } else {
