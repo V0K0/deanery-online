@@ -48,23 +48,23 @@
                     <hr>
                     <p class="font-weight-bold" th:text="#{fac}"></p>
                     <div>
-                        <p th:text="${student?.group?.specialty?.department?.faculty?.facultyName}"></p>
+                        <p th:text="${student?.studentGroup?.specialty?.department?.faculty?.facultyName}"></p>
                     </div>
                     <hr>
                     <p class="font-weight-bold" th:text="#{dep}"></p>
                     <div>
-                        <p th:text="${student?.group?.specialty?.department?.departmentName}"></p>
+                        <p th:text="${student?.studentGroup?.specialty?.department?.departmentName}"></p>
                     </div>
                     <hr>
                     <p class="font-weight-bold" th:text="#{spec}"></p>
                     <div>
-                        <p th:if="${student?.group?.specialty ne null}"
-                           th:text="${student.group.specialty.specialtyCode + ' (' + student.group.specialty.specialtyName + ')'}"></p>
+                        <p th:if="${student?.studentGroup?.specialty ne null}"
+                           th:text="${student.studentGroup.specialty.specialtyCode + ' (' + student.studentGroup.specialty.specialtyName + ')'}"></p>
                     </div>
                     <hr>
                     <p class="font-weight-bold" th:text="#{un_group}"></p>
                     <div>
-                        <p th:if="${student?.group?.groupCode ne null}" th:text="${student.group.groupCode}"></p>
+                        <p th:if="${student?.studentGroup?.groupCode ne null}" th:text="${student.studentGroup.groupCode}"></p>
                     </div>
                     <hr>
                 </div>

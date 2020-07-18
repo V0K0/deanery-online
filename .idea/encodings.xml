@@ -2,7 +2,7 @@
 <project version="4">
   <component name="Encoding" defaultCharsetForPropertiesFiles="UTF-8">
     <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/main/java/com/vozniuk/springapplication/DeaneryOnlineApplication.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/vozniuk/deanery/DeaneryOnlineApplication.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/resources/messages_ru_RU.properties" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/resources/messages_uk_UA.properties" charset="UTF-8" />
     <file url="PROJECT" charset="UTF-8" />
