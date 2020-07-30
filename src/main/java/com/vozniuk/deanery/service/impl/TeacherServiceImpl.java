@@ -20,8 +20,11 @@ public class TeacherServiceImpl  implements TeacherService{
 
     @Override
     public Teacher addOrUpdateTeacher(Teacher teacher) {
-        teacherRepository.saveAndFlush(teacher);
-        return teacher;
+        if (isNameLastnameFilled(teacher)){
+            teacherRepository.saveAndFlush(teacher);
+            return teacher;
+        }
+        return null;
     }
 
     @Override
@@ -47,6 +50,10 @@ public class TeacherServiceImpl  implements TeacherService{
     @Override
     public Teacher getByNameAndLastname(String name, String lastname) {
         return teacherRepository.findByLastnameAndName(lastname, name);
+    }
+
+    private boolean isNameLastnameFilled(Teacher teacher) {
+        return !teacher.getName().isBlank() && !teacher.getLastname().isBlank();
     }
 
 }

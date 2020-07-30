@@ -19,7 +19,7 @@ public class StudyingPlan {
     private Integer planId;
 
     @Setter(value = AccessLevel.PRIVATE)
-    @OneToMany(mappedBy = "groupPlan")
+    @OneToMany(mappedBy = "groupPlan",cascade = CascadeType.PERSIST)
     private Set<UniversityGroup> universityGroup = new HashSet<>();
 
     @Setter(value = AccessLevel.PRIVATE)

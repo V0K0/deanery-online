@@ -50,17 +50,21 @@ public class UserServiceImpl implements UserDetailsService {
         user.setActive(true);
         user.setRoles(Collections.singleton(Role.USER));
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        userRepository.save(user);
-        saveUserAsStudent(user);
+        userRepository.saveAndFlush(user);
 
         return true;
     }
 
 
-    private void saveUserAsStudent(User user) {
+    public void saveUserAsStudent(User user) {
         Student student = new Student();
         student.setId(user.getId());
         studentServiceImpl.addOrUpdateStudent(student);
+    }
+
+    public void saveUserAsAdmin(User user){
+        user.getRoles().add(Role.ADMIN);
+        userRepository.saveAndFlush(user);
     }
 
 }

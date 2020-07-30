@@ -1,4 +1,4 @@
-package com.vozniuk.deanery.controllers.admin;
+package com.vozniuk.deanery.web.controllers.admin;
 
 import com.vozniuk.deanery.domain.data.university.StudyingPlan;
 import com.vozniuk.deanery.domain.data.university.Subject;
@@ -47,25 +47,28 @@ public class AdminTeacherController {
         Teacher teacher = teacherServiceImpl.getTeacherById(Integer.parseInt(allParams.get("id")));
         if (teacher != null) {
             fetchAndSetTeacherAttributes(teacher, allParams);
-            if (!teacher.getName().isBlank() && !teacher.getLastname().isBlank()) {
-                teacherServiceImpl.addOrUpdateTeacher(teacher);
-                return ResponseEntity.ok("Updated");
-            }
+            teacherServiceImpl.addOrUpdateTeacher(teacher);
+            return ResponseEntity.status(HttpStatus.NO_CONTENT);
         }
-        return ResponseEntity.status(HttpStatus.NOT_MODIFIED).body("Denied");
+        return ResponseEntity.status(HttpStatus.NOT_MODIFIED);
     }
 
     @PostMapping("/admin-page/teachers/create")
     public String createTeacher(@RequestParam Map<String, String> allParams) {
         Teacher teacher = new Teacher();
         fetchAndSetTeacherAttributes(teacher, allParams);
-        if (!teacher.getName().isBlank() && !teacher.getLastname().isBlank()) {
-            if (teacherServiceImpl.getByNameAndLastname(teacher.getName(), teacher.getLastname()) == null) {
-                teacherServiceImpl.addOrUpdateTeacher(teacher);
-            }
-        }
-
+        pushNewTeacher(teacher);
         return "redirect:/admin-page/teachers";
+    }
+
+    private void pushNewTeacher(Teacher teacher){
+        if (!isTeacherExists(teacher)) {
+            teacherServiceImpl.addOrUpdateTeacher(teacher);
+        }
+    }
+
+    private boolean isTeacherExists(Teacher teacher) {
+        return teacherServiceImpl.getByNameAndLastname(teacher.getName(), teacher.getLastname()) != null;
     }
 
     private void fetchAndSetTeacherAttributes(Teacher teacher, Map<String, String> allParams) {
@@ -104,10 +107,10 @@ public class AdminTeacherController {
             teachers.add(teacher);
             teacherServiceImpl.addOrUpdateTeacher(teacher);
             subjectServiceImpl.addOrUpdateSubject(subject);
-            return ResponseEntity.ok("Added");
+            return ResponseEntity.status(HttpStatus.CREATED);
         }
 
-        return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body("Denied");
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Denied");
     }
 
     @DeleteMapping("/admin-page/teachers/delete-relation")
@@ -121,14 +124,14 @@ public class AdminTeacherController {
             Set<Teacher> teachers = subject.getTeachers();
             boolean removeSubject = teacherSubjects.remove(subject);
             boolean removeTeacher = teachers.remove(teacher);
-            if (removeSubject && removeTeacher){
+            if (removeSubject && removeTeacher) {
                 teacherServiceImpl.addOrUpdateTeacher(teacher);
                 subjectServiceImpl.addOrUpdateSubject(subject);
-                return ResponseEntity.ok("Deleted");
+                return ResponseEntity.status(HttpStatus.NO_CONTENT);
             }
         }
 
-        return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body("Denied");
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Denied");
     }
 
 }

@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.sql.Time;
 
 @Getter
@@ -17,12 +16,13 @@ public class Schedule {
     @Column(name = "schedule_id")
     private Integer scheduleId;
 
+    @Column(nullable = false, length = 2)
     private Integer term;
 
-    @Column(name = "day_of_week")
+    @Column(name = "day_of_week", length = 20)
     private String dayOfWeek;
 
-    @Column(name = "week_type")
+    @Column(name = "week_type", length = 20)
     private String weekType;
 
     @Column(name = "lesson_time")

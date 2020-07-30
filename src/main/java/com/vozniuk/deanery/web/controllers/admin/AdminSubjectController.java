@@ -1,4 +1,4 @@
-package com.vozniuk.deanery.controllers.admin;
+package com.vozniuk.deanery.web.controllers.admin;
 
 import com.vozniuk.deanery.domain.data.university.StudyingPlan;
 import com.vozniuk.deanery.domain.data.university.Subject;

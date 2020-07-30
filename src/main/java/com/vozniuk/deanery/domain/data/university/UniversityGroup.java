@@ -3,10 +3,8 @@ package com.vozniuk.deanery.domain.data.university;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.util.HashSet;
 import java.util.Set;
 

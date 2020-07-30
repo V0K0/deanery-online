@@ -1,13 +1,13 @@
-package com.vozniuk.deanery.controllers.api;
+package com.vozniuk.deanery.web.controllers.api;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.vozniuk.deanery.domain.data.university.*;
-import com.vozniuk.deanery.json.StudentSerializer;
-import com.vozniuk.deanery.json.SubjectSerializer;
-import com.vozniuk.deanery.json.TeacherSerializer;
+import com.vozniuk.deanery.json.converters.CollectionToJSONConverter;
+import com.vozniuk.deanery.json.serializers.StudentSerializer;
+import com.vozniuk.deanery.json.serializers.SubjectSerializer;
+import com.vozniuk.deanery.json.serializers.TeacherSerializer;
 import com.vozniuk.deanery.service.impl.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -16,12 +16,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -71,22 +67,23 @@ public class APIController {
         Pageable pageable = PageRequest.of(pageNumIndex, 10);
         Page<Subject> subjects = subjectServiceImpl.findAllLimit(pageable);
         List<Subject> subjectList = subjects.toList();
-        String json = convertSubjectsListToJSON(subjectList);
+        String json = CollectionToJSONConverter.writeAsJSON(Subject.class, new SubjectSerializer(), subjectList);
         if (json != null) {
             return ResponseEntity.ok(json);
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
     }
 
+
     @GetMapping(value = "api/teachers", produces = MediaType.APPLICATION_JSON_VALUE)
     public Object getTeachers(
-            @RequestParam(name = "page", defaultValue = "1") String page, Model model) {
+            @RequestParam(name = "page", defaultValue = "1") String page) {
         int pageNumIndex = Integer.parseInt(page) - 1;
         Pageable pageable = PageRequest.of(pageNumIndex, 10);
         Page<Teacher> teachers = teacherServiceImpl.findAllLimit(pageable);
         if (teachers != null) {
             List<Teacher> teachersList = teachers.toList();
-            String json = convertTeachersListToJSON(teachersList);
+            String json = CollectionToJSONConverter.writeAsJSON(Teacher.class, new TeacherSerializer(), teachersList);
             if (json != null) {
                 return ResponseEntity.ok(json);
             }
@@ -97,13 +94,13 @@ public class APIController {
 
     @GetMapping(value = "api/students", produces = MediaType.APPLICATION_JSON_VALUE)
     public Object getStudents(
-            @RequestParam(name = "page", defaultValue = "1") String page, Model model) {
+            @RequestParam(name = "page", defaultValue = "1") String page) {
         int pageNumIndex = Integer.parseInt(page) - 1;
         Pageable pageable = PageRequest.of(pageNumIndex, 10);
         Page<Student> students = studentServiceImpl.findAllLimit(pageable);
         if (students != null) {
             List<Student> studentsList = students.toList();
-            String json = convertStudentsListToJSON(studentsList);
+            String json = CollectionToJSONConverter.writeAsJSON(Student.class, new StudentSerializer(), studentsList);
             if (json != null) {
                 return ResponseEntity.ok(json);
             }
@@ -113,12 +110,12 @@ public class APIController {
 
 
     @GetMapping(value = "api/students/search", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Object getStudentsByGroup(@RequestParam(name = "group") String groupCode, Model model) {
+    public Object getStudentsByGroup(@RequestParam(name = "group") String groupCode) {
         UniversityGroup group = groupServiceImpl.getByGroupCode(groupCode);
         if (group != null) {
             List<Student> studentsList = studentServiceImpl.getAllStudentsByGroup(group);
-            if (studentsList != null && studentsList.size() > 0) {
-                String json = convertStudentsListToJSON(studentsList);
+            if (studentsList != null && !studentsList.isEmpty()) {
+                String json = CollectionToJSONConverter.writeAsJSON(Student.class, new StudentSerializer(), studentsList);
                 if (json != null) {
                     return ResponseEntity.ok(json);
                 }
@@ -129,7 +126,7 @@ public class APIController {
 
 
     @GetMapping(value = "api/teachers/search", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Object getTeachersByNameAndLastname(@RequestParam(name = "name") String name, @RequestParam(name = "lastname") String lastname, Model model) {
+    public Object getTeachersByNameAndLastname(@RequestParam(name = "name") String name, @RequestParam(name = "lastname") String lastname) {
         Teacher teacher = teacherServiceImpl.getByNameAndLastname(name, lastname);
         if (teacher != null) {
             String json = convertTeacherToJSON(teacher);
@@ -142,29 +139,16 @@ public class APIController {
 
 
     @GetMapping(value = "api/subjects/search", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Object getSubjectsByPlan(@RequestParam(name = "plan") String plan, Model model) {
+    public Object getSubjectsByPlan(@RequestParam(name = "plan") String plan) {
         StudyingPlan studyingPlan = planServiceImpl.getPlanById(Integer.parseInt(plan));
         if (studyingPlan != null) {
             List<Subject> subjectList = subjectServiceImpl.getAllByPlan(studyingPlan);
-            String json = convertSubjectsListToJSON(subjectList);
+            String json = CollectionToJSONConverter.writeAsJSON(Subject.class, new SubjectSerializer(), subjectList);
             if (json != null) {
                 return ResponseEntity.ok(json);
             }
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-    }
-
-
-    private String convertSubjectsListToJSON(List<Subject> subjectList) {
-        return mapperWriteList(Subject.class, new SubjectSerializer(), subjectList);
-    }
-
-    private String convertStudentsListToJSON(List<Student> studentsList) {
-        return mapperWriteList(Student.class, new StudentSerializer(), studentsList);
-    }
-
-    private String convertTeachersListToJSON(List<Teacher> teachersList) {
-        return mapperWriteList(Teacher.class, new TeacherSerializer(), teachersList);
     }
 
     private String convertTeacherToJSON(Teacher teacher) {
@@ -179,16 +163,6 @@ public class APIController {
         }
     }
 
-    private <T> String mapperWriteList(Class<? extends T> type, JsonSerializer<T> serializer, List<T> objects) {
-        final ObjectMapper mapper = new ObjectMapper();
-        SimpleModule simpleModule = new SimpleModule();
-        simpleModule.addSerializer(type, serializer);
-        mapper.registerModule(simpleModule);
-        try {
-            return mapper.writeValueAsString(objects);
-        } catch (JsonProcessingException e) {
-            return null;
-        }
-    }
+
 
 }

@@ -1,7 +1,7 @@
 package com.vozniuk.deanery.utils;
 
-import java.util.HashMap;
+import java.util.Map;
 
-public abstract class TimeTable {
-    public abstract HashMap<String, Integer> getTimeMap();
+public interface TimeTable {
+     Map<String, Integer> getTimeMap();
 }

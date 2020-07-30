@@ -1,14 +1,15 @@
 package com.vozniuk.deanery.utils;
 
 import com.vozniuk.deanery.domain.data.university.Schedule;
+import org.springframework.stereotype.Component;
 
-import java.util.HashMap;
+import java.util.Map;
 
+@Component
 public class ScheduleUtils {
 
-    private TimeTable timeTable;
-    private HashMap<String, Integer> lessonsTimeMap;
-    private Schedule schedule;
+    private final TimeTable timeTable;
+    private final Map<String, Integer> lessonsTimeMap;
 
     public ScheduleUtils(TimeTable timeTable) {
         this.timeTable = timeTable;
@@ -19,22 +20,10 @@ public class ScheduleUtils {
         return timeTable;
     }
 
-    public void setTimeTable(TimeTable timeTable) {
-        this.timeTable = timeTable;
-        lessonsTimeMap = timeTable.getTimeMap();
-    }
-
     public int findLessonIndexInSchedule(Schedule schedule) {
         String lessonTime = schedule.getLessonTime().toString();
         return lessonsTimeMap.get(lessonTime);
     }
 
-    public Schedule getSchedule() {
-        return schedule;
-    }
-
-    public void setSchedule(Schedule schedule) {
-        this.schedule = schedule;
-    }
 
 }

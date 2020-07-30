@@ -6,7 +6,6 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.Future;
-import javax.validation.constraints.NotNull;
 import java.sql.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -24,13 +23,13 @@ public class Subject {
     @Column(name = "subject_name", nullable = false)
     private String subjectName;
 
-    @Column(name = "practical_hours", nullable = false)
+    @Column(name = "practical_hours", nullable = false, length = 3)
     private Integer practicalHours;
 
-    @Column(name = "lecture_hours", nullable = false)
+    @Column(name = "lecture_hours", nullable = false, length = 3)
     private Integer lectureHours;
 
-    @Column(name = "defence_type", nullable = false)
+    @Column(name = "defence_type", nullable = false, length = 20)
     private String defenceType;
 
     @Column(name = "course_work")

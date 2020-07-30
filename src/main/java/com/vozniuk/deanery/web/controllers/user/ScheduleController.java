@@ -1,14 +1,13 @@
-package com.vozniuk.deanery.controllers.user;
+package com.vozniuk.deanery.web.controllers.user;
 
 
-import com.vozniuk.deanery.utils.Days;
-import com.vozniuk.deanery.utils.ScheduleUtils;
-import com.vozniuk.deanery.utils.DefaultTimeTable;
 import com.vozniuk.deanery.domain.data.university.Schedule;
 import com.vozniuk.deanery.domain.data.university.Student;
 import com.vozniuk.deanery.domain.data.user.User;
 import com.vozniuk.deanery.service.impl.ScheduleServiceImpl;
 import com.vozniuk.deanery.service.impl.StudentServiceImpl;
+import com.vozniuk.deanery.utils.Days;
+import com.vozniuk.deanery.utils.ScheduleUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -25,6 +24,8 @@ public class ScheduleController {
 
     private ScheduleServiceImpl scheduleServiceImpl;
 
+    private final ScheduleUtils scheduleUtils;
+
     @Autowired
     public void setStudentServiceImpl(StudentServiceImpl studentServiceImpl) {
         this.studentServiceImpl = studentServiceImpl;
@@ -33,6 +34,10 @@ public class ScheduleController {
     @Autowired
     public void setScheduleServiceImpl(ScheduleServiceImpl scheduleServiceImpl) {
         this.scheduleServiceImpl = scheduleServiceImpl;
+    }
+
+    public ScheduleController(ScheduleUtils scheduleUtils) {
+        this.scheduleUtils = scheduleUtils;
     }
 
     @GetMapping("/schedule")
@@ -57,7 +62,7 @@ public class ScheduleController {
             loadScheduleForDayInModel(current, model, Days.WEDNESDAY);
             loadScheduleForDayInModel(current, model, Days.THURSDAY);
             loadScheduleForDayInModel(current, model, Days.FRIDAY);
-            model.addAttribute("scheduleUtils", new ScheduleUtils(new DefaultTimeTable()));
+            model.addAttribute("scheduleUtils", scheduleUtils);
         }
 
     }

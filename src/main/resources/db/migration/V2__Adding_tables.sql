@@ -42,8 +42,8 @@ create table subject (
 subject_id int not null AUTO_INCREMENT,
 plan_id int not null,
 subject_name varchar (255) not null,
-practical_hours int not null,
-lecture_hours int not null,
+practical_hours int (3) not null,
+lecture_hours int (3) not null,
 defence_type varchar (20) not null,
 course_work bit,
 defence_date date,
@@ -53,7 +53,7 @@ create table schedule (
 schedule_id int not null AUTO_INCREMENT,
 group_id int not null,
 subject_id int not null,
-term int(1) not null,
+term int(2) not null,
 day_of_week varchar (20),
 week_type varchar (20),
 lesson_time time,
@@ -62,8 +62,8 @@ primary key (schedule_id));
 
 create table teacher (
 teacher_id int not null AUTO_INCREMENT,
-name varchar (255),
-lastname  varchar (255),
+name varchar (255) not null,
+lastname  varchar (255) not null,
 patronymic  varchar (255),
 phone varchar(12),
 primary key (teacher_id));

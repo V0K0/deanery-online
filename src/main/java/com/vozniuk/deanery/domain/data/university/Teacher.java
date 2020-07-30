@@ -18,8 +18,10 @@ public class Teacher {
     @Column(name = "teacher_id")
     private Integer teacherId;
 
+    @Column(nullable = false)
     private String name;
 
+    @Column(nullable = false)
     private String lastname;
 
     private String patronymic;

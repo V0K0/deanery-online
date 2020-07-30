@@ -25,7 +25,7 @@ public class Student {
 
     private String address;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "group_id")
     private UniversityGroup studentGroup;
 
