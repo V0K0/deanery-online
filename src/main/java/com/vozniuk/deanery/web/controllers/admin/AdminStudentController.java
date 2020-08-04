@@ -4,6 +4,8 @@ import com.vozniuk.deanery.domain.data.university.Student;
 import com.vozniuk.deanery.domain.data.university.UniversityGroup;
 import com.vozniuk.deanery.service.impl.GroupServiceImpl;
 import com.vozniuk.deanery.service.impl.StudentServiceImpl;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +25,8 @@ public class AdminStudentController {
 
     private GroupServiceImpl groupServiceImpl;
 
+    private final Logger logger = LogManager.getLogger(AdminStudentController.class);
+
     @Autowired
     public void setStudentServiceImpl(StudentServiceImpl studentServiceImpl) {
         this.studentServiceImpl = studentServiceImpl;
@@ -41,8 +45,11 @@ public class AdminStudentController {
         if (oldStudent != null) {
             fetchAndSetStudentUpdateAttributes(oldStudent, allParams);
             studentServiceImpl.addOrUpdateStudent(oldStudent);
-            return ResponseEntity.status(HttpStatus.OK).body("Updated");
+            logger.info("Successfully updated student with id {} by admin", id);
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Updated");
         }
+
+        logger.info("Failed to update student with id {} by admin", id);
         return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body("Denied");
     }
 

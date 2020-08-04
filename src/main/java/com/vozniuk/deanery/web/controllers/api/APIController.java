@@ -9,6 +9,8 @@ import com.vozniuk.deanery.json.serializers.StudentSerializer;
 import com.vozniuk.deanery.json.serializers.SubjectSerializer;
 import com.vozniuk.deanery.json.serializers.TeacherSerializer;
 import com.vozniuk.deanery.service.impl.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -33,6 +35,8 @@ public class APIController {
     private TeacherServiceImpl teacherServiceImpl;
 
     private PlanServiceImpl planServiceImpl;
+
+    private final Logger logger = LogManager.getLogger(APIController.class);
 
     @Autowired
     public void setSubjectServiceImpl(SubjectServiceImpl subjectServiceImpl) {
@@ -69,6 +73,7 @@ public class APIController {
         List<Subject> subjectList = subjects.toList();
         String json = CollectionToJSONConverter.writeAsJSON(Subject.class, new SubjectSerializer(), subjectList);
         if (json != null) {
+            logger.info("JSON of subjects successfully created");
             return ResponseEntity.ok(json);
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
@@ -85,6 +90,7 @@ public class APIController {
             List<Teacher> teachersList = teachers.toList();
             String json = CollectionToJSONConverter.writeAsJSON(Teacher.class, new TeacherSerializer(), teachersList);
             if (json != null) {
+                logger.info("JSON of teachers successfully created");
                 return ResponseEntity.ok(json);
             }
         }
@@ -102,6 +108,7 @@ public class APIController {
             List<Student> studentsList = students.toList();
             String json = CollectionToJSONConverter.writeAsJSON(Student.class, new StudentSerializer(), studentsList);
             if (json != null) {
+                logger.info("JSON of students successfully created");
                 return ResponseEntity.ok(json);
             }
         }
@@ -117,6 +124,7 @@ public class APIController {
             if (studentsList != null && !studentsList.isEmpty()) {
                 String json = CollectionToJSONConverter.writeAsJSON(Student.class, new StudentSerializer(), studentsList);
                 if (json != null) {
+                    logger.info("JSON of students filtered by group successfully created");
                     return ResponseEntity.ok(json);
                 }
             }
@@ -131,6 +139,7 @@ public class APIController {
         if (teacher != null) {
             String json = convertTeacherToJSON(teacher);
             if (json != null) {
+                logger.info("JSON of concrete teacher successfully created");
                 return ResponseEntity.ok(json);
             }
         }
@@ -145,6 +154,7 @@ public class APIController {
             List<Subject> subjectList = subjectServiceImpl.getAllByPlan(studyingPlan);
             String json = CollectionToJSONConverter.writeAsJSON(Subject.class, new SubjectSerializer(), subjectList);
             if (json != null) {
+                logger.info("JSON of subjects filtered by plan successfully created");
                 return ResponseEntity.ok(json);
             }
         }

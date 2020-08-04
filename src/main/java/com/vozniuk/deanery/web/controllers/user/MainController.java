@@ -7,6 +7,8 @@ import com.vozniuk.deanery.domain.data.user.Role;
 import com.vozniuk.deanery.domain.data.user.User;
 import com.vozniuk.deanery.service.impl.StudentServiceImpl;
 import com.vozniuk.deanery.service.impl.SubjectServiceImpl;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -23,6 +25,8 @@ public class MainController {
     private SubjectServiceImpl subjectServiceImpl;
 
     private StudentServiceImpl studentServiceImpl;
+
+    private final Logger logger = LogManager.getLogger(MainController.class);
 
     @Autowired
     public void setSubjectServiceImpl(SubjectServiceImpl subjectServiceImpl) {
@@ -41,9 +45,13 @@ public class MainController {
     @GetMapping("/home")
     public String homePage(@AuthenticationPrincipal User user, Model model){
         if (user.getAuthorities().contains(Role.ADMIN)){
+            logger.info("Admin: {} logged in", user.getUsername());
             return "forward:admin-page";
         }
         loadStudentInModel(user, model);
+
+        logger.info("User: {} logged in", user.getUsername());
+
         return "home";
     }
 
@@ -51,6 +59,7 @@ public class MainController {
     public String planPage(@AuthenticationPrincipal User user, Model model){
         loadStudentInModel(user, model);
         loadPlanInModel(model);
+        logger.info("GET plan for: {}", user.getUsername());
         return "studying-plan";
     }
 

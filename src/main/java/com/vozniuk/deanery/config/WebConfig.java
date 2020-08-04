@@ -19,7 +19,7 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addViewController("/login").setViewName("login");
     }
 
-    @Value("${languageTag}")
+    @Value("${application.language-tag}")
     private String tag;
 
     @Bean

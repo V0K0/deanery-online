@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import javax.validation.constraints.Future;
 import java.sql.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -35,7 +34,6 @@ public class Subject {
     @Column(name = "course_work")
     private boolean courseWork;
 
-    @Future
     @Column(name = "defence_date")
     private Date defenceDate;
 

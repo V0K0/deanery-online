@@ -4,6 +4,8 @@ import com.vozniuk.deanery.domain.data.university.StudyingPlan;
 import com.vozniuk.deanery.domain.data.university.Subject;
 import com.vozniuk.deanery.service.impl.PlanServiceImpl;
 import com.vozniuk.deanery.service.impl.SubjectServiceImpl;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +25,8 @@ public class AdminSubjectController {
 
     private PlanServiceImpl planServiceImpl;
 
+    private final Logger logger = LogManager.getLogger(AdminSubjectController.class);
+
     @Autowired
     public void setSubjectServiceImpl(SubjectServiceImpl subjectServiceImpl) {
         this.subjectServiceImpl = subjectServiceImpl;
@@ -39,8 +43,10 @@ public class AdminSubjectController {
         Subject subject = subjectServiceImpl.getSubjectById(Integer.parseInt(id));
         if (subject != null) {
             subjectServiceImpl.deleteSubject(subject);
+            logger.info("Successfully removed subject with id: {} by admin", id);
             return ResponseEntity.status(HttpStatus.OK).body("Deleted");
         }
+        logger.error("Failed to remove subject with id: {} by admin", id);
         return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body("Denied");
     }
 
@@ -50,6 +56,9 @@ public class AdminSubjectController {
         fetchAndSetSubjectCreateAttributes(newSubject, allParams);
         if (newSubject.getPlan() != null) {
             subjectServiceImpl.addOrUpdateSubject(newSubject);
+            logger.info("Successfully added new subject with id {} by admin", newSubject.getSubjectId());
+        } else {
+            logger.error("Failed to create new subject with id {} by admin", newSubject.getSubjectId());
         }
 
         return "redirect:/admin-page/study";
@@ -64,9 +73,10 @@ public class AdminSubjectController {
         if (oldOneSubject != null) {
             fetchAndSetSubjectUpdateAttributes(oldOneSubject, allParams);
             subjectServiceImpl.addOrUpdateSubject(oldOneSubject);
-            return ResponseEntity.status(HttpStatus.OK).body("Updated");
+            logger.info("Successfully updated subject with id: {} by admin", id);
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Updated");
         }
-
+        logger.info("Failed to update subject with id: {} by admin", id);
         return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body("Denied");
     }
 

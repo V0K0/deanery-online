@@ -4,6 +4,8 @@ import com.vozniuk.deanery.domain.data.university.Student;
 import com.vozniuk.deanery.domain.data.user.User;
 import com.vozniuk.deanery.service.impl.GroupServiceImpl;
 import com.vozniuk.deanery.service.impl.StudentServiceImpl;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -22,6 +24,8 @@ public class ProfileController {
     private StudentServiceImpl studentServiceImpl;
 
     private GroupServiceImpl groupServiceImpl;
+
+    private final Logger logger = LogManager.getLogger(ProfileController.class);
 
     @Autowired
     public void setStudentServiceImpl(StudentServiceImpl studentServiceImpl) {
@@ -52,6 +56,7 @@ public class ProfileController {
         Student current = (Student) model.getAttribute("student");
         if (current != null) {
             updateStudent(current, allParams);
+            logger.info("User: {} updated profile", user.getUsername());
         }
        return "redirect:/profile";
     }

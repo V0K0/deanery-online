@@ -7,10 +7,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import java.util.TimeZone;
 
 /**
- * Start application hereS
- * Note that by default {@link User} is creating without admin rights
- * For application working you will also need an empty MySQL database named "deanery" or simply change database url to your own
- * in application.properties file
+ * Start application here.
+ * Note that by default {@link User} is creating without admin rights.
+ * By default application creates empty database named `deanery` using localhost:3306.
+ * You can change connection string to your own in application.properties.
  **/
 
 

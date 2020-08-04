@@ -8,6 +8,8 @@ import com.vozniuk.deanery.service.impl.ScheduleServiceImpl;
 import com.vozniuk.deanery.service.impl.StudentServiceImpl;
 import com.vozniuk.deanery.utils.Days;
 import com.vozniuk.deanery.utils.ScheduleUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -26,6 +28,8 @@ public class ScheduleController {
 
     private final ScheduleUtils scheduleUtils;
 
+    private final Logger logger = LogManager.getLogger(ScheduleController.class);
+
     @Autowired
     public void setStudentServiceImpl(StudentServiceImpl studentServiceImpl) {
         this.studentServiceImpl = studentServiceImpl;
@@ -42,6 +46,7 @@ public class ScheduleController {
 
     @GetMapping("/schedule")
     public String getSchedule(@AuthenticationPrincipal User user, Model model) {
+        logger.info("GET: Schedule for: {}", user.getUsername());
         model.addAttribute("username", user.getUsername());
         pushUserInModel(user, model);
         pushScheduleForStudent(model);
@@ -55,14 +60,15 @@ public class ScheduleController {
 
     private void pushScheduleForStudent(Model model) {
         Student current = (Student) model.getAttribute("student");
-
         if (current != null) {
+            logger.info("Started lazy loading schedule from DB");
             loadScheduleForDayInModel(current, model, Days.MONDAY);
             loadScheduleForDayInModel(current, model, Days.TUESDAY);
             loadScheduleForDayInModel(current, model, Days.WEDNESDAY);
             loadScheduleForDayInModel(current, model, Days.THURSDAY);
             loadScheduleForDayInModel(current, model, Days.FRIDAY);
             model.addAttribute("scheduleUtils", scheduleUtils);
+            logger.info("Completed loading schedule");
         }
 
     }

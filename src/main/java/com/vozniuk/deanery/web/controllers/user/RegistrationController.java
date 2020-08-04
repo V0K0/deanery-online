@@ -2,6 +2,8 @@ package com.vozniuk.deanery.web.controllers.user;
 
 import com.vozniuk.deanery.domain.data.user.User;
 import com.vozniuk.deanery.service.impl.UserServiceImpl;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +19,8 @@ public class RegistrationController {
     private UserServiceImpl userServiceImpl;
 
     private Locale locale;
+
+    private final Logger logger = LogManager.getLogger(RegistrationController.class);
 
     @Autowired
     public void setLocale(Locale locale){
@@ -39,12 +43,17 @@ public class RegistrationController {
         boolean registrationSucceed = userServiceImpl.addUser(user);
 
         if (!registrationSucceed) {
+
+            logger.trace("Failed registration attempt. Already existent username");
+
             final ResourceBundle messages = ResourceBundle.getBundle("messages", locale);
             model.addAttribute("msgError", messages.getString("msgErrorAlreadyExists"));
             return "registration";
         }
 
         userServiceImpl.saveUserAsStudent(user);
+
+        logger.info("Successfully created new user with name: {}", user.getUsername());
 
         return "redirect:/login";
     }

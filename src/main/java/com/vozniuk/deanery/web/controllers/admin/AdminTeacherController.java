@@ -6,6 +6,8 @@ import com.vozniuk.deanery.domain.data.university.Teacher;
 import com.vozniuk.deanery.service.impl.PlanServiceImpl;
 import com.vozniuk.deanery.service.impl.SubjectServiceImpl;
 import com.vozniuk.deanery.service.impl.TeacherServiceImpl;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +27,8 @@ public class AdminTeacherController {
     private SubjectServiceImpl subjectServiceImpl;
 
     private PlanServiceImpl planServiceImpl;
+
+    private final Logger logger = LogManager.getLogger(AdminTeacherController.class);
 
     @Autowired
     public void setTeacherServiceImpl(TeacherServiceImpl teacherServiceImpl) {
@@ -48,8 +52,10 @@ public class AdminTeacherController {
         if (teacher != null) {
             fetchAndSetTeacherAttributes(teacher, allParams);
             teacherServiceImpl.addOrUpdateTeacher(teacher);
-            return ResponseEntity.status(HttpStatus.NO_CONTENT);
+            logger.info("Teacher with id: {} was updated by admin", teacher.getTeacherId());
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Updated");
         }
+        logger.error("Failed to update teacher by admin");
         return ResponseEntity.status(HttpStatus.NOT_MODIFIED);
     }
 
@@ -64,6 +70,7 @@ public class AdminTeacherController {
     private void pushNewTeacher(Teacher teacher){
         if (!isTeacherExists(teacher)) {
             teacherServiceImpl.addOrUpdateTeacher(teacher);
+            logger.info("Successfully added new teacher with id: {} by admin", teacher.getTeacherId());
         }
     }
 
@@ -107,9 +114,10 @@ public class AdminTeacherController {
             teachers.add(teacher);
             teacherServiceImpl.addOrUpdateTeacher(teacher);
             subjectServiceImpl.addOrUpdateSubject(subject);
-            return ResponseEntity.status(HttpStatus.CREATED);
+            logger.info("Successfully created new relation between teacher with id: {} and subject: {} by admin", id, name);
+            return ResponseEntity.status(HttpStatus.CREATED).body("Created");
         }
-
+        logger.error("Failed to create relation between teacher with id: {} and subject: {} by admin", id, name);
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Denied");
     }
 
@@ -127,10 +135,11 @@ public class AdminTeacherController {
             if (removeSubject && removeTeacher) {
                 teacherServiceImpl.addOrUpdateTeacher(teacher);
                 subjectServiceImpl.addOrUpdateSubject(subject);
-                return ResponseEntity.status(HttpStatus.NO_CONTENT);
+                logger.info("Successfully removed relation between teacher with id: {} and subject: {} by admin", id, name);
+                return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Deleted");
             }
         }
-
+        logger.error("Failed to remove relation between teacher with id: {} and subject: {} by admin", id, name);
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Denied");
     }
 

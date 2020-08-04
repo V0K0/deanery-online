@@ -11,7 +11,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
 @Service
 public class UserServiceImpl implements UserDetailsService {
@@ -48,7 +49,9 @@ public class UserServiceImpl implements UserDetailsService {
             return false;
         }
         user.setActive(true);
-        user.setRoles(Collections.singleton(Role.USER));
+        Set<Role> roles = new HashSet<>();
+        roles.add(Role.USER);
+        user.setRoles(roles);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.saveAndFlush(user);
 
