@@ -1,7 +1,7 @@
-package com.vozniuk.deanery.service.services;
+package com.vozniuk.deanery.service;
 
-import com.vozniuk.deanery.domain.data.university.Schedule;
-import com.vozniuk.deanery.domain.data.university.UniversityGroup;
+import com.vozniuk.deanery.data.university.Schedule;
+import com.vozniuk.deanery.data.university.UniversityGroup;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ public interface ScheduleService {
 
     void deleteSchedule(Schedule schedule);
 
-    Schedule getScheduleById(Integer id);
+    Schedule getScheduleById(Long id);
 
     List<Schedule> getAllForGroupOnDay(UniversityGroup group, String day);
 

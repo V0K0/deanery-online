@@ -1,7 +1,7 @@
-package com.vozniuk.deanery.service.services;
+package com.vozniuk.deanery.service;
 
-import com.vozniuk.deanery.domain.data.university.Specialty;
-import com.vozniuk.deanery.domain.data.university.UniversityGroup;
+import com.vozniuk.deanery.data.university.Specialty;
+import com.vozniuk.deanery.data.university.UniversityGroup;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ public interface GroupService {
 
     void deleteGroup(UniversityGroup group);
 
-    UniversityGroup getGroupById(Integer id);
+    UniversityGroup getGroupById(Long id);
 
     List<UniversityGroup> getGroupsBySpecialty(Specialty specialty);
 

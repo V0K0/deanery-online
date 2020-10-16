@@ -1,40 +1,42 @@
 package com.vozniuk.deanery.service.impl;
 
-import com.vozniuk.deanery.domain.data.university.StudyingPlan;
-import com.vozniuk.deanery.domain.data.university.Subject;
-import com.vozniuk.deanery.repositories.SubjectRepository;
-import com.vozniuk.deanery.service.services.SubjectService;
+import com.vozniuk.deanery.data.university.StudyingPlan;
+import com.vozniuk.deanery.data.university.Subject;
+import com.vozniuk.deanery.repository.SubjectRepository;
+import com.vozniuk.deanery.service.SubjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
 @Service
+@Transactional
 public class SubjectServiceImpl implements SubjectService {
 
-    private SubjectRepository subjectRepository;
+    private final SubjectRepository subjectRepository;
 
     @Autowired
-    public void setSubjectRepository(SubjectRepository subjectRepository) {
+    public SubjectServiceImpl(SubjectRepository subjectRepository) {
         this.subjectRepository = subjectRepository;
     }
 
     @Override
     public Subject addOrUpdateSubject(Subject subject) {
-        subjectRepository.saveAndFlush(subject);
-        return subject;
+        return subjectRepository.saveAndFlush(subject);
     }
 
     @Override
     public void deleteSubject(Subject subject) {
-        subjectRepository.deleteById(subject.getSubjectId());
+        subjectRepository.delete(subject);
     }
 
     @Override
-    public Subject getSubjectById(Integer id) {
-        return subjectRepository.findById(id).isPresent() ? subjectRepository.findById(id).get() : null;
+    public Subject getSubjectById(Long id) {
+        return subjectRepository.findById(id).orElseThrow(EntityNotFoundException::new);
     }
 
     @Override
@@ -44,7 +46,7 @@ public class SubjectServiceImpl implements SubjectService {
 
     @Override
     public Subject getByNameAndPlan(String name, StudyingPlan plan) {
-        return subjectRepository.findBySubjectNameAndPlan(name, plan).isPresent() ? subjectRepository.findBySubjectNameAndPlan(name, plan).get() : null;
+        return subjectRepository.findBySubjectNameAndPlan(name, plan).orElseThrow(EntityNotFoundException::new);
     }
 
     @Override
@@ -54,7 +56,6 @@ public class SubjectServiceImpl implements SubjectService {
 
     @Override
     public Long getSubjectsCount() {
-        return subjectRepository.getSubjectsCount();
+        return subjectRepository.count();
     }
-
 }

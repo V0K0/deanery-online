@@ -1,7 +1,7 @@
-package com.vozniuk.deanery.service.services;
+package com.vozniuk.deanery.service;
 
-import com.vozniuk.deanery.domain.data.university.StudyingPlan;
-import com.vozniuk.deanery.domain.data.university.Subject;
+import com.vozniuk.deanery.data.university.StudyingPlan;
+import com.vozniuk.deanery.data.university.Subject;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -13,7 +13,7 @@ public interface SubjectService {
 
     void deleteSubject(Subject subject);
 
-    Subject getSubjectById(Integer id);
+    Subject getSubjectById(Long id);
 
     List<Subject> getAllByPlan(StudyingPlan plan);
 

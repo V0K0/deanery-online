@@ -1,6 +1,6 @@
-package com.vozniuk.deanery.service.services;
+package com.vozniuk.deanery.service;
 
-import com.vozniuk.deanery.domain.data.university.Teacher;
+import com.vozniuk.deanery.data.university.Teacher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -10,7 +10,7 @@ public interface TeacherService {
 
     void deleteTeacher(Teacher teacher);
 
-    Teacher getTeacherById(Integer id);
+    Teacher getTeacherById(Long id);
 
     Page<Teacher> findAllLimit(Pageable pageable);
 

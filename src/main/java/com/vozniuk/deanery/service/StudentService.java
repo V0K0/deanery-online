@@ -1,7 +1,7 @@
-package com.vozniuk.deanery.service.services;
+package com.vozniuk.deanery.service;
 
-import com.vozniuk.deanery.domain.data.university.Student;
-import com.vozniuk.deanery.domain.data.university.UniversityGroup;
+import com.vozniuk.deanery.data.university.Student;
+import com.vozniuk.deanery.data.university.UniversityGroup;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -13,7 +13,7 @@ public interface StudentService {
 
     void deleteStudent(Student student);
 
-    Student getStudentById(Integer id);
+    Student getStudentById(Long id);
 
     List<Student> getAllStudentsByGroup(UniversityGroup group);
 
