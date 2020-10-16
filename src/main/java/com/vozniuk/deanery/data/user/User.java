@@ -1,5 +1,7 @@
-package com.vozniuk.deanery.domain.data.user;
+package com.vozniuk.deanery.data.user;
 
+import com.vozniuk.deanery.data.IndexedEntity;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
@@ -13,11 +15,8 @@ import java.util.Set;
 @Entity
 @Getter
 @Setter
-public class User implements UserDetails {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+@EqualsAndHashCode(of = "id")
+public class User extends IndexedEntity implements UserDetails {
 
     @Column(nullable = false)
     private String username;
@@ -27,7 +26,7 @@ public class User implements UserDetails {
 
     private boolean active;
 
-    @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
+    @ElementCollection(targetClass = Role.class, fetch = FetchType.LAZY)
     @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
     @Enumerated(EnumType.STRING)
     private Set<Role> roles = new HashSet<>();

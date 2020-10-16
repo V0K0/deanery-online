@@ -1,8 +1,6 @@
-package com.vozniuk.deanery.domain.data.university;
+package com.vozniuk.deanery.data.university;
 
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -10,13 +8,17 @@ import java.util.Set;
 
 @Getter
 @Setter
+@Builder
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(of = "teacherId")
 public class Teacher {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "teacher_id")
-    private Integer teacherId;
+    private Long teacherId;
 
     @Column(nullable = false)
     private String name;
@@ -35,4 +37,15 @@ public class Teacher {
             inverseJoinColumns = @JoinColumn(name = "subject_id"))
     private Set<Subject> subjects = new HashSet<>();
 
+    @Override
+    public String toString() {
+        return "Teacher{" +
+                "id=" + teacherId +
+                "name='" + name + '\'' +
+                ", lastname='" + lastname + '\'' +
+                ", patronymic='" + patronymic + '\'' +
+                ", phone='" + phone + '\'' +
+                ", subjects=" + subjects.toString() +
+                '}';
+    }
 }

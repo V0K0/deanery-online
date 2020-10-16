@@ -1,8 +1,9 @@
-package com.vozniuk.deanery.domain.data.user;
+package com.vozniuk.deanery.data.user;
 
 import org.springframework.security.core.GrantedAuthority;
 
 public enum Role implements GrantedAuthority {
+
     USER,
     ADMIN;
 

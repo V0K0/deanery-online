@@ -1,8 +1,6 @@
-package com.vozniuk.deanery.domain.data.university;
+package com.vozniuk.deanery.data.university;
 
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -11,13 +9,17 @@ import java.util.Set;
 
 @Getter
 @Setter
+@Builder
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(of = "subjectId")
 public class Subject {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "subject_id")
-    private Integer subjectId;
+    private Long subjectId;
 
     @Column(name = "subject_name", nullable = false)
     private String subjectName;
@@ -45,4 +47,18 @@ public class Subject {
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "subjects")
     private Set<Teacher> teachers = new HashSet<>();
 
+    @Override
+    public String toString() {
+        return "Subject{" +
+                "id=" + subjectId +
+                "subjectName='" + subjectName + '\'' +
+                ", practicalHours=" + practicalHours +
+                ", lectureHours=" + lectureHours +
+                ", defenceType='" + defenceType + '\'' +
+                ", courseWork=" + courseWork +
+                ", defenceDate=" + defenceDate +
+                ", plan=" + plan +
+                ", teachers=" + teachers.toString() +
+                '}';
+    }
 }

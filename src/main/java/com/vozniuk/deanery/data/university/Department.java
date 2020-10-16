@@ -1,6 +1,8 @@
-package com.vozniuk.deanery.domain.data.university;
+package com.vozniuk.deanery.data.university;
 
+import com.vozniuk.deanery.data.IndexedEntity;
 import lombok.AccessLevel;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,12 +13,8 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
-public class Department {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "department_id")
-    private Integer departmentId;
+@EqualsAndHashCode(of = "id")
+public class Department extends IndexedEntity {
 
     @Column(name = "department_name", nullable = false)
     private String departmentName;
@@ -29,4 +27,12 @@ public class Department {
     @OneToMany(mappedBy = "department", cascade = CascadeType.ALL)
     private Set<Specialty> specialties = new HashSet<>();
 
+    @Override
+    public String toString() {
+        return "Department{" +
+                "id =" + id +
+                "departmentName='" + departmentName + '\'' +
+                ", faculty=" + faculty.getFacultyName() +
+                '}';
+    }
 }
