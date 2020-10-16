@@ -105,7 +105,7 @@ $(function () {
     function findTeacherByName(name, lastname) {
         if (name != null && lastname != null) {
             $.ajax({
-                url: "/api/teachers/search",
+                url: "/api/teachers/special",
                 type: "GET",
                 data: {
                     name: name,
@@ -134,10 +134,9 @@ $(function () {
     function updateTeacher(teacher) {
         if (teacher != null) {
             $.ajax({
-                url: "/admin-page/teachers/update",
+                url: "/api/teachers/" + teacher.id,
                 type: "PUT",
                 data: {
-                    id: teacher.id,
                     name: teacher.name,
                     lastname: teacher.lastname,
                     patron: teacher.patron,
@@ -158,15 +157,14 @@ $(function () {
     function deleteRelation(relation) {
         if (relation != null) {
             $.ajax({
-                url: "/admin-page/teachers/delete-relation",
+                url: "/api/teachers/relations/" + relation.id,
                 type: "DELETE",
                 data: {
-                    id: relation.id,
                     name: relation.name,
                     plan: relation.plan
                 },
                 success: function () {
-                    if ($(deniedModification304).css("display") !== "none"){
+                    if ($(deniedModification304).css("display") !== "none") {
                         $(deniedModification304).css("display", "none");
                     }
                     fetchAllTeachersFromController();
@@ -181,7 +179,7 @@ $(function () {
     function addRelation(relation) {
         if (relation != null) {
             $.ajax({
-                url: "/admin-page/teachers/add-relation",
+                url: "/api/teachers/relations",
                 type: "POST",
                 data: {
                     id: relation.id,
@@ -189,7 +187,7 @@ $(function () {
                     plan: relation.plan
                 },
                 success: function () {
-                    if ($(deniedModification304).css("display") !== "none"){
+                    if ($(deniedModification304).css("display") !== "none") {
                         $(deniedModification304).css("display", "none");
                     }
                     fetchAllTeachersFromController();

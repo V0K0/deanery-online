@@ -1,7 +1,8 @@
-package com.vozniuk.deanery.web.controllers.user;
+package com.vozniuk.deanery.controller.user;
 
-import com.vozniuk.deanery.domain.data.user.User;
-import com.vozniuk.deanery.service.impl.UserServiceImpl;
+import com.vozniuk.deanery.data.user.User;
+import com.vozniuk.deanery.service.UserService;
+import com.vozniuk.deanery.service.exception.UserCreationException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,20 +17,19 @@ import java.util.ResourceBundle;
 @Controller
 public class RegistrationController {
 
-    private UserServiceImpl userServiceImpl;
-
+    private final Logger logger = LogManager.getLogger(RegistrationController.class);
+    private final UserService userService;
     private Locale locale;
 
-    private final Logger logger = LogManager.getLogger(RegistrationController.class);
-
     @Autowired
-    public void setLocale(Locale locale){
-        this.locale = locale;
+    public RegistrationController(UserService userService) {
+        this.userService = userService;
+        locale = Locale.forLanguageTag("en-US");
     }
 
     @Autowired
-    public void setUserServiceImpl(UserServiceImpl userServiceImpl) {
-        this.userServiceImpl = userServiceImpl;
+    public void setLocale(Locale locale) {
+        this.locale = locale;
     }
 
     @GetMapping("/registration")
@@ -39,22 +39,15 @@ public class RegistrationController {
 
     @PostMapping("/registration")
     public String signUpUser(User user, Model model) {
-
-        boolean registrationSucceed = userServiceImpl.addUser(user);
-
-        if (!registrationSucceed) {
-
-            logger.trace("Failed registration attempt. Already existent username");
-
+        try {
+            userService.saveUserAsStudent(user);
+        } catch (UserCreationException exception) {
+            logger.error(exception.getMessage());
             final ResourceBundle messages = ResourceBundle.getBundle("messages", locale);
             model.addAttribute("msgError", messages.getString("msgErrorAlreadyExists"));
             return "registration";
         }
-
-        userServiceImpl.saveUserAsStudent(user);
-
         logger.info("Successfully created new user with name: {}", user.getUsername());
-
         return "redirect:/login";
     }
 }

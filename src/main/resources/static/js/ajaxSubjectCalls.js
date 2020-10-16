@@ -80,14 +80,11 @@ $(function () {
         });
     }
 
-    function findByPlanSubjects(plan) {
-        if (plan != null) {
+    function findByPlanSubjects(planId) {
+        if (planId != null) {
             $.ajax({
-                url: "/api/subjects/search",
+                url: "/api/subjects/plans/" + planId,
                 type: "GET",
-                data: {
-                    plan: plan
-                },
                 success: function (data) {
                     if (data.length > 0) {
                         if ($(badSearch).css('display') === 'block') {
@@ -111,7 +108,7 @@ $(function () {
     function deleteSubject(id) {
         if (id != null || id !== undefined) {
             $.ajax({
-                url: "/admin-page/study/subject/delete/" + id,
+                url: "/api/subjects/" + id,
                 type: "DELETE",
                 success: function () {
                     fetchDataFromController();
@@ -128,10 +125,9 @@ $(function () {
     function updateSubject(subject) {
         if (subject != null) {
             $.ajax({
-                url: "/admin-page/study/subject/update",
+                url: "/api/subjects/" + subject.id,
                 type: "PUT",
                 data: {
-                    id: subject.id,
                     name: subject.name,
                     ph: subject.practicalHours,
                     lh: subject.lectureHours,
