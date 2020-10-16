@@ -1,33 +1,29 @@
 package com.vozniuk.deanery.service.impl;
 
-import com.vozniuk.deanery.domain.data.university.Schedule;
-import com.vozniuk.deanery.domain.data.university.UniversityGroup;
-import com.vozniuk.deanery.repositories.ScheduleRepository;
-import com.vozniuk.deanery.service.services.ScheduleService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.vozniuk.deanery.data.university.Schedule;
+import com.vozniuk.deanery.data.university.UniversityGroup;
+import com.vozniuk.deanery.repository.ScheduleRepository;
+import com.vozniuk.deanery.service.ScheduleService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityNotFoundException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@Transactional
 public class ScheduleServiceImpl implements ScheduleService {
 
-    private ScheduleRepository scheduleRepository;
+    private final ScheduleRepository scheduleRepository;
 
-    @Autowired
-    public void setScheduleRepository(ScheduleRepository scheduleRepository) {
+    public ScheduleServiceImpl(ScheduleRepository scheduleRepository) {
         this.scheduleRepository = scheduleRepository;
     }
 
     @Override
-    public List<Schedule> getAllForGroupOnDay(UniversityGroup group, String day) {
-        return scheduleRepository.findByGroupAndDayOfWeekOrderByLessonTime(group, day);
-    }
-
-    @Override
     public Schedule addOrUpdateSchedule(Schedule schedule) {
-        scheduleRepository.saveAndFlush(schedule);
-        return schedule;
+        return scheduleRepository.saveAndFlush(schedule);
     }
 
     @Override
@@ -36,8 +32,12 @@ public class ScheduleServiceImpl implements ScheduleService {
     }
 
     @Override
-    public Schedule getScheduleById(Integer id) {
-        return scheduleRepository.findById(id).isPresent() ? scheduleRepository.findById(id).get() : null;
+    public Schedule getScheduleById(Long id) {
+        return scheduleRepository.findById(id).orElseThrow(EntityNotFoundException::new);
     }
 
+    @Override
+    public List<Schedule> getAllForGroupOnDay(UniversityGroup group, String day) {
+        return scheduleRepository.findByGroupAndDayOfWeekOrderByLessonTime(group, day).orElse(new ArrayList<>());
+    }
 }

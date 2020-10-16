@@ -1,28 +1,29 @@
 package com.vozniuk.deanery.service.impl;
 
-import com.vozniuk.deanery.domain.data.university.Specialty;
-import com.vozniuk.deanery.domain.data.university.UniversityGroup;
-import com.vozniuk.deanery.repositories.GroupRepository;
-import com.vozniuk.deanery.service.services.GroupService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.vozniuk.deanery.data.university.Specialty;
+import com.vozniuk.deanery.data.university.UniversityGroup;
+import com.vozniuk.deanery.repository.GroupRepository;
+import com.vozniuk.deanery.service.GroupService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityNotFoundException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@Transactional
 public class GroupServiceImpl implements GroupService {
 
-    private GroupRepository groupRepository;
+    private final GroupRepository groupRepository;
 
-    @Autowired
-    public void setGroupRepository(GroupRepository groupRepository) {
+    public GroupServiceImpl(GroupRepository groupRepository) {
         this.groupRepository = groupRepository;
     }
 
     @Override
     public UniversityGroup addOrUpdateGroup(UniversityGroup group) {
-        groupRepository.saveAndFlush(group);
-        return group;
+        return groupRepository.saveAndFlush(group);
     }
 
     @Override
@@ -31,18 +32,17 @@ public class GroupServiceImpl implements GroupService {
     }
 
     @Override
-    public UniversityGroup getGroupById(Integer id) {
-        return groupRepository.findById(id).isPresent() ? groupRepository.findById(id).get() : null;
+    public UniversityGroup getGroupById(Long id) {
+        return groupRepository.findById(id).orElseThrow(EntityNotFoundException::new);
     }
 
     @Override
     public List<UniversityGroup> getGroupsBySpecialty(Specialty specialty) {
-        return groupRepository.findAllBySpecialty(specialty);
+        return groupRepository.findAllBySpecialty(specialty).orElse(new ArrayList<>());
     }
 
     @Override
     public UniversityGroup getByGroupCode(String groupCode) {
-        return groupRepository.findByGroupCode(groupCode);
+        return groupRepository.findByGroupCode(groupCode).orElseThrow(EntityNotFoundException::new);
     }
-
 }

@@ -79,7 +79,7 @@ $(function () {
 
     function findStudentsByGroup(groupCode) {
         $.ajax({
-            url: "/api/students/search",
+            url: "/api/students/groups",
             type: "GET",
             data: {
                 group: groupCode
@@ -121,10 +121,9 @@ $(function () {
     function updateStudent(student) {
         if (checkProperties(student)) {
             $.ajax({
-                url: "/admin-page/students/update",
+                url: "/api/students/" + student.id,
                 type: "PUT",
                 data: {
-                    id: student.id,
                     name: student.name,
                     lastname: student.lastname,
                     stGroup: student.stGroup,

@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3" lang="ua">
 <body>
-<form id="formEdit" class="needs-validation createTeacherForm" method="post" validate th:fragment="create-teacher" th:action="@{/admin-page/teachers/create}">
+<form class="needs-validation createTeacherForm" id="formEdit" method="post" th:action="@{/admin-page/teachers}"
+      th:fragment="create-teacher" validate>
     <div class="form-row">
         <div class="form-group col-md-6">
             <label for="teacherName" th:text="#{st_name}"></label>

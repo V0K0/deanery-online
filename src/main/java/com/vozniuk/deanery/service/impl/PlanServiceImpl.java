@@ -1,35 +1,35 @@
 package com.vozniuk.deanery.service.impl;
 
-import com.vozniuk.deanery.domain.data.university.StudyingPlan;
-import com.vozniuk.deanery.repositories.PlanRepository;
-import com.vozniuk.deanery.service.services.PlanService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.vozniuk.deanery.data.university.StudyingPlan;
+import com.vozniuk.deanery.repository.PlanRepository;
+import com.vozniuk.deanery.service.PlanService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import javax.persistence.EntityNotFoundException;
 
 @Service
+@Transactional
 public class PlanServiceImpl implements PlanService {
 
-    private PlanRepository planRepository;
+    private final PlanRepository planRepository;
 
-    @Autowired
-    public void setPlanRepository(PlanRepository planRepository) {
+    public PlanServiceImpl(PlanRepository planRepository) {
         this.planRepository = planRepository;
     }
 
     @Override
     public StudyingPlan addOrUpdatePlan(StudyingPlan plan) {
-        planRepository.saveAndFlush(plan);
-        return plan;
+        return planRepository.saveAndFlush(plan);
     }
 
     @Override
     public void deletePlan(StudyingPlan plan) {
-        planRepository.deleteById(plan.getPlanId());
+        planRepository.delete(plan);
     }
 
     @Override
-    public StudyingPlan getPlanById(Integer id) {
-        return planRepository.findById(id).isPresent() ?  planRepository.findById(id).get() : null;
+    public StudyingPlan getPlanById(Long id) {
+        return planRepository.findById(id).orElseThrow(EntityNotFoundException::new);
     }
-
 }

@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3" lang="ua">
 <body>
-<form id="formEdit" class="needs-validation createSubjectForm" method="post" validate th:fragment="create-subject" th:action="@{/admin-page/study/subject/create}">
+<form class="needs-validation createSubjectForm" id="formEdit" method="post" th:action="@{/admin-page/study/subjects/}"
+      th:fragment="create-subject" validate>
     <div class="form-group">
         <label for="subjectName" th:text="#{subj}"></label>
         <input type="text" class="form-control" id="subjectName" name="subjectName"
