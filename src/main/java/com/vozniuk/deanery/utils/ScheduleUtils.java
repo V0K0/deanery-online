@@ -1,6 +1,6 @@
 package com.vozniuk.deanery.utils;
 
-import com.vozniuk.deanery.domain.data.university.Schedule;
+import com.vozniuk.deanery.data.university.Schedule;
 import org.springframework.stereotype.Component;
 
 import java.util.Map;
@@ -13,6 +13,11 @@ public class ScheduleUtils {
 
     public ScheduleUtils(TimeTable timeTable) {
         this.timeTable = timeTable;
+        lessonsTimeMap = timeTable.getTimeMap();
+    }
+
+    public ScheduleUtils() {
+        timeTable = new DefaultTimeTable();
         lessonsTimeMap = timeTable.getTimeMap();
     }
 

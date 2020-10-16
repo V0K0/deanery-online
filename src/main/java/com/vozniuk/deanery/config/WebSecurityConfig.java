@@ -21,23 +21,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private UserServiceImpl userServiceImpl;
 
-    private PasswordEncoder passwordEncoder;
-
     @Autowired
     public void setUserServiceImpl(UserServiceImpl userServiceImpl) {
         this.userServiceImpl = userServiceImpl;
     }
 
-    @Autowired
-    public void setPasswordEncoder(PasswordEncoder passwordEncoder) {
-        this.passwordEncoder = passwordEncoder;
-    }
-
     @Bean
-    public PasswordEncoder getPasswordEncoder() {
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder(8);
     }
-
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -68,6 +60,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userServiceImpl)
-                .passwordEncoder(passwordEncoder);
+                .passwordEncoder(passwordEncoder());
     }
 }
