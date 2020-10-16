@@ -1,9 +1,9 @@
-package com.vozniuk.deanery.json.serializers;
+package com.vozniuk.deanery.json.serializer;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.ser.std.StdSerializer;
-import com.vozniuk.deanery.domain.data.university.Student;
+import com.vozniuk.deanery.data.university.Student;
 
 import java.io.IOException;
 

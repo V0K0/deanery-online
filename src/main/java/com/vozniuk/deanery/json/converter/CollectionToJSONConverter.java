@@ -1,4 +1,4 @@
-package com.vozniuk.deanery.json.converters;
+package com.vozniuk.deanery.json.converter;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonSerializer;
@@ -9,18 +9,15 @@ import java.util.Collection;
 
 public class CollectionToJSONConverter {
 
-    private CollectionToJSONConverter(){}
+    private CollectionToJSONConverter() {
+    }
 
-    public static <T> String writeAsJSON(Class<? extends T> type, JsonSerializer<T> serializer, Collection<T> objects) {
+    public static <T> String writeAsJSON(Class<? extends T> type, JsonSerializer<T> serializer, Collection<T> objects) throws JsonProcessingException {
         final ObjectMapper mapper = new ObjectMapper();
         SimpleModule simpleModule = new SimpleModule();
         simpleModule.addSerializer(type, serializer);
         mapper.registerModule(simpleModule);
-        try {
-            return mapper.writeValueAsString(objects);
-        } catch (JsonProcessingException e) {
-            return null;
-        }
+        return mapper.writeValueAsString(objects);
     }
 
 }
