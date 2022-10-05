@@ -19,7 +19,7 @@
 
     <properties>
         <java.version>1.8</java.version>
-        <jacson.version>2.11.1</jacson.version>
+        <jacson.version>2.12.6.1</jacson.version>
         <lombok.version>1.18.12</lombok.version>
         <flyway.version>6.4.4</flyway.version>
         <flywayplg.version>5.1.4</flywayplg.version>
